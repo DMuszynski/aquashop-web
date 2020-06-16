@@ -1,0 +1,6 @@
+# Parent module aquashop-web .gitignore
+/.idea
+aquashop-web.iml
+
+# Backend application module aquashop-api .gitignore
+/aquashop-api/aquashop-api.iml
