@@ -1,7 +1,12 @@
 # Parent module aquashop-web .gitignore
-/.idea
 aquashop-web.iml
+/.idea
 
 # Backend application module aquashop-api .gitignore
 /aquashop-api/aquashop-api.iml
 /aquashop-api/target
+
+# Frontend application module aquashop-ng-app .gitignore
+/aquashop-ng-app/aquashop-ng-app.iml
+/aquashop-ng-app/node_modules
+/aquashop-ng-app/dist
