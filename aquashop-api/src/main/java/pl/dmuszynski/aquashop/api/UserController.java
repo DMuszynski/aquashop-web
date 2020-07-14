@@ -14,7 +14,6 @@ public class UserController {
     }
 
     public void register() {
-        User user = new User.UserBuilder("email", "password").build();
-        userManager.save(user);
+        userManager.register("email", "password");
     }
 }

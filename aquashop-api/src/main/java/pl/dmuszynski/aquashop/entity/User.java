@@ -1,38 +1,49 @@
 package pl.dmuszynski.aquashop.entity;
 
-import lombok.Getter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
+import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    @Column(name = "user_id", unique = true, updatable = false, nullable = false)
+    private Long id;
 
-    private final String email;
+//    @Column(unique = true)
+    private String email;
 
-    private final String password;
+//    @Column(unique = true)
+    private String password;
 
-    @OneToMany
-    private final List<Address> addresses;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Address> addresses;
 
     @ManyToMany
-    private final Set<Role> roles;
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<Role>();
 
-    @OneToOne
-    private final Person person;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     @CreatedDate
-    private final LocalDate created;
+    @Column(updatable = false)
+    private LocalDateTime created;
 
-    private final boolean isEnabled;
+    private boolean isEnabled;
+
+    protected User() { }
 
     private User(UserBuilder userBuilder) {
         this.id = userBuilder.id;
@@ -47,13 +58,13 @@ public class User {
 
     public static final class UserBuilder {
         private Long id;
-        private final String email;
-        private final String password;
+        private String email;
+        private String password;
         private List<Address> addresses;
-        private Person person;
         private Set<Role> roles;
-        private LocalDate created;
+        private Person person;
         private boolean isEnabled;
+        private LocalDateTime created;
 
         public UserBuilder(String email, String password) {
             this.email = email;
@@ -70,18 +81,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder person(Person person) {
-            this.person = person;
-            return this;
-        }
-
         public UserBuilder roles(Set<Role> roles) {
             this.roles = roles;
             return this;
         }
 
-        public UserBuilder created(LocalDate created) {
-            this.created = created;
+        public UserBuilder person(Person person) {
+            this.person = person;
             return this;
         }
 
@@ -90,13 +96,19 @@ public class User {
             return this;
         }
 
+        public UserBuilder created(LocalDateTime created) {
+            this.created = created;
+            return this;
+        }
+
         public User build() {
-            User user =  new User(this);
+            User user = new User(this);
             validateUserObject(user);
             return user;
         }
 
-        private void validateUserObject(User user) {
+        private void validateUserObject(final User user) {
+            System.out.println("JEST " + user.getRoles().size());
             if(user.roles.isEmpty())
                 throw new IllegalStateException("roles cannot be empty");
         }
