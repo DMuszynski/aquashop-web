@@ -2,7 +2,6 @@ package pl.dmuszynski.aquashop.entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
@@ -19,11 +17,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", unique = true, updatable = false, nullable = false)
     private Long id;
-
-//    @Column(unique = true)
+    
+    @Column(length = 35, unique = true, nullable = false)
     private String email;
 
-//    @Column(unique = true)
+    @Column(length = 30, unique = true, nullable = false)
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -31,7 +29,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<Role> roles = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
@@ -41,6 +39,7 @@ public class User {
     @Column(updatable = false)
     private LocalDateTime created;
 
+    @Column
     private boolean isEnabled;
 
     protected User() { }
@@ -108,9 +107,40 @@ public class User {
         }
 
         private void validateUserObject(final User user) {
-            System.out.println("JEST " + user.getRoles().size());
-            if(user.roles.isEmpty())
+            if (user.roles.isEmpty())
                 throw new IllegalStateException("roles cannot be empty");
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
     }
 }

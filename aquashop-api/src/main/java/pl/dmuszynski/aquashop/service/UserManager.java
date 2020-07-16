@@ -10,7 +10,6 @@ import pl.dmuszynski.aquashop.entity.User;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 
