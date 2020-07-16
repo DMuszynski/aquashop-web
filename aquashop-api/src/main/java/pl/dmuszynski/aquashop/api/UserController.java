@@ -1,5 +1,6 @@
 package pl.dmuszynski.aquashop.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.entity.User;
 import pl.dmuszynski.aquashop.service.UserManager;
@@ -10,6 +11,7 @@ public class UserController {
 
     private UserManager userManager;
 
+    @Autowired
     public UserController(UserManager userManager) {
         this.userManager = userManager;
     }

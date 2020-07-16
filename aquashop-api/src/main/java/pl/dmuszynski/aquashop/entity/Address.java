@@ -1,8 +1,12 @@
 package pl.dmuszynski.aquashop.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 public class Address {
 
     @Id
@@ -25,53 +29,4 @@ public class Address {
 
     @Column(length = 25)
     private String country;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

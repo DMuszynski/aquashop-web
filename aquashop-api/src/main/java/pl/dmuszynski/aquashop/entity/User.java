@@ -1,5 +1,6 @@
 package pl.dmuszynski.aquashop.entity;
 
+import lombok.Getter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
@@ -110,37 +112,5 @@ public class User {
             if (user.roles.isEmpty())
                 throw new IllegalStateException("roles cannot be empty");
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public boolean isEnabled() {
-        return isEnabled;
     }
 }
