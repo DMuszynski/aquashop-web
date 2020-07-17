@@ -39,15 +39,6 @@ public class UserManagerTest {
     }
 
     public List<User> prepareMockData() {
-
-        System.out.println("DUPA");
-
-        User u1 = userManager.register("a", "b");
-        User u2 = userManager.register("c", "d");
-        User u3 = userManager.register("e", "f");
-
-        List<User> users = new ArrayList<>();
-        userRepository.findAll().iterator().forEachRemaining(users::add);
-        return users;
+        return new ArrayList<>();
     }
 }
