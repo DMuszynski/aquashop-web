@@ -2,24 +2,25 @@ package pl.dmuszynski.aquashop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.dmuszynski.aquashop.entity.User;
-import pl.dmuszynski.aquashop.service.AuthorizationManager;
+
+import pl.dmuszynski.aquashop.service.AuthenticationManager;
 import pl.dmuszynski.aquashop.service.RegistrationManager;
 import pl.dmuszynski.aquashop.service.UserManager;
+import pl.dmuszynski.aquashop.entity.User;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private AuthorizationManager authorizationManager;
+    private AuthenticationManager authenticationManager;
     private RegistrationManager registrationManager;
     private UserManager userManager;
 
     @Autowired
-    public UserController(AuthorizationManager authorizationManager, RegistrationManager registrationManager,
+    public UserController(AuthenticationManager authenticationManager, RegistrationManager registrationManager,
                           UserManager userManager)
     {
-        this.authorizationManager = authorizationManager;
+        this.authenticationManager = authenticationManager;
         this.registrationManager = registrationManager;
         this.userManager = userManager;
     }
