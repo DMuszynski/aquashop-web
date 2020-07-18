@@ -15,16 +15,12 @@ public class Person {
     @Column(name = "person_id", unique = true, nullable = false)
     private Long id;
 
-    @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
     private String surname;
 
-    @Column(length = 9, unique = true, nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
-    private LocalDate birth;
+    private LocalDate dateOfBirth;
 }
 

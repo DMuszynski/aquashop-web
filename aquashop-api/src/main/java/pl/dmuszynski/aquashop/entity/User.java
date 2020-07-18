@@ -33,13 +33,13 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "person_id")
     private Person person;
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime created;
+    private LocalDateTime creationDate;
 
     @Column
     private boolean isEnabled;
@@ -53,7 +53,7 @@ public class User {
         this.addresses = userBuilder.addresses;
         this.roles = userBuilder.roles;
         this.person = userBuilder.person;
-        this.created = userBuilder.created;
+        this.creationDate = userBuilder.creationDate;
         this.isEnabled = userBuilder.isEnabled;
     }
 
@@ -61,11 +61,11 @@ public class User {
         private Long id;
         private String email;
         private String password;
-        private List<Address> addresses;
         private Set<Role> roles;
+        private LocalDateTime creationDate;
         private Person person;
+        private List<Address> addresses;
         private boolean isEnabled;
-        private LocalDateTime created;
 
         public UserBuilder(String email, String password) {
             this.email = email;
@@ -77,13 +77,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder addresses(List<Address> addresses) {
-            this.addresses = addresses;
+        public UserBuilder roles(Set<Role> roles) {
+            this.roles = roles;
             return this;
         }
 
-        public UserBuilder roles(Set<Role> roles) {
-            this.roles = roles;
+        public UserBuilder creationDate(LocalDateTime creationDate) {
+            this.creationDate = creationDate;
             return this;
         }
 
@@ -92,13 +92,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder isEnabled(boolean isEnabled) {
-            this.isEnabled = isEnabled;
+        public UserBuilder addresses(List<Address> addresses) {
+            this.addresses = addresses;
             return this;
         }
 
-        public UserBuilder created(LocalDateTime created) {
-            this.created = created;
+        public UserBuilder isEnabled(boolean isEnabled) {
+            this.isEnabled = isEnabled;
             return this;
         }
 

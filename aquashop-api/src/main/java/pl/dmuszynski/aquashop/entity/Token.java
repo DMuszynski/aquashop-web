@@ -14,7 +14,7 @@ public class Token {
     @Column(name = "token_id", unique = true, nullable = false)
     private Long id;
 
-    @Column(length = 50)
+    @Column(unique = true)
     private String value;
 
     @OneToOne
