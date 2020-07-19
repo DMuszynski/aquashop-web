@@ -26,6 +26,10 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+    public void updateUserIsEnabledById(Long id, boolean isEnabled) {
+        this.userRepository.updateUserIsEnabledById(id, isEnabled);
+    }
+
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }

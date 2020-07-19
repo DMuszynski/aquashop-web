@@ -1,40 +1,33 @@
 package pl.dmuszynski.aquashop.service;
 
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.dmuszynski.aquashop.entity.Token;
-import pl.dmuszynski.aquashop.entity.User;
+
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.TokenRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
+import pl.dmuszynski.aquashop.entity.User;
 
-import javax.mail.MessagingException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.UUID;
 
 @Service
 public class RegistrationService {
 
-    private MailService mailService;
+    private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private TokenRepository tokenRepository;
-    private PasswordEncoder passwordEncoder;
+    private TokenService tokenService;
 
     @Autowired
-    public RegistrationService(MailService mailService, UserRepository userRepository, RoleRepository roleRepository,
-                               TokenRepository tokenRepository, PasswordEncoder passwordEncoder)
+    public RegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository,
+                               RoleRepository roleRepository, TokenService tokenService)
     {
-        this.mailService = mailService;
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.tokenRepository = tokenRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.tokenService = tokenService;
     }
 
     public void register(String email, String password) {
@@ -48,28 +41,6 @@ public class RegistrationService {
             .build();
 
         userRepository.save(registerUser);
-        sendToken(registerUser);
-    }
-
-    private void sendToken(User registerUser) {
-        Token userToken = generateNewUserToken(registerUser);
-        String mailSubject = "Potwierdzenie rejestracji konta AquaShop";
-        String mailContent = "Wymagane potwierdzenie rejestracji. Aby aktywować konto kliknij w poniższy link: \n"
-            + "http://localhost:8080/activatelink/" + userToken.getValue();
-
-        try {
-            mailService.sendMail(registerUser.getEmail(), mailSubject, mailContent, true );
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Token generateNewUserToken(User registerUser) {
-        String tokenValue = UUID.randomUUID().toString();
-        Token token = new Token();
-        token.setValue(tokenValue);
-        token.setUser(registerUser);
-
-        return tokenRepository.save(token);
+        tokenService.sendToken(registerUser);
     }
 }

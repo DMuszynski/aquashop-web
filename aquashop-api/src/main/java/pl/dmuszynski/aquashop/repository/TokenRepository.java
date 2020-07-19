@@ -6,5 +6,5 @@ import pl.dmuszynski.aquashop.entity.Token;
 
 @Repository
 public interface TokenRepository extends CrudRepository<Token, Long> {
-
+    Token findTokenByValue(String value);
 }
