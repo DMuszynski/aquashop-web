@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.dmuszynski.aquashop.model.Role;
+import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.model.User;
@@ -36,10 +37,9 @@ public class RegistrationService {
             .password(passwordEncoder.encode(password))
             .roles(new HashSet<>(
                 Collections.singletonList(
-                    this.roleRepository.findByName("ROLE_USER")
+                    this.roleRepository.findByRoleType(RoleType.USER)
                         .orElseGet(()->{
                             Role userRole = new Role();
-                            userRole.setName("ROLE_USER");
                             return this.roleRepository.save(userRole);
                         })
                 )))
