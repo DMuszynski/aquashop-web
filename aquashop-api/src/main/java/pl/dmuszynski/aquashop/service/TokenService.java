@@ -2,8 +2,8 @@ package pl.dmuszynski.aquashop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.dmuszynski.aquashop.entity.Token;
-import pl.dmuszynski.aquashop.entity.User;
+import pl.dmuszynski.aquashop.model.Token;
+import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.TokenRepository;
 
 import javax.mail.MessagingException;
@@ -22,7 +22,8 @@ public class TokenService {
     }
 
     public Token findTokenByValue(String value) {
-        return tokenRepository.findTokenByValue(value);
+        return tokenRepository.findTokenByValue(value)
+            .map();
     }
 
     public void sendToken(User user) {

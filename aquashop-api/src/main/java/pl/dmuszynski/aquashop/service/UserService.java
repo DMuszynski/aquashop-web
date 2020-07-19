@@ -3,7 +3,7 @@ package pl.dmuszynski.aquashop.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dmuszynski.aquashop.entity.User;
+import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 

@@ -4,10 +4,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.dmuszynski.aquashop.model.Role;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
-import pl.dmuszynski.aquashop.repository.TokenRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
-import pl.dmuszynski.aquashop.entity.User;
+import pl.dmuszynski.aquashop.model.User;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,6 +37,11 @@ public class RegistrationService {
             .roles(new HashSet<>(
                 Collections.singletonList(
                     this.roleRepository.findByName("ROLE_USER")
+                        .orElseGet(()->{
+                            Role userRole = new Role();
+                            userRole.setName("ROLE_USER");
+                            return this.roleRepository.save(userRole);
+                        })
                 )))
             .build();
 

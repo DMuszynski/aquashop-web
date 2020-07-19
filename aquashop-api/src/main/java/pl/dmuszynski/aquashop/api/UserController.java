@@ -3,12 +3,12 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pl.dmuszynski.aquashop.entity.Token;
+import pl.dmuszynski.aquashop.model.Token;
 import pl.dmuszynski.aquashop.service.AuthenticationService;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.TokenService;
 import pl.dmuszynski.aquashop.service.UserService;
-import pl.dmuszynski.aquashop.entity.User;
+import pl.dmuszynski.aquashop.model.User;
 
 @RestController
 @RequestMapping(value = "/user")

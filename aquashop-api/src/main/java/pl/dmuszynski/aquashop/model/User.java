@@ -1,4 +1,4 @@
-package pl.dmuszynski.aquashop.entity;
+package pl.dmuszynski.aquashop.model;
 
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

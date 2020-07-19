@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
-import pl.dmuszynski.aquashop.entity.User;
+import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 
