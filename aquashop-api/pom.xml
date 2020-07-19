@@ -19,7 +19,7 @@
         <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
 		<maven.compiler.source>1.14</maven.compiler.source>
 		<maven.compiler.target>1.14</maven.compiler.target>
-		<lombook.version>1.18.12</lombook.version>
+		<lombok.version>1.18.12</lombok.version>
 		<java.version>14</java.version>
 	</properties>
 	
@@ -52,6 +52,13 @@
 			<version>${spring.boot.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,7 +71,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>${lombook.version}</version>
+			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 

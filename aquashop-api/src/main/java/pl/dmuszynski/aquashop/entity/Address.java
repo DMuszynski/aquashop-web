@@ -1,12 +1,11 @@
 package pl.dmuszynski.aquashop.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@Getter @Setter
 public class Address {
 
     @Id
@@ -18,15 +17,11 @@ public class Address {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(length = 35)
-    private String street;
+    private String country;
 
-    @Column(length = 5)
-    private String zipCode;
-
-    @Column(length = 30)
     private String location;
 
-    @Column(length = 25)
-    private String country;
+    private String zipCode;
+
+    private String street;
 }

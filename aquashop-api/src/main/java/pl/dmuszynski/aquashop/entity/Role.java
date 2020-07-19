@@ -1,19 +1,18 @@
 package pl.dmuszynski.aquashop.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@Getter @Setter
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", unique = true, nullable = false)
-    private Long Id;
+    private Long id;
 
-    @Column(length = 30 , unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 }

@@ -13,11 +13,8 @@ import pl.dmuszynski.aquashop.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
-public class UserManagerTest {
+public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
@@ -26,7 +23,7 @@ public class UserManagerTest {
     private RoleRepository roleRepository;
 
     @Spy
-    private UserManager userManager;
+    private UserService userService;
 
     @Before
     public void init() {

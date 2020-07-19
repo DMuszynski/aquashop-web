@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserManager {
+public class UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
 
     @Autowired
-    public UserManager(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
@@ -35,18 +35,4 @@ public class UserManager {
         userRepository.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void fillDb(){
-//        Role r1 = new Role();
-//        Role r2 = new Role();
-//        r1.setName("ROLE_USER");
-//        r2.setName("ROLE_ADMIN");
-//
-//        roleRepository.save(r1);
-//        roleRepository.save(r2);
-//        this.userRepository.delete((this.userRepository.findById(2L)).get());
-
-//        register("email1122", "password");
-//    }
 }

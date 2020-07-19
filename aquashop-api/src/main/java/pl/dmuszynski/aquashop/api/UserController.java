@@ -3,40 +3,40 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pl.dmuszynski.aquashop.service.AuthenticationManager;
-import pl.dmuszynski.aquashop.service.RegistrationManager;
-import pl.dmuszynski.aquashop.service.UserManager;
+import pl.dmuszynski.aquashop.service.AuthenticationService;
+import pl.dmuszynski.aquashop.service.RegistrationService;
+import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.entity.User;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private AuthenticationManager authenticationManager;
-    private RegistrationManager registrationManager;
-    private UserManager userManager;
+    private AuthenticationService authenticationService;
+    private RegistrationService registrationService;
+    private UserService userService;
 
     @Autowired
-    public UserController(AuthenticationManager authenticationManager, RegistrationManager registrationManager,
-                          UserManager userManager)
+    public UserController(AuthenticationService authenticationService, RegistrationService registrationService,
+                          UserService userService)
     {
-        this.authenticationManager = authenticationManager;
-        this.registrationManager = registrationManager;
-        this.userManager = userManager;
+        this.authenticationService = authenticationService;
+        this.registrationService = registrationService;
+        this.userService = userService;
     }
 
     @PostMapping(value = "/register")
     public void register(@RequestBody User user) {
-        registrationManager.register(user.getEmail(), user.getPassword());
+        registrationService.register(user.getEmail(), user.getPassword());
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public void deleteById(@PathVariable("id") Long id) {
-        userManager.deleteById(id);
+        userService.deleteById(id);
     }
 
     @GetMapping(value = "/findAll")
     public Iterable<User> findAll() {
-        return userManager.findAll();
+        return userService.findAll();
     }
 }

@@ -1,13 +1,12 @@
 package pl.dmuszynski.aquashop.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Data
 @Entity
-@Getter @Setter
 public class Person {
 
     @Id
