@@ -7,7 +7,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", unique = true, nullable = false)
+    @Column(name = "address_id", unique = true)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

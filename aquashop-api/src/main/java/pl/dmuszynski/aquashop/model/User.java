@@ -21,6 +21,7 @@ public class User {
     private Long id;
     
     @Column(unique = true, nullable = false)
+    @
     private String email;
 
     @Column(unique = true, nullable = false)

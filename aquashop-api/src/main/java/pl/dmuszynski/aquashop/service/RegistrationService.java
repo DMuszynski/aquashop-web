@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.dmuszynski.aquashop.exception.CustomerExistException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Token;
@@ -40,6 +41,8 @@ public class RegistrationService {
 ////                )))
 ////            .build();
 
+        this.userRepository.findByEmail(email)
+            .orElseThrow(() -> new CustomerExistException(email));
 
         User registerUser = new User();
         registerUser.setEmail(email);
@@ -57,7 +60,6 @@ public class RegistrationService {
         Token tokenByValue = tokenService.findTokenByValue(tokenValue);
         User user = tokenByValue.getUser();
 
-        System.out.println("JEST");
         userRepository.save(user);
     }
 }

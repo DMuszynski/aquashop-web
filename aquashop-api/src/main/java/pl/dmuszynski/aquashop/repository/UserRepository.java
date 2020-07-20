@@ -7,8 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.dmuszynski.aquashop.model.User;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
 
     @Modifying
     @Query("UPDATE User u SET u.isEnabled = :isEnabled WHERE u.id = :id")

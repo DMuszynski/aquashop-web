@@ -1,6 +1,7 @@
 package pl.dmuszynski.aquashop.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -8,15 +9,20 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id", unique = true, nullable = false)
+    @Column(name = "person_id", unique = true)
     private Long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String surname;
 
+    @NotNull
+    @Column(unique = true, length = 9)
     private String phoneNumber;
 
+    @NotNull
     private LocalDate dateOfBirth;
 
     public Person(String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
