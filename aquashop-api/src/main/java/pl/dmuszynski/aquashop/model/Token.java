@@ -1,10 +1,7 @@
 package pl.dmuszynski.aquashop.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
-@Data
 @Entity
 public class Token {
 
@@ -19,4 +16,23 @@ public class Token {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Token(User user, String value) {
+        this.user = user;
+        this.value = value;
+    }
+
+    public Token() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }

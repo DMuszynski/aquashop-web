@@ -14,13 +14,12 @@ public class Role {
     @Column(unique = true, nullable = false)
     private RoleType roleType;
 
-    public Role(Long id, RoleType roleType) {
-        this.id = id;
+    public Role(RoleType roleType) {
         this.roleType = roleType;
     }
 
     public Role() {
-        this(0L, RoleType.USER);
+        this(RoleType.ROLE_USER);
     }
 
     public Long getId() {

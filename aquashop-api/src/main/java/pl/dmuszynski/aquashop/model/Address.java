@@ -1,10 +1,7 @@
 package pl.dmuszynski.aquashop.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
-@Data
 @Entity
 public class Address {
 
@@ -24,4 +21,38 @@ public class Address {
     private String zipCode;
 
     private String street;
+
+    public Address(User user, String country, String location, String zipCode, String street) {
+        this.user = user;
+        this.country = country;
+        this.location = location;
+        this.zipCode = zipCode;
+        this.street = street;
+    }
+
+    public Address() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getStreet() {
+        return street;
+    }
 }

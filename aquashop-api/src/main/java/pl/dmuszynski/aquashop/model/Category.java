@@ -12,14 +12,11 @@ public class Category {
 
     private String name;
 
-    public Category(Long id, String name) {
-        this.id = id;
+    public Category(String name) {
         this.name = name;
     }
 
-    public Category() {
-        this(0L, "Category");
-    }
+    public Category() { }
 
     public Long getId() {
         return id;

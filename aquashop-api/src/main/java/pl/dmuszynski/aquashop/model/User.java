@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Builder @Data @Setter(AccessLevel.NONE)
+//@Builder @Data @Setter(AccessLevel.NONE)
+@Getter @Setter
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
@@ -42,4 +43,6 @@ public class User {
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime creationDate;
+
+    public User() {}
 }

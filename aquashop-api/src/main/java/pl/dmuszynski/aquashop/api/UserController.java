@@ -3,10 +3,8 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pl.dmuszynski.aquashop.model.Token;
 import pl.dmuszynski.aquashop.service.AuthenticationService;
 import pl.dmuszynski.aquashop.service.RegistrationService;
-import pl.dmuszynski.aquashop.service.TokenService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
 
@@ -16,16 +14,14 @@ public class UserController {
 
     private AuthenticationService authenticationService;
     private RegistrationService registrationService;
-    private TokenService tokenService;
     private UserService userService;
 
     @Autowired
     public UserController(AuthenticationService authenticationService, RegistrationService registrationService,
-                          TokenService tokenService, UserService userService)
+                          UserService userService)
     {
         this.authenticationService = authenticationService;
         this.registrationService = registrationService;
-        this.tokenService = tokenService;
         this.userService = userService;
     }
 
@@ -36,9 +32,7 @@ public class UserController {
 
     @GetMapping(value = "/token")
     public void signUp(@RequestParam String value) {
-        Token tokenByValue = tokenService.findTokenByValue(value);
-        User user = tokenByValue.getUser();
-        userService.updateUserIsEnabledById(user.getId(), true);
+        registrationService.signUp(value);
     }
 
     @DeleteMapping(value = "/delete/{id}")

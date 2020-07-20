@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface TokenRepository extends CrudRepository<Token, Long> {
     Optional<Token> findTokenByValue(String value);
-
 }

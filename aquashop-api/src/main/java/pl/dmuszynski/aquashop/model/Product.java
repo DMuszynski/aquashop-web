@@ -12,14 +12,11 @@ public class Product {
 
     private String name;
 
-    public Product(Long id, String name) {
-        this.id = id;
+    public Product(String name) {
         this.name = name;
     }
 
-    public Product() {
-        this(0L, "Product");
-    }
+    public Product() { }
 
     public Long getId() {
         return id;
