@@ -9,10 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 @RestControllerAdvice
-public class TokenNotFoundAdvice extends ResponseEntityExceptionHandler {
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(TokenNotFoundException.class)
-    public ResponseEntity<Object> tokenNotFoundHandler(TokenNotFoundException ex, WebRequest webRequest) {
+    public ResponseEntity<Object> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
+    }
+
+    @ExceptionHandler(UserEmailAlreadyExistException.class)
+    public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 }

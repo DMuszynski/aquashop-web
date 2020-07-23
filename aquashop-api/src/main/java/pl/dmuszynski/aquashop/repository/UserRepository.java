@@ -16,5 +16,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Modifying
     @Query("UPDATE User u SET u.isEnabled = :isEnabled WHERE u.id = :id")
-    void updateUserIsEnabledById(@Param("id") Long id, @Param("isEnabled") boolean isEnabled);
+    void updateIsEnabledById(@Param("isEnabled") boolean isEnabled, @Param("id") Long id);
 }

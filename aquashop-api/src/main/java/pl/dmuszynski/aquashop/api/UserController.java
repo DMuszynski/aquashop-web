@@ -30,18 +30,18 @@ public class UserController {
         registrationService.register(user.getEmail(), user.getPassword());
     }
 
-    @GetMapping(value = "/token")
+    @PatchMapping(value = "/token")
     public void signUp(@RequestParam String value) {
         registrationService.signUp(value);
-    }
-
-    @DeleteMapping(value = "/delete/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
-        userService.deleteById(id);
     }
 
     @GetMapping(value = "/findAll")
     public Iterable<User> findAll() {
         return userService.findAll();
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteById(@PathVariable("id") Long id) {
+        userService.deleteById(id);
     }
 }

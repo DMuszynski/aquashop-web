@@ -23,8 +23,8 @@ public class TokenService {
         this.mailService = mailService;
     }
 
-    public Token findTokenByValue(String value) {
-        return tokenRepository.findTokenByValue(value)
+    public Token findByValue(String value) {
+        return tokenRepository.findByValue(value)
             .orElseThrow(() -> new TokenNotFoundException(value));
     }
 

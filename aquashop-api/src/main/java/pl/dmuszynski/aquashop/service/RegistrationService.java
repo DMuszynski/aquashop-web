@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dmuszynski.aquashop.exception.CustomerExistException;
+import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Token;
@@ -32,34 +32,24 @@ public class RegistrationService {
     }
 
     public void register(String email, String password) {
-//        User registerUser = User.builder()
-////            .email(email)
-////            .password(passwordEncoder.encode(password))
-////            .roles(new HashSet<>(
-////                Collections.singletonList(
-////                    this.roleService.findByRoleType(RoleType.USER)
-////                )))
-////            .build();
-
         this.userRepository.findByEmail(email)
-            .orElseThrow(() -> new CustomerExistException(email));
+            .orElseThrow(() -> new UserEmailAlreadyExistException(email));
 
-        User registerUser = new User();
-        registerUser.setEmail(email);
-        registerUser.setPassword(passwordEncoder.encode(password));
-        registerUser.setRoles(new HashSet<>(
-            Collections.singletonList(
-                this.roleService.findByRoleType(RoleType.ROLE_USER)
-            )));
+        User registerUser = new User.UserBuilder(email, passwordEncoder.encode(password))
+            .roles(new HashSet<>(
+                Collections.singletonList(
+                    this.roleService.findByRoleType(RoleType.ROLE_USER)
+                )))
+            .build();
 
         userRepository.save(registerUser);
         tokenService.sendToken(registerUser);
     }
 
     public void signUp(String tokenValue) {
-        Token tokenByValue = tokenService.findTokenByValue(tokenValue);
+        Token tokenByValue = tokenService.findByValue(tokenValue);
         User user = tokenByValue.getUser();
 
-        userRepository.save(user);
+        userRepository.updateIsEnabledById(true, user.getId());
     }
 }

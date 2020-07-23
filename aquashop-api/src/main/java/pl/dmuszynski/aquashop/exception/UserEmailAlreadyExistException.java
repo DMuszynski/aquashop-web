@@ -1,8 +1,8 @@
 package pl.dmuszynski.aquashop.exception;
 
-public class CustomerExistException extends RuntimeException {
+public class UserEmailAlreadyExistException extends RuntimeException {
 
-    public CustomerExistException(String value) {
+    public UserEmailAlreadyExistException(String value) {
         super("The user with the given e-mail address: " + value + " is already exists");
     }
 }
