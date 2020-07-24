@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 @Service
-public class RegistrationService {
+public class RegistrationService implements IRegistrationService{
 
     private PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
@@ -31,6 +31,7 @@ public class RegistrationService {
         this.roleService = roleService;
     }
 
+    @Override
     public void register(String email, String password) {
         this.userRepository.findByEmail(email)
             .orElseThrow(() -> new UserEmailAlreadyExistException(email));
@@ -46,6 +47,7 @@ public class RegistrationService {
         tokenService.sendToken(registerUser);
     }
 
+    @Override
     public void signUp(String tokenValue) {
         Token tokenByValue = tokenService.findByValue(tokenValue);
         User user = tokenByValue.getUser();

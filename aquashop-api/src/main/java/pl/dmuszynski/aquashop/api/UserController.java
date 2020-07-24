@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import pl.dmuszynski.aquashop.service.AuthenticationService;
-import pl.dmuszynski.aquashop.service.RegistrationService;
+import pl.dmuszynski.aquashop.service.IRegistrationService;
+
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
 
@@ -13,11 +14,11 @@ import pl.dmuszynski.aquashop.model.User;
 public class UserController {
 
     private AuthenticationService authenticationService;
-    private RegistrationService registrationService;
+    private IRegistrationService registrationService;
     private UserService userService;
 
     @Autowired
-    public UserController(AuthenticationService authenticationService, RegistrationService registrationService,
+    public UserController(AuthenticationService authenticationService, IRegistrationService registrationService,
                           UserService userService)
     {
         this.authenticationService = authenticationService;
