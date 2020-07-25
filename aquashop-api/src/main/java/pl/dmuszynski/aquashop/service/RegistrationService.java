@@ -10,6 +10,7 @@ import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Token;
 import pl.dmuszynski.aquashop.model.User;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -33,9 +34,7 @@ public class RegistrationService implements IRegistrationService {
 
     @Override
     public void register(String email, String password) {
-        this.userRepository.findByEmail(email)
-            .orElseThrow(() -> new UserEmailAlreadyExistException(email));
-
+        validateEmailAlreadyExist(email);
         User registerUser = new User.UserBuilder(email, passwordEncoder.encode(password))
             .roles(new HashSet<>(
                 Collections.singletonList(
@@ -47,11 +46,17 @@ public class RegistrationService implements IRegistrationService {
         tokenService.sendToken(registerUser);
     }
 
+    @Transactional
     @Override
     public void signUp(String tokenValue) {
         Token tokenByValue = tokenService.findByValue(tokenValue);
         User user = tokenByValue.getUser();
 
         userRepository.updateIsEnabledById(true, user.getId());
+    }
+
+    private void validateEmailAlreadyExist(String email) {
+        if (this.userRepository.findByEmail(email).isPresent())
+            throw new UserEmailAlreadyExistException(email);
     }
 }

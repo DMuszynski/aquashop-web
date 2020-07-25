@@ -31,7 +31,7 @@ public class UserController {
         registrationService.register(user.getEmail(), user.getPassword());
     }
 
-    @PatchMapping(value = "/token")
+    @GetMapping(value = "/token")
     public void signUp(@RequestParam String value) {
         registrationService.signUp(value);
     }

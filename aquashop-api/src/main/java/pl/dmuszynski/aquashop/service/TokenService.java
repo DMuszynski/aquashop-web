@@ -12,7 +12,7 @@ import javax.mail.MessagingException;
 import java.util.UUID;
 
 @Service
-public class TokenService implements ITokenService{
+public class TokenService implements ITokenService {
 
     private final TokenRepository tokenRepository;
     private final IMailService mailService;
@@ -38,6 +38,7 @@ public class TokenService implements ITokenService{
 
         try {
             mailService.sendMail(user.getEmail(), mailSubject, mailContent, true );
+
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -46,7 +47,7 @@ public class TokenService implements ITokenService{
     private Token generateNewUserToken(User user) {
         String tokenValue;
         do tokenValue = UUID.randomUUID().toString();
-        while (tokenRepository.findByValue(tokenValue).isEmpty());
+        while (tokenRepository.findByValue(tokenValue).isPresent());
 
         Token token = new Token(user, tokenValue);
         return tokenRepository.save(token);
