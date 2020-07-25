@@ -7,7 +7,7 @@ import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationService implements IAuthenticationService{
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
