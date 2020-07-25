@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.service.AuthenticationService;
 import pl.dmuszynski.aquashop.service.IRegistrationService;
 
-import pl.dmuszynski.aquashop.service.UserService;
+import pl.dmuszynski.aquashop.service.IUserService;
 import pl.dmuszynski.aquashop.model.User;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private AuthenticationService authenticationService;
-    private IRegistrationService registrationService;
-    private UserService userService;
+    private final AuthenticationService authenticationService;
+    private final IRegistrationService registrationService;
+    private final IUserService userService;
 
     @Autowired
     public UserController(AuthenticationService authenticationService, IRegistrationService registrationService,
-                          UserService userService)
+                          IUserService userService)
     {
         this.authenticationService = authenticationService;
         this.registrationService = registrationService;
@@ -34,11 +34,6 @@ public class UserController {
     @PatchMapping(value = "/token")
     public void signUp(@RequestParam String value) {
         registrationService.signUp(value);
-    }
-
-    @GetMapping(value = "/findAll")
-    public Iterable<User> findAll() {
-        return userService.findAll();
     }
 
     @DeleteMapping(value = "/delete/{id}")
