@@ -12,7 +12,7 @@ import javax.mail.MessagingException;
 import java.util.UUID;
 
 @Service
-public class TokenService {
+public class TokenService implements ITokenService{
 
     private final TokenRepository tokenRepository;
     private final IMailService mailService;
@@ -23,11 +23,13 @@ public class TokenService {
         this.mailService = mailService;
     }
 
+    @Override
     public Token findByValue(String value) {
         return tokenRepository.findByValue(value)
             .orElseThrow(() -> new TokenNotFoundException(value));
     }
 
+    @Override
     public void sendToken(User user) {
         Token userToken = generateNewUserToken(user);
         String mailSubject = "Potwierdzenie rejestracji konta AquaShop";
