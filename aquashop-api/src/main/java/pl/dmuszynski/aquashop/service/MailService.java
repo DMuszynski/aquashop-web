@@ -9,7 +9,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-public class MailService {
+public class MailService implements IMailService{
 
     private JavaMailSender javaMailSender;
 
@@ -18,6 +18,7 @@ public class MailService {
         this.javaMailSender = javaMailSender;
     }
 
+    @Override
     public void sendMail(String to, String subject, String content, boolean isHtmlContent) throws MessagingException {
         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);

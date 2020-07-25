@@ -14,11 +14,11 @@ import java.util.UUID;
 @Service
 public class TokenService {
 
-    private TokenRepository tokenRepository;
-    private MailService mailService;
+    private final TokenRepository tokenRepository;
+    private final IMailService mailService;
 
     @Autowired
-    public TokenService(TokenRepository tokenRepository, MailService mailService) {
+    public TokenService(TokenRepository tokenRepository, IMailService mailService) {
         this.tokenRepository = tokenRepository;
         this.mailService = mailService;
     }
