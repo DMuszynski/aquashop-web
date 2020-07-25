@@ -44,9 +44,11 @@ public class TokenService implements ITokenService{
     }
 
     private Token generateNewUserToken(User user) {
-        String tokenValue = UUID.randomUUID().toString();
-        Token token = new Token(user, tokenValue);
+        String tokenValue;
+        do tokenValue = UUID.randomUUID().toString();
+        while (tokenRepository.findByValue(tokenValue).isEmpty());
 
+        Token token = new Token(user, tokenValue);
         return tokenRepository.save(token);
     }
 }
