@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
+import pl.dmuszynski.aquashop.exception.UserIsAlreadyEnabledException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Token;
@@ -52,11 +53,16 @@ public class RegistrationService implements IRegistrationService {
         Token tokenByValue = tokenService.findByValue(tokenValue);
         User user = tokenByValue.getUser();
 
-        userRepository.updateIsEnabledById(true, user.getId());
+        if (!user.isEnabled())
+            userRepository.updateIsEnabledById(true, user.getId());
+        else
+           throw new UserIsAlreadyEnabledException();
     }
 
     private void validateEmailAlreadyExist(String email) {
         if (this.userRepository.findByEmail(email).isPresent())
             throw new UserEmailAlreadyExistException(email);
     }
+
+
 }

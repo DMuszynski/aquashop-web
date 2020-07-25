@@ -20,4 +20,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
+
+    @ExceptionHandler(UserIsAlreadyEnabledException.class)
+    public ResponseEntity<Object> handleUserIsAlreadyEnabledException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
+    }
 }
