@@ -9,8 +9,8 @@ import pl.dmuszynski.aquashop.repository.UserRepository;
 @Service
 public class AuthenticationService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository) {

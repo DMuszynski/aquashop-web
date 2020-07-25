@@ -11,8 +11,8 @@ import pl.dmuszynski.aquashop.model.User;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {

@@ -7,15 +7,16 @@ import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 
 @Service
-public class RoleService {
+public class RoleService implements IRoleService{
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
+    @Override
     public Role findByRoleType(RoleType roleType) {
         return roleRepository.findByRoleType(roleType)
             .orElseGet(() -> roleRepository.save(new Role(roleType)));

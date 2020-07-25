@@ -16,14 +16,14 @@ import java.util.HashSet;
 @Service
 public class RegistrationService implements IRegistrationService{
 
-    private PasswordEncoder passwordEncoder;
-    private UserRepository userRepository;
-    private TokenService tokenService;
-    private RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final TokenService tokenService;
+    private final IRoleService roleService;
 
     @Autowired
     public RegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                               TokenService tokenService, RoleService roleService)
+                               TokenService tokenService, IRoleService roleService)
     {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
