@@ -10,7 +10,7 @@ import pl.dmuszynski.aquashop.service.IUserService;
 import pl.dmuszynski.aquashop.model.User;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "user-management/users")
 public class UserController {
 
     private final IAuthenticationService authenticationService;
@@ -36,7 +36,12 @@ public class UserController {
         registrationService.signUp(value);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @PatchMapping(value = "/")
+    public void update(@RequestBody User user) {
+
+    }
+
+    @DeleteMapping(value = "/{id}")
     public void deleteById(@PathVariable("id") Long id) {
         userService.deleteById(id);
     }

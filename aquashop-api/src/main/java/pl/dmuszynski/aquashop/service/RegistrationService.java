@@ -63,6 +63,4 @@ public class RegistrationService implements IRegistrationService {
         if (this.userRepository.findByEmail(email).isPresent())
             throw new UserEmailAlreadyExistException(email);
     }
-
-
 }

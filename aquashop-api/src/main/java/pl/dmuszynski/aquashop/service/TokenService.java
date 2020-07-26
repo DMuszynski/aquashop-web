@@ -34,11 +34,10 @@ public class TokenService implements ITokenService {
         Token userToken = generateNewUserToken(user);
         String mailSubject = "Potwierdzenie rejestracji konta AquaShop";
         String mailContent = "Wymagane potwierdzenie rejestracji. Aby aktywować konto kliknij w poniższy link: \n"
-            + "http://localhost:8080/user/token?value=" + userToken.getValue();
+            + "http://localhost:8080/user-management/users/token?value=" + userToken.getValue();
 
         try {
             mailService.sendMail(user.getEmail(), mailSubject, mailContent, true );
-
         } catch (MessagingException e) {
             e.printStackTrace();
         }
