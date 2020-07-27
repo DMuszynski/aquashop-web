@@ -38,7 +38,7 @@ public class UserController {
 
     @PatchMapping(value = "/email")
     public void changeEmail(@RequestBody User user) {
-
+        this.userService.changeEmail(user.getEmail(), user.getId());
     }
 
     @PatchMapping(value = "/password")

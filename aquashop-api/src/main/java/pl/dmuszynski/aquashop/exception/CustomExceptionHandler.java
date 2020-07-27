@@ -11,11 +11,6 @@ import org.springframework.http.HttpStatus;
 @RestControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(TokenNotFoundException.class)
-    public ResponseEntity<Object> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
-    }
-
     @ExceptionHandler(UserEmailAlreadyExistException.class)
     public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
@@ -29,5 +24,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserSamePasswordException.class)
     public ResponseEntity<Object> handleUserSamePasswordException(UserSamePasswordException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    public ResponseEntity<Object> handleAddressNotFoundException(AddressNotFoundException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
+    }
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<Object> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
     }
 }

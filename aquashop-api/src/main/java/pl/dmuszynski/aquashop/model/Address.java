@@ -1,6 +1,9 @@
 package pl.dmuszynski.aquashop.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Address {
@@ -14,12 +17,16 @@ public class Address {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotNull
     private String country;
 
+    @NotNull
     private String location;
 
+    @NotNull
     private String zipCode;
 
+    @NotNull
     private String street;
 
     public Address(User user, String country, String location, String zipCode, String street) {
