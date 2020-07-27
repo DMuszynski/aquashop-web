@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
+import pl.dmuszynski.aquashop.exception.UserNotFoundException;
+import pl.dmuszynski.aquashop.exception.UserSamePasswordException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.model.User;
 
@@ -19,25 +22,37 @@ public class UserService implements IUserService{
         this.userRepository = userRepository;
     }
 
+    @Override
+    public void changePassword(String password, Long id) {
+        validatePassword(password, findById(id).getPassword());
+        userRepository.updatePasswordById(passwordEncoder.encode(password), id);
+    }
+
+    @Override
+    public void changeEmail(String email, Long id) {
+        validateEmail(email);
+        userRepository.updateEmailById(email, id);
+    }
+
+    @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id)
+            .orElseThrow(() -> new UserNotFoundException(id));
     }
 
-    public void changePassword(User user) {
-        final User foundUser = findById(user.getId());
-
-
-    }
     @Override
     public void deleteById(Long id) {
         this.userRepository.deleteById(id);
     }
 
-    private void validatePassword(String oldPassword, String newPassword) {
-        if (passwordEncoder.matches(oldPassword, newPassword)) {
-            System.out.println("TO samo");
-        } else {
-            System.out.println("dobre hasło");
+    private void validatePassword(String newPassword, String oldPassword) {
+        if (!passwordEncoder.matches(newPassword, oldPassword)) {
+            throw new UserSamePasswordException();
         }
+    }
+
+    private void validateEmail(String email) {
+        userRepository.findByEmail(email)
+            .orElseThrow(() -> new UserEmailAlreadyExistException(email));
     }
 }

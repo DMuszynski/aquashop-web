@@ -36,9 +36,14 @@ public class UserController {
         registrationService.signUp(value);
     }
 
-    @PatchMapping(value = "/")
-    public void update(@RequestBody User user) {
+    @PatchMapping(value = "/email")
+    public void changeEmail(@RequestBody User user) {
 
+    }
+
+    @PatchMapping(value = "/password")
+    public void changePassword(@RequestBody User user) {
+        this.userService.changePassword(user.getPassword(), user.getId());
     }
 
     @DeleteMapping(value = "/{id}")

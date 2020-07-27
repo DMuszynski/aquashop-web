@@ -25,4 +25,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleUserIsAlreadyEnabledException(UserIsAlreadyEnabledException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
+
+    @ExceptionHandler(UserSamePasswordException.class)
+    public ResponseEntity<Object> handleUserSamePasswordException(UserSamePasswordException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
+    }
 }
