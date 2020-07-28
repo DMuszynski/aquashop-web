@@ -1,9 +1,10 @@
-package pl.dmuszynski.aquashop.service;
+package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.dmuszynski.aquashop.exception.AddressNotFoundException;
+import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.AddressRepository;
 import pl.dmuszynski.aquashop.model.Address;
 import pl.dmuszynski.aquashop.repository.UserRepository;
@@ -28,8 +29,16 @@ public class AddressService {
             .orElseThrow(() -> new AddressNotFoundException(id));
     }
 
-    public void save(Address address) {
-        addressRepository.save(address);
+    public void addUserAddress(Address address, Long id) {
+
+        this.addressRepository.findById(id)
+            .map(address1 -> {
+                a
+            })
+        User user = new User.UserBuilder("d","").build();
+        user.getAddresses().add(address);
+
+        addressRepository.save(new Address(user, address.getCountry(), address.getLocation(), address.getZipCode(), address.getStreet()));
     }
 
     public Iterable<Address> findAllById(Long id) {

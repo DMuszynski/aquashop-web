@@ -2,7 +2,7 @@ package pl.dmuszynski.aquashop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.dmuszynski.aquashop.service.AddressService;
+import pl.dmuszynski.aquashop.service.implementation.AddressService;
 import pl.dmuszynski.aquashop.model.Address;
 
 @RestController
@@ -16,12 +16,22 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping
-    public void add(@RequestBody Address address) {
-        addressService.save(address);
+    @PostMapping(value = "/user-management/users/{userId}/addresses")
+    public void addUserAddress(@RequestBody Address address, @PathVariable Long userId) {
+        addressService.addUserAddress(address, userId);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @GetMapping(value = "/user-management/users/{userId}/addresses")
+    public Iterable<Address> findAllById(@PathVariable Long userId) {
+        return addressService.findAllById(userId);
+    }
+
+    @PutMapping(value = "/user-management/users/{userId}/addresses/{addressId}")
+    public void updateUserAddress(@RequestBody Address address, @PathVariable Long userId, @PathVariable Long addressId) {
+
+    }
+
+    @DeleteMapping(value = "/user-management/users/{userId}/addresses/{addressId}")
     public void deleteById(@PathVariable Long id) {
         addressService.deleteById(id);
     }

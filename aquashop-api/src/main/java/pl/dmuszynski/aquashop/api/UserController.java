@@ -3,25 +3,19 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import pl.dmuszynski.aquashop.service.IAuthenticationService;
-import pl.dmuszynski.aquashop.service.IRegistrationService;
-
-import pl.dmuszynski.aquashop.service.IUserService;
+import pl.dmuszynski.aquashop.service.RegistrationService;
+import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
 
 @RestController
 @RequestMapping(value = "user-management/users")
 public class UserController {
 
-    private final IAuthenticationService authenticationService;
-    private final IRegistrationService registrationService;
-    private final IUserService userService;
+    private final RegistrationService registrationService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(IAuthenticationService authenticationService, IRegistrationService registrationService,
-                          IUserService userService)
-    {
-        this.authenticationService = authenticationService;
+    public UserController(RegistrationService registrationService, UserService userService) {
         this.registrationService = registrationService;
         this.userService = userService;
     }
