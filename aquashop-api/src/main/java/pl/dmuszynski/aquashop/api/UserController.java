@@ -30,14 +30,14 @@ public class UserController {
         registrationService.signUp(value);
     }
 
-    @PatchMapping(value = "/email")
-    public void changeEmail(@RequestBody User user) {
-        this.userService.changeEmail(user.getEmail(), user.getId());
+    @PatchMapping(value = "/{id}/email")
+    public void changeEmail(@RequestBody User user, @PathVariable Long id) {
+        this.userService.changeEmail(user.getEmail(), id);
     }
 
-    @PatchMapping(value = "/password")
-    public void changePassword(@RequestBody User user) {
-        this.userService.changePassword(user.getPassword(), user.getId());
+    @PatchMapping(value = "/{id}/password")
+    public void changePassword(@RequestBody User user, @PathVariable Long id) {
+        this.userService.changePassword(user.getPassword(), id);
     }
 
     @DeleteMapping(value = "/{id}")
