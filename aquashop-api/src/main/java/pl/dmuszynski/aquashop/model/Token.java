@@ -1,5 +1,6 @@
 package pl.dmuszynski.aquashop.model;
 
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +11,8 @@ public class Token {
     @Column(name = "token_id", unique = true, nullable = false)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @NotNull
+    @Column(unique = true)
     private String value;
 
     @OneToOne
@@ -22,7 +24,7 @@ public class Token {
         this.value = value;
     }
 
-    public Token() { }
+    protected Token() { }
 
     public Long getId() {
         return id;

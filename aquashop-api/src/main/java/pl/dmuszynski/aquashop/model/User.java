@@ -30,10 +30,6 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
-
     @Column(nullable = false)
     private boolean isEnabled;
 
@@ -49,7 +45,6 @@ public class User {
         this.password = userBuilder.password;
         this.addresses = userBuilder.addresses;
         this.roles = userBuilder.roles;
-        this.person = userBuilder.person;
         this.isEnabled = userBuilder.isEnabled;
         this.creationDate = userBuilder.creationDate;
     }
@@ -60,7 +55,6 @@ public class User {
         private String password;
         private Set<Role> roles;
         private List<Address> addresses;
-        private Person person;
         private boolean isEnabled;
         private LocalDateTime creationDate;
 
@@ -81,11 +75,6 @@ public class User {
 
         public UserBuilder addresses(List<Address> addresses) {
             this.addresses = addresses;
-            return this;
-        }
-
-        public UserBuilder person(Person person) {
-            this.person = person;
             return this;
         }
 
@@ -129,10 +118,6 @@ public class User {
 
     public List<Address> getAddresses() {
         return addresses;
-    }
-
-    public Person getPerson() {
-        return person;
     }
 
     public boolean isEnabled() {

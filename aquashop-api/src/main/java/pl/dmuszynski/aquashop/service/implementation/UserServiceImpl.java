@@ -11,6 +11,8 @@ import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,6 +25,14 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
+    @Override
+    public void changePassword(String password, Long id) {
+        validateSamePassword(password, findById(id).getPassword());
+        this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
+    }
+
+    @Transactional
     @Override
     public void changeEmail(String email, Long id) {
         validateUserEmailAlreadyExist(email);
@@ -30,20 +40,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(String password, Long id) {
-        validateSamePassword(password, findById(id).getPassword());
-        this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
+    public void deleteById(Long id) {
+        this.userRepository.deleteById(id);
     }
 
     @Override
     public User findById(Long id) {
         return this.userRepository.findById(id)
             .orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        this.userRepository.deleteById(id);
     }
 
     private void validateUserEmailAlreadyExist(String email) {

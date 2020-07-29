@@ -31,14 +31,14 @@ public class AddressService {
 
     public void addUserAddress(Address address, Long id) {
 
-        this.addressRepository.findById(id)
-            .map(address1 -> {
-                a
-            })
-        User user = new User.UserBuilder("d","").build();
-        user.getAddresses().add(address);
-
-        addressRepository.save(new Address(user, address.getCountry(), address.getLocation(), address.getZipCode(), address.getStreet()));
+//        this.addressRepository.findById(id)
+//            .map(address1 -> {
+//                a
+//            })
+//        User user = new User.UserBuilder("d","").build();
+//        user.getAddresses().add(address);
+//
+//        addressRepository.save(new Address(user, address.getCountry(), address.getLocation(), address.getZipCode(), address.getStreet()));
     }
 
     public Iterable<Address> findAllById(Long id) {

@@ -25,17 +25,26 @@ public class Person {
     @NotNull
     private LocalDate dateOfBirth;
 
-    public Person(String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Person(User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
+        this.user = user;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Person() { }
+    protected Person() { }
 
     public Long getId() {
         return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getName() {
