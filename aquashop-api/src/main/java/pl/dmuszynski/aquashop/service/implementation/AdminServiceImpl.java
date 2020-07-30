@@ -34,6 +34,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void updateUserRole(RoleType roleType, Long userId) {
-//        this.adminRepository.updateRoleUser(roleType.);
+        this.adminRepository.updateUserRole(2,1);
     }
 }
