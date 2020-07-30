@@ -22,12 +22,12 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public void register(@RequestBody User user) {
-        registrationService.register(user.getEmail(), user.getPassword());
+        this.registrationService.register(user.getEmail(), user.getPassword());
     }
 
     @GetMapping(value = "/token")
     public void signUp(@RequestParam String value) {
-        registrationService.signUp(value);
+        this.registrationService.signUp(value);
     }
 
     @PatchMapping(value = "/{id}/email")
@@ -42,6 +42,6 @@ public class UserController {
 
     @DeleteMapping(value = "/{id}")
     public void deleteById(@PathVariable("id") Long id) {
-        userService.deleteById(id);
+        this.userService.deleteById(id);
     }
 }

@@ -17,32 +17,32 @@ public class PersonController {
     }
 
     @PostMapping
-    public void add(@RequestBody Person person, @PathVariable Long id) {
-        personService.add(person, id);
+    public void addUserPerson(@RequestBody Person person, @PathVariable("id") Long userId) {
+        this.personService.addUserPerson(person, userId);
     }
 
     @PatchMapping(value = "/{id}/name")
     public void updateNameById(@RequestBody Person person, @PathVariable Long id) {
-        personService.updateNameById(person.getName(), id);
+        this.personService.updateNameById(person.getName(), id);
     }
 
     @PatchMapping(value = "/{id}/surname")
     public void updateSurnameById(@RequestBody Person person, @PathVariable Long id) {
-        personService.updateSurnameById(person.getSurname(), id);
+        this.personService.updateSurnameById(person.getSurname(), id);
     }
 
     @PatchMapping(value = "/{id}/phone-number")
     public void updatePhoneNumberById(@RequestBody Person person, @PathVariable Long id) {
-        personService.updatePhoneNumberById(person.getPhoneNumber(), id);
+        this.personService.updatePhoneNumberById(person.getPhoneNumber(), id);
     }
 
     @PatchMapping(value = "/{id}/date-of-birth")
     public void updateDateOfBirthById(@RequestBody Person person, @PathVariable Long id) {
-        personService.updateDateOfBirthById(person.getDateOfBirth(), id);
+        this.personService.updateDateOfBirthById(person.getDateOfBirth(), id);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteByUserId(@PathVariable Long id) {
-        personService.deleteById(id);
+        this.personService.deleteById(id);
     }
 }

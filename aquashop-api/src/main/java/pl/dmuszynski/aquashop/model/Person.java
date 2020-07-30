@@ -11,6 +11,10 @@ public class Person {
     @Column(name = "person_id", unique = true)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String name;
 
     private String surname;
@@ -19,10 +23,6 @@ public class Person {
     private String phoneNumber;
 
     private LocalDate dateOfBirth;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public Person(User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
         this.user = user;

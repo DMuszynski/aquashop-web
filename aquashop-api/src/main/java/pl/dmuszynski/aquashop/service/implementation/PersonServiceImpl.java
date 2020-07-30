@@ -26,11 +26,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person add(Person person, Long userId) {
-        final User user = userService.findById(userId);
+    public void addUserPerson(Person person, Long userId) {
+        final User user = this.userService.findById(userId);
         person.setUser(user);
 
-        return this.personRepository.save(person);
+        this.personRepository.save(person);
     }
 
     @Override
