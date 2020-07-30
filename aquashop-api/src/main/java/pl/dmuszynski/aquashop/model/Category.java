@@ -8,7 +8,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id", unique = true)
+    @Column(name = "category_id", unique = true, nullable = false)
     private Long id;
 
     @NotNull
@@ -18,7 +18,7 @@ public class Category {
         this.name = name;
     }
 
-    public Category() { }
+    protected Category() { }
 
     public Long getId() {
         return id;
