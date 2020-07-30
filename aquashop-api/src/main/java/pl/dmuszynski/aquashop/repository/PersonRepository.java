@@ -12,15 +12,15 @@ import java.time.LocalDate;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-    @Modifying @Query("UPDATE Person p SET p.dateOfBirth = :dateOfBirth WHERE p.id = :id")
+    @Modifying @Query(value = "UPDATE Person p SET p.dateOfBirth = :dateOfBirth WHERE p.id = :id")
     void updateDateOfBirthById(@Param("dateOfBirth") LocalDate dateOfBirth, @Param("id") Long id);
 
-    @Modifying @Query("UPDATE Person p SET p.phoneNumber = :phoneNumber WHERE p.id = :id")
+    @Modifying @Query(value = "UPDATE Person p SET p.phoneNumber = :phoneNumber WHERE p.id = :id")
     void updatePhoneNumberById(@Param("phoneNumber") String phoneNumber, @Param("id") Long id);
 
-    @Modifying @Query("UPDATE Person p SET p.surname = :surname WHERE p.id = :id")
+    @Modifying @Query(value = "UPDATE Person p SET p.surname = :surname WHERE p.id = :id")
     void updateSurnameById(@Param("surname") String surname, @Param("id") Long id);
 
-    @Modifying @Query("UPDATE Person p SET p.name = :name WHERE p.id = :id")
+    @Modifying @Query(value = "UPDATE Person p SET p.name = :name WHERE p.id = :id")
     void updateNameById(@Param("name") String name, @Param("id") Long id);
 }

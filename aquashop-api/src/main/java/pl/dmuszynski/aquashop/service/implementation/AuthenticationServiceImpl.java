@@ -7,13 +7,13 @@ import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository) {
+    public AuthenticationServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }

@@ -6,7 +6,7 @@ import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.model.Address;
 
 @RestController
-@RequestMapping("user-management/users/{id}/address-management/addresses")
+@RequestMapping(value = "user-management/users/{id}/address-management/addresses")
 public class AddressController {
 
     private final AddressService addressService;
@@ -17,7 +17,7 @@ public class AddressController {
     }
 
     @PostMapping
-    public void addUserAddress(@RequestBody Address address, @PathVariable("id") Long userId) {
+    public void addUserAddress(@RequestBody Address address, @PathVariable(value = "id") Long userId) {
         this.addressService.addUserAddress(address, userId);
     }
 

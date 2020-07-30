@@ -14,12 +14,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    @Modifying @Query("UPDATE User u SET u.email = :email WHERE u.id = :id")
+    @Modifying @Query(value = "UPDATE User u SET u.email = :email WHERE u.id = :id")
     void updateEmailById(@Param("email") String email, @Param("id") Long id);
 
-    @Modifying @Query("UPDATE User u SET u.password = :password WHERE u.id = :id")
+    @Modifying @Query(value = "UPDATE User u SET u.password = :password WHERE u.id = :id")
     void updatePasswordById(@Param("password") String password, @Param("id") Long id);
 
-    @Modifying @Query("UPDATE User u SET u.isEnabled = :isEnabled WHERE u.id = :id")
-    void updateIsEnabledById(@Param("isEnabled") boolean isEnabled, @Param("id") Long id);
+    @Modifying @Query(value = "UPDATE User u SET u.isEnabled = true WHERE u.id = :id")
+    void activateAccount(@Param("id") Long id);
 }

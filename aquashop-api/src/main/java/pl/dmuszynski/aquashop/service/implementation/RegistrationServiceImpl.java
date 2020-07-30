@@ -61,7 +61,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private void activateAccount(boolean isEnabled, Long id) {
         if (!isEnabled)
-            this.userRepository.updateIsEnabledById(true, id);
+            this.userRepository.activateAccount(id);
         else
             throw new UserIsAlreadyEnabledException();
     }

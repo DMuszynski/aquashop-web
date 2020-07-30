@@ -17,7 +17,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addUserPerson(@RequestBody Person person, @PathVariable("id") Long userId) {
+    public void addUserPerson(@RequestBody Person person, @PathVariable(value = "id") Long userId) {
         this.personService.addUserPerson(person, userId);
     }
 

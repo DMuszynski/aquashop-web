@@ -2,7 +2,6 @@ package pl.dmuszynski.aquashop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
@@ -41,7 +40,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteById(@PathVariable Long id) {
         this.userService.deleteById(id);
     }
 }
