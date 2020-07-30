@@ -13,7 +13,7 @@ import pl.dmuszynski.aquashop.model.User;
 
 import javax.transaction.Transactional;
 
-@Service
+@Service @Transactional
 public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
@@ -25,14 +25,12 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
     @Override
     public void changePassword(String password, Long id) {
         validateSamePassword(password, findById(id).getPassword());
         this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
     }
 
-    @Transactional
     @Override
     public void changeEmail(String email, Long id) {
         validateUserEmailAlreadyExist(email);

@@ -43,16 +43,16 @@ public class User {
         this.id = userBuilder.id;
         this.email = userBuilder.email;
         this.password = userBuilder.password;
-        this.addresses = userBuilder.addresses;
         this.roles = userBuilder.roles;
+        this.addresses = userBuilder.addresses;
         this.isEnabled = userBuilder.isEnabled;
         this.creationDate = userBuilder.creationDate;
     }
 
     public static final class UserBuilder {
         private Long id;
-        private String email;
-        private String password;
+        private final String email;
+        private final String password;
         private Set<Role> roles;
         private List<Address> addresses;
         private boolean isEnabled;
@@ -89,14 +89,7 @@ public class User {
         }
 
         public User build() {
-            User user = new User(this);
-            validateUserObject(user);
-            return user;
-        }
-
-        private void validateUserObject(final User user) {
-            if(user.roles.isEmpty())
-                throw new IllegalStateException("roles cannot be empty");
+            return new User(this);
         }
     }
 

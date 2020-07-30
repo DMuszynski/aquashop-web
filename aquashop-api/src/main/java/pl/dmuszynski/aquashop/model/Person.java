@@ -1,7 +1,6 @@
 package pl.dmuszynski.aquashop.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,17 +11,13 @@ public class Person {
     @Column(name = "person_id", unique = true)
     private Long id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String surname;
 
-    @NotNull
     @Column(unique = true, length = 9)
     private String phoneNumber;
 
-    @NotNull
     private LocalDate dateOfBirth;
 
     @OneToOne
@@ -61,6 +56,10 @@ public class Person {
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

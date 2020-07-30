@@ -1,42 +1,60 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.dmuszynski.aquashop.exception.UserNotFoundException;
+import pl.dmuszynski.aquashop.model.Person;
+import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.PersonRepository;
+import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.PersonService;
 import org.springframework.stereotype.Service;
+import pl.dmuszynski.aquashop.service.UserService;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 
-@Service
+@Service @Transactional
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
+    private final UserService userService;
 
-    public PersonServiceImpl(PersonRepository personRepository) {
+    @Autowired
+    public PersonServiceImpl(PersonRepository personRepository, UserService userService) {
         this.personRepository = personRepository;
+        this.userService = userService;
+    }
+
+    @Override
+    public Person add(Person person, Long userId) {
+        final User user = userService.findById(userId);
+        person.setUser(user);
+
+        return this.personRepository.save(person);
     }
 
     @Override
     public void updateDateOfBirthById(LocalDate dateOfBirth, Long id) {
-        personRepository.updateDateOfBirthById(dateOfBirth, id);
+        this.personRepository.updateDateOfBirthById(dateOfBirth, id);
     }
 
     @Override
     public void updatePhoneNumberById(String phoneNumber, Long id) {
-        personRepository.updatePhoneNumberById(phoneNumber, id);
+        this.personRepository.updatePhoneNumberById(phoneNumber, id);
     }
 
     @Override
     public void updateSurnameById(String surname, Long id) {
-        personRepository.updateSurnameById(surname, id);
+        this.personRepository.updateSurnameById(surname, id);
     }
 
     @Override
     public void updateNameById(String name, Long id) {
-        personRepository.updateNameById(name, id);
+        this.personRepository.updateNameById(name, id);
     }
 
     @Override
     public void deleteById(Long id) {
-        personRepository.deleteById(id);
+        this.personRepository.deleteById(id);
     }
 }
