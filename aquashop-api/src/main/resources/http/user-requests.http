@@ -1,0 +1,30 @@
+### Register user
+POST http://localhost:8080/user-management/users/register
+Content-Type: application/json
+
+{
+  "email" : "scsplayer1@gmail.com",
+  "password" : "password"
+}
+
+### Sign up
+GET http://localhost:8080/user-management/users/token?value=42a8b8d9-29f7-48a0-8072-3e7324dc2812
+
+### Change user password
+PATCH http://localhost:8080/user-management/users/1/password
+Content-Type: application/json
+
+{
+  "password" : "newPassword"
+}
+
+### Change user email
+PATCH http://localhost:8080/user-management/users/1/email
+Content-Type: application/json
+
+{
+  "email" : "scsplayer2@gmail.com"
+}
+
+### Delete user
+DELETE http://localhost:8080/user-management/users/1

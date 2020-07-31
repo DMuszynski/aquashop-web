@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void validateSamePassword(String password, String oldPassword) {
-        if (!this.passwordEncoder.matches(password, oldPassword)) {
+        if (this.passwordEncoder.matches(password, oldPassword)) {
             throw new UserSamePasswordException();
         }
     }
