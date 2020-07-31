@@ -1,0 +1,10 @@
+### Find all users
+GET http://localhost:8080/admin-management/users
+
+### Update user isEnabled
+PATCH http://localhost:8080/admin-management/users/1/is-enabled
+Content-Type: application/json
+
+{
+  "isEnabled" : "false"
+}

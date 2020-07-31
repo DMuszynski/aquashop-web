@@ -3,6 +3,7 @@ package pl.dmuszynski.aquashop.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
 
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,13 +15,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", unique = true, updatable = false, nullable = false)
+    @Column(name = "user_id", unique = true, nullable = false)
     private Long id;
-    
-    @Column(unique = true, nullable = false)
+
+    @NotNull @Column(unique = true)
     private String email;
 
-    @Column(unique = true, nullable = false)
+    @NotNull @Column(unique = true)
     private String password;
 
     @ManyToMany
@@ -30,11 +31,11 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @Column(nullable = false)
+    @NotNull
     private boolean isEnabled;
 
     @CreatedDate
-    @Column(updatable = false, nullable = false)
+    @NotNull @Column(updatable = false)
     private LocalDateTime creationDate;
 
     protected User() {}
