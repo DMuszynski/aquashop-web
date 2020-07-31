@@ -1,14 +1,12 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.dmuszynski.aquashop.exception.UserNotFoundException;
+import org.springframework.stereotype.Service;
+import pl.dmuszynski.aquashop.repository.PersonRepository;
+import pl.dmuszynski.aquashop.service.PersonService;
+import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
 import pl.dmuszynski.aquashop.model.User;
-import pl.dmuszynski.aquashop.repository.PersonRepository;
-import pl.dmuszynski.aquashop.repository.UserRepository;
-import pl.dmuszynski.aquashop.service.PersonService;
-import org.springframework.stereotype.Service;
-import pl.dmuszynski.aquashop.service.UserService;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
