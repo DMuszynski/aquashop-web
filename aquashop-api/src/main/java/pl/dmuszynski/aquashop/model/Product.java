@@ -19,7 +19,7 @@ public class Product {
     @Column(precision = 2)
     private float prize;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public Product(String name, float prize) {

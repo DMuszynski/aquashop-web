@@ -11,6 +11,9 @@ public class Comment {
     @Column(name = "comment_id", unique = true)
     private Long id;
 
+    @NotNull
+    private int mark;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -18,15 +21,20 @@ public class Comment {
     @NotNull
     private String description;
 
-    public Comment(Product product, String description) {
+    public Comment(Product product, String description, int mark) {
         this.description = description;
         this.product = product;
+        this.mark = mark;
     }
 
     protected Comment() {}
 
     public Long getId() {
         return id;
+    }
+
+    public int getMark() {
+        return mark;
     }
 
     public Product getProduct() {
