@@ -1,0 +1,12 @@
+### Realize transaction
+POST http://localhost:8080/transaction-management/transactions
+Content-Type: application/json
+
+{
+  "user" : {
+    "id" : "1"
+  },
+  "product" : {
+    "id" : "1"
+  }
+}

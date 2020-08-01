@@ -30,8 +30,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void realizeTransaction(Transaction transaction) {
-        Product product = this.productService.findById(transaction.getId());
-        User user = this.userService.findById(transaction.getId());
+        Product product = this.productService.findById(transaction.getProduct().getId());
+        User user = this.userService.findById(transaction.getUser().getId());
 
         this.transactionRepository.save(new Transaction(product, user, LocalDateTime.now()));
     }
