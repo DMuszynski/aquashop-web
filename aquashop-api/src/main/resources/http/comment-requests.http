@@ -1,0 +1,27 @@
+### Add product comment
+POST http://localhost:8080/product-management/products/1/comment-management/comments
+Content-Type: application/json
+
+{
+  "description" : "very flexible black shorts",
+  "mark" : "0"
+}
+
+### Update comment description
+PATCH http://localhost:8080/product-management/products/1/comment-management/comments/1/description
+Content-Type: application/json
+
+{
+  "description" : "silk and very flexible black shorts"
+}
+
+### Update comment mark
+PATCH http://localhost:8080/product-management/products/1/comment-management/comments/1/mark
+Content-Type: application/json
+
+{
+  "mark" : "1"
+}
+
+### Delete comment
+DELETE http://localhost:8080/product-management/products/1/comment-management/comments/1
