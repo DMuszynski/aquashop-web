@@ -6,7 +6,7 @@ import pl.dmuszynski.aquashop.model.Comment;
 import pl.dmuszynski.aquashop.service.CommentService;
 
 @RestController
-@RequestMapping(value = "product-management/products/{id}/comment-management/comments")
+@RequestMapping(value = "/product-management/products/{id}/comment-management/comments")
 public class CommentController {
 
     private final CommentService commentService;

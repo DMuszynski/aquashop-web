@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.dmuszynski.aquashop.repository.CommentRepository;
 import pl.dmuszynski.aquashop.service.CommentService;
+import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Comment;
+import pl.dmuszynski.aquashop.model.Product;
 
 import javax.transaction.Transactional;
 
@@ -12,16 +14,20 @@ import javax.transaction.Transactional;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
+    private final ProductService productService;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, ProductService productService) {
         this.commentRepository = commentRepository;
+        this.productService = productService;
     }
 
     @Override
     public void addProductComment(Comment comment, Long productId) {
+        final Product product = this.productService.findById(productId);
+        comment.setProduct(product);
 
-        commentRepository.save(comment);
+        this.commentRepository.save(comment);
     }
 
     @Override

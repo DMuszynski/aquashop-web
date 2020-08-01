@@ -7,4 +7,5 @@ public interface ProductService {
     void updatePrizeById(float prize, Long id);
     void updateNameById(String name, Long id);
     void deleteById(Long id);
+    Product findById(Long id);
 }

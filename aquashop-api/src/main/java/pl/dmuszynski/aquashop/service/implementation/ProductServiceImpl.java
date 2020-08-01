@@ -2,6 +2,7 @@ package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.dmuszynski.aquashop.exception.ProductNotFoundException;
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Product;
@@ -36,5 +37,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(Long id) {
         this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public Product findById(Long id) {
+        return this.productRepository.findById(id)
+            .orElseThrow(() -> new ProductNotFoundException(id));
     }
 }

@@ -44,4 +44,8 @@ public class Comment {
     public String getDescription() {
         return description;
     }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
