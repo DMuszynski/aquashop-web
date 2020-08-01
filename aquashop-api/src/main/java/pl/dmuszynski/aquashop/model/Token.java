@@ -8,7 +8,7 @@ public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "token_id", unique = true, nullable = false)
+    @Column(name = "token_id", unique = true)
     private Long id;
 
     @NotNull @Column(unique = true)

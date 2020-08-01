@@ -8,7 +8,7 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id", unique = true, nullable = false)
+    @Column(name = "role_id", unique = true)
     private Long id;
 
     @Enumerated(EnumType.STRING)
