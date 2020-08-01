@@ -1,0 +1,27 @@
+### Add product
+POST http://localhost:8080/product-management/products
+Content-Type: application/json
+
+{
+  "name" : "Black Shorts",
+  "prize" : "30.99"
+}
+
+### Update product name
+PATCH http://localhost:8080/product-management/products/1/name
+Content-Type: application/json
+
+{
+  "name" : "Red Shorts"
+}
+
+### Update product prize
+PATCH http://localhost:8080/product-management/products/1/prize
+Content-Type: application/json
+
+{
+  "prize" : "20.00"
+}
+
+### Delete product
+DELETE http://localhost:8080/product-management/products/1
