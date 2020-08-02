@@ -17,22 +17,22 @@ public class CommentController {
     }
 
     @PostMapping
-    void addProductComment(@RequestBody Comment comment, @PathVariable(value = "id") Long productId) {
+    public void addProductComment(@RequestBody Comment comment, @PathVariable(value = "id") Long productId) {
         this.commentService.addProductComment(comment, productId);
     }
 
     @PatchMapping(value = "/{id}/description")
-    void updateDescriptionById(@RequestBody Comment comment, @PathVariable Long id) {
+    public void updateDescriptionById(@RequestBody Comment comment, @PathVariable Long id) {
         this.commentService.updateDescriptionById(comment.getDescription(), id);
     }
 
     @PatchMapping(value = "/{id}/mark")
-    void updateMarkById(@RequestBody Comment comment, @PathVariable Long id) {
+    public void updateMarkById(@RequestBody Comment comment, @PathVariable Long id) {
         this.commentService.updateMarkById(comment.getMark(), id);
     }
 
     @DeleteMapping(value = "/{id}")
-    void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         this.commentService.deleteById(id);
     }
 }

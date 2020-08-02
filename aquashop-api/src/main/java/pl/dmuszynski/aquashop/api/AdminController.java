@@ -1,10 +1,14 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.service.AdminService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin-management/users")
@@ -18,8 +22,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public Iterable<User> findAll() {
-        return this.adminService.findAll();
+    public ResponseEntity<List<User>> findAll() {
+        List<User> users = this.adminService.findAll();
+
+        if (!users.isEmpty())
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PatchMapping(value = "/{id}/user-role")

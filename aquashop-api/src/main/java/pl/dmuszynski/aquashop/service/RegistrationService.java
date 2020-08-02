@@ -1,6 +1,8 @@
 package pl.dmuszynski.aquashop.service;
 
+import pl.dmuszynski.aquashop.model.User;
+
 public interface RegistrationService {
-    void register(String email, String password);
+    User register(String email, String password);
     void signUp(String value);
 }

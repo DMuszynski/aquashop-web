@@ -1,6 +1,6 @@
 package pl.dmuszynski.aquashop.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +10,7 @@ import pl.dmuszynski.aquashop.model.Person;
 import java.time.LocalDate;
 
 @Repository
-public interface PersonRepository extends CrudRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @Modifying @Query(value = "UPDATE Person p SET p.dateOfBirth = :dateOfBirth WHERE p.id = :id")
     void updateDateOfBirthById(@Param("dateOfBirth") LocalDate dateOfBirth, @Param("id") Long id);

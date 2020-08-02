@@ -1,6 +1,8 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -20,8 +22,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public void register(@RequestBody User user) {
-        this.registrationService.register(user.getEmail(), user.getPassword());
+    public ResponseEntity<User> register(@RequestBody User user) {
+        final User registerUser = this.registrationService.register(user.getEmail(), user.getPassword());
+        return new ResponseEntity<>(registerUser, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/token")
@@ -40,7 +43,8 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         this.userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

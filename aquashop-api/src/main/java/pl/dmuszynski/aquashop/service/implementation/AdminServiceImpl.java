@@ -2,6 +2,7 @@ package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.dmuszynski.aquashop.exception.UserNotFoundException;
 import pl.dmuszynski.aquashop.repository.AdminRepository;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.service.AdminService;
@@ -9,6 +10,7 @@ import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.User;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service @Transactional
 public class AdminServiceImpl implements AdminService {
@@ -23,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Iterable<User> findAll() {
+    public List<User> findAll() {
         return this.adminRepository.findAll();
     }
 

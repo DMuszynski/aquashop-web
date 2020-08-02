@@ -37,7 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void register(String email, String password) {
+    public User register(String email, String password) {
         validateUserEmailAlreadyExist(email);
         final User registerUser = new User.UserBuilder(email, this.passwordEncoder.encode(password))
             .roles(new HashSet<>(
@@ -48,6 +48,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         this.userRepository.save(registerUser);
         this.tokenService.sendToken(registerUser);
+
+        return registerUser;
     }
 
     @Transactional
