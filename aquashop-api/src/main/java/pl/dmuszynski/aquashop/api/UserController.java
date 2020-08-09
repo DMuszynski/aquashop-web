@@ -3,6 +3,7 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -27,22 +28,25 @@ public class UserController {
         return new ResponseEntity<>(registerUser, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/token")
-    public void signUp(@RequestParam String value) {
-        this.registrationService.signUp(value);
-    }
+//    @GetMapping(value = "/token")
+//    public void signUp(@RequestParam String value) {
+//        this.registrationService.signUp(value);
+//    }
 
     @PatchMapping(value = "/{id}/email")
+    @PreAuthorize(value = "hasRole('USER')")
     public void changeEmail(@RequestBody User user, @PathVariable Long id) {
         this.userService.changeEmail(user.getEmail(), id);
     }
 
     @PatchMapping(value = "/{id}/password")
+    @PreAuthorize(value = "hasRole('USER')")
     public void changePassword(@RequestBody User user, @PathVariable Long id) {
         this.userService.changePassword(user.getPassword(), id);
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize(value = "hasRole('USER')")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         this.userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

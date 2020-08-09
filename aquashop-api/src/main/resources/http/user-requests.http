@@ -7,6 +7,9 @@ Content-Type: application/json
   "password" : "password"
 }
 
+### JwtToken Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIn0.zaCJN0ekcrDajZ9QFSwP6-wL0B_2-G9Gy_iXCUdMkbU
+
+
 ### Sign up
 GET http://localhost:8080/user-management/users/token?value=42a8b8d9-29f7-48a0-8072-3e7324dc2812
 

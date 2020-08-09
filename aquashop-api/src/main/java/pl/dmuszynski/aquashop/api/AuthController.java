@@ -5,8 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import pl.dmuszynski.aquashop.payload.request.LoginRequest;
 import pl.dmuszynski.aquashop.service.AuthService;
 import pl.dmuszynski.aquashop.model.User;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -22,7 +25,8 @@ public class AuthController {
 
     @PostMapping(value = "/sign-in")
     public ResponseEntity<?> authenticateUser(@RequestBody User user) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        System.out.println("JEST");
+        return ResponseEntity.ok(authService.authenticateUser(user));
     }
 
     @PostMapping(value = "/sign-up")

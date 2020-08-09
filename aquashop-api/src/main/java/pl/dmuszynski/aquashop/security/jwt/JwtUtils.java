@@ -2,12 +2,17 @@ package pl.dmuszynski.aquashop.security.jwt;
 
 import java.util.Date;
 
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import com.auth0.jwt.JWT;
 //import io.jsonwebtoken.*;
 import pl.dmuszynski.aquashop.security.services.UserDetailsImpl;
 
@@ -22,25 +27,39 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
-
+        Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
-//        return Jwts.builder()
-//            .setSubject((userPrincipal.getUsername()))
-//            .setIssuedAt(new Date())
-//            .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-//            .signWith(SignatureAlgorithm.HS512, jwtSecret)
-//            .compact();
-
-        return "";
+        return JWT.create()
+            .withSubject(userPrincipal.getUsername())
+//            .withIssuedAt(new Date())
+            .withIssuer("auth0")
+//            .withExpiresAt(new Date((new Date()).getTime() + jwtExpirationMs))
+            .sign(algorithm);
     }
 
     public String getUserNameFromJwtToken(String token) {
+        return JWT.decode(token).getSubject();
 //        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
-        return "";
+//        return "";
     }
 
     public boolean validateJwtToken(String authToken) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
+            JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("auth0")
+                .build(); //Reusable verifier instance
+
+            DecodedJWT jwt = verifier.verify(authToken);
+
+            return true;
+        } catch (JWTVerificationException exception){
+            //Invalid signature/claims
+            System.out.println("ZLY TOKEN");
+        }
+
+
 //        try {
 //            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 //            return true;
