@@ -5,11 +5,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id", unique = true)
+    @Column(name = "product_id")
     private Long id;
 
     @NotNull

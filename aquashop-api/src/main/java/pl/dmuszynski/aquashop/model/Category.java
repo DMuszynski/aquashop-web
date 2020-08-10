@@ -1,17 +1,18 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id", unique = true)
+    @Column(name = "category_id")
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
     public Category(String name) {
@@ -26,5 +27,13 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

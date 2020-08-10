@@ -1,30 +1,30 @@
 package pl.dmuszynski.aquashop.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", unique = true)
+    @Column(name = "address_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
+    @NotBlank
     private String country;
 
-    @NotNull
+    @NotBlank
     private String location;
 
-    @NotNull
+    @NotBlank
     private String zipCode;
 
-    @NotNull
+    @NotBlank
     private String street;
 
     public Address(User user, String country, String location, String zipCode, String street) {
@@ -61,12 +61,12 @@ public class Address {
         return street;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setCountry(String country) {

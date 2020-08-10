@@ -1,27 +1,33 @@
 package pl.dmuszynski.aquashop.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "phone_number"))
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id", unique = true)
+    @Column(name = "person_id")
     private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String surname;
 
-    @Column(unique = true, length = 9)
+    @NotBlank @Column(length = 9)
     private String phoneNumber;
 
+    @NotNull
     private LocalDate dateOfBirth;
 
     public Person(User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
@@ -58,8 +64,28 @@ public class Person {
         return dateOfBirth;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
 

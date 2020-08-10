@@ -1,25 +1,27 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "description"))
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id", unique = true)
+    @Column(name = "comment_id")
     private Long id;
-
-    @NotNull
-    private int mark;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @NotNull
+    @NotBlank
     private String description;
+
+    @NotNull
+    private int mark;
 
     public Comment(Product product, String description, int mark) {
         this.description = description;
@@ -45,7 +47,19 @@ public class Comment {
         return description;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
