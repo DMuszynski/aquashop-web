@@ -11,7 +11,6 @@ import pl.dmuszynski.aquashop.model.User;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/auth-management")
 public class AuthController {
@@ -25,7 +24,6 @@ public class AuthController {
 
     @PostMapping(value = "/sign-in")
     public ResponseEntity<?> authenticateUser(@RequestBody User user) {
-        System.out.println("JEST");
         return ResponseEntity.ok(authService.authenticateUser(user));
     }
 

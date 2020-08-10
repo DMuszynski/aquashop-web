@@ -22,7 +22,9 @@ import org.springframework.util.StringUtils;
 
 import pl.dmuszynski.aquashop.security.services.UserDetailsServiceImpl;
 
+@Component
 public class AuthTokenFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtUtils jwtUtils;
 

@@ -64,4 +64,24 @@ public class Address {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
 }

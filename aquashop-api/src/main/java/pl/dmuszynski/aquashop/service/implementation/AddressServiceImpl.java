@@ -3,6 +3,7 @@ package pl.dmuszynski.aquashop.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.dmuszynski.aquashop.exception.AddressNotFoundException;
 import pl.dmuszynski.aquashop.repository.AddressRepository;
 import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -11,7 +12,8 @@ import pl.dmuszynski.aquashop.model.User;
 
 import javax.transaction.Transactional;
 
-@Service @Transactional
+@Transactional
+@Service(value = "addressService")
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
@@ -24,31 +26,56 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void addUserAddress(Address address, Long userId) {
+    public Address addUserAddress(Address address, Long userId) {
         final User user = this.userService.findById(userId);
-        address.setUser(user);
 
-        this.addressRepository.save(address);
+        return this.addressRepository.save(
+            new Address(user,
+                address.getCountry(),
+                address.getLocation(),
+                address.getZipCode(),
+                address.getStreet())
+        );
     }
 
     @Override
-    public void updateCountryById(String country, Long id) {
-        this.addressRepository.updateCountryById(country, id);
+    public Address updateCountryById(String country, Long id) {
+        final Address address = this.addressRepository.findById(id)
+            .orElseThrow(AddressNotFoundException::new);
+        address.setCountry(country);
+
+        this.addressRepository.updateCountryById(address.getCountry(), id);
+        return address;
     }
 
     @Override
-    public void updateLocationById(String location, Long id) {
-        this.addressRepository.updateLocationById(location, id);
+    public Address updateLocationById(String location, Long id) {
+        final Address address = this.addressRepository.findById(id)
+            .orElseThrow(AddressNotFoundException::new);
+        address.setLocation(location);
+
+        this.addressRepository.updateLocationById(address.getLocation(), id);
+        return address;
     }
 
     @Override
-    public void updateZipCodeById(String zipCode, Long id) {
-        this.addressRepository.updateZipCodeById(zipCode, id);
+    public Address updateZipCodeById(String zipCode, Long id) {
+        final Address address = this.addressRepository.findById(id)
+            .orElseThrow(AddressNotFoundException::new);
+        address.setZipCode(zipCode);
+
+        this.addressRepository.updateZipCodeById(address.getZipCode(), id);
+        return address;
     }
 
     @Override
-    public void updateStreetById(String street, Long id) {
-        this.addressRepository.updateStreetById(street, id);
+    public Address updateStreetById(String street, Long id) {
+        final Address address = this.addressRepository.findById(id)
+            .orElseThrow(AddressNotFoundException::new);
+        address.setStreet(street);
+
+        this.addressRepository.updateStreetById(address.getStreet(), id);
+        return address;
     }
 
     @Override

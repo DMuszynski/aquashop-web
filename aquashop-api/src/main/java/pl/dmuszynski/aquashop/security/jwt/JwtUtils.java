@@ -32,16 +32,14 @@ public class JwtUtils {
 
         return JWT.create()
             .withSubject(userPrincipal.getUsername())
-//            .withIssuedAt(new Date())
+            .withIssuedAt(new Date())
             .withIssuer("auth0")
-//            .withExpiresAt(new Date((new Date()).getTime() + jwtExpirationMs))
+            .withExpiresAt(new Date((new Date()).getTime() + jwtExpirationMs))
             .sign(algorithm);
     }
 
     public String getUserNameFromJwtToken(String token) {
         return JWT.decode(token).getSubject();
-//        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
-//        return "";
     }
 
     public boolean validateJwtToken(String authToken) {
