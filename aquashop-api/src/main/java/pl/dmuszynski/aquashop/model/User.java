@@ -3,6 +3,7 @@ package pl.dmuszynski.aquashop.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,17 +12,18 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "email"), @UniqueConstraint(columnNames = "password")})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", unique = true)
+    @Column(name = "user_id")
     private Long id;
 
-    @NotNull @Column(unique = true)
+    @NotBlank
     private String email;
 
-    @NotNull @Column(unique = true)
+    @NotBlank
     private String password;
 
     @ManyToMany

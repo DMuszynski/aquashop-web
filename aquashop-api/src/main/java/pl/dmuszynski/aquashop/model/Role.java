@@ -4,15 +4,15 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "role_type"))
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id", unique = true)
+    @Column(name = "role_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull @Column(unique = true)
+    @NotNull @Enumerated(EnumType.STRING)
     private final RoleType roleType;
 
     public Role(RoleType roleType) {

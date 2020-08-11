@@ -1,17 +1,19 @@
 package pl.dmuszynski.aquashop.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "value"))
 public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "token_id", unique = true)
+    @Column(name = "token_id")
     private Long id;
 
-    @NotNull @Column(unique = true)
+    @NotBlank
     private String value;
 
     @OneToOne

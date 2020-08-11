@@ -1,11 +1,12 @@
 package pl.dmuszynski.aquashop.model;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
 
     @Id
@@ -13,11 +14,10 @@ public class Product {
     @Column(name = "product_id")
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
-    @NotNull
-    @Column(precision = 2)
+    @NotNull @Column(scale = 2)
     private float prize;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
