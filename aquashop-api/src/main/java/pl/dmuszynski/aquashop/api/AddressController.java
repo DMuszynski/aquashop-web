@@ -9,8 +9,7 @@ import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.model.Address;
 
 @RestController
-//@PreAuthorize(value = "hasRole('USER')")
-@PreAuthorize(value = "permitAll()")
+@PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "user-management/users/{id}/address-management/addresses")
 public class AddressController {
 
