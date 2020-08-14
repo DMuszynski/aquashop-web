@@ -3,12 +3,14 @@ package pl.dmuszynski.aquashop.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.dmuszynski.aquashop.model.Address;
 import pl.dmuszynski.aquashop.model.Comment;
 import pl.dmuszynski.aquashop.service.CommentService;
 
 @RestController
+@PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "/product-management/products/{id}/comment-management/comments")
 public class CommentController {
 

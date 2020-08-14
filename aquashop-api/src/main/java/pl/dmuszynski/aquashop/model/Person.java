@@ -31,11 +31,11 @@ public class Person {
     private LocalDate dateOfBirth;
 
     public Person(User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
-        this.user = user;
-        this.name = name;
-        this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
+        this.surname = surname;
+        this.name = name;
+        this.user = user;
     }
 
     protected Person() { }

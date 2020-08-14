@@ -2,6 +2,8 @@ package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pl.dmuszynski.aquashop.exception.PersonNotFoundException;
 import pl.dmuszynski.aquashop.repository.PersonRepository;
 import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -11,7 +13,8 @@ import pl.dmuszynski.aquashop.model.User;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
-@Service @Transactional
+@Transactional
+@Service(value = "personService")
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
@@ -24,31 +27,57 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void addUserPerson(Person person, Long userId) {
+    public Person addUserPerson(Person person, Long userId) {
         final User user = this.userService.findById(userId);
-        person.setUser(user);
 
-        this.personRepository.save(person);
+        return this.personRepository.save(
+            new Person(user,
+                person.getName(),
+                person.getSurname(),
+                person.getPhoneNumber(),
+                person.getDateOfBirth()
+            )
+        );
     }
 
     @Override
-    public void updateDateOfBirthById(LocalDate dateOfBirth, Long id) {
-        this.personRepository.updateDateOfBirthById(dateOfBirth, id);
+    public Person updateDateOfBirthById(LocalDate dateOfBirth, Long id) {
+        final Person person = this.personRepository.findById(id)
+            .orElseThrow(PersonNotFoundException::new);
+        person.setDateOfBirth(dateOfBirth);
+
+        this.personRepository.updateDateOfBirthById(person.getDateOfBirth(), id);
+        return person;
     }
 
     @Override
-    public void updatePhoneNumberById(String phoneNumber, Long id) {
-        this.personRepository.updatePhoneNumberById(phoneNumber, id);
+    public Person updatePhoneNumberById(String phoneNumber, Long id) {
+        final Person person = this.personRepository.findById(id)
+            .orElseThrow(PersonNotFoundException::new);
+        person.setPhoneNumber(phoneNumber);
+
+        this.personRepository.updatePhoneNumberById(person.getPhoneNumber(), id);
+        return person;
     }
 
     @Override
-    public void updateSurnameById(String surname, Long id) {
-        this.personRepository.updateSurnameById(surname, id);
+    public Person updateSurnameById(String surname, Long id) {
+        final Person person = this.personRepository.findById(id)
+            .orElseThrow(PersonNotFoundException::new);
+        person.setSurname(surname);
+
+        this.personRepository.updateSurnameById(person.getSurname(), id);
+        return person;
     }
 
     @Override
-    public void updateNameById(String name, Long id) {
-        this.personRepository.updateNameById(name, id);
+    public Person updateNameById(String name, Long id) {
+        final Person person = this.personRepository.findById(id)
+            .orElseThrow(PersonNotFoundException::new);
+        person.setName(name);
+
+        this.personRepository.updateNameById(person.getName(), id);
+        return person;
     }
 
     @Override

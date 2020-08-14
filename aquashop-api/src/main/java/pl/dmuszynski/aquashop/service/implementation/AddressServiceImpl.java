@@ -34,7 +34,8 @@ public class AddressServiceImpl implements AddressService {
                 address.getCountry(),
                 address.getLocation(),
                 address.getZipCode(),
-                address.getStreet())
+                address.getStreet()
+            )
         );
     }
 
