@@ -26,7 +26,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<Person> addUserPerson(@RequestBody Person person, @PathVariable(value = "id") Long userId) {
         final Person createdPerson = this.personService.addUserPerson(person, userId);
-        return new ResponseEntity<>(createdPerson, HttpStatus.OK);
+        return new ResponseEntity<>(createdPerson, HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{id}/name")

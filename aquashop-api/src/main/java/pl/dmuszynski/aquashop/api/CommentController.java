@@ -24,7 +24,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<Comment> addProductComment(@RequestBody Comment comment, @PathVariable(value = "id") Long productId) {
         final Comment createdComment = this.commentService.addProductComment(comment, productId);
-        return new ResponseEntity<>(createdComment, HttpStatus.OK);
+        return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{id}/description")

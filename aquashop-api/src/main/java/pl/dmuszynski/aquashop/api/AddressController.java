@@ -24,7 +24,7 @@ public class AddressController {
     @PostMapping
     public ResponseEntity<Address> addUserAddress(@RequestBody Address address, @PathVariable(value = "id") Long userId) {
         final Address createdAddress = this.addressService.addUserAddress(address, userId);
-        return new ResponseEntity<>(createdAddress, HttpStatus.OK);
+        return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{id}/country")

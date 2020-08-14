@@ -1,15 +1,18 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import pl.dmuszynski.aquashop.exception.ProductNotFoundException;
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Product;
 
-import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service @Transactional
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Transactional
+@Service(value = "productService")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -20,28 +23,37 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
-        this.productRepository.save(product);
+    public List<Product> findAll() {
+        return this.productRepository.findAll();
     }
 
     @Override
-    public void updatePrizeById(float prize, Long id) {
+    public Product addProduct(Product product) {
+        return this.productRepository.save(product);
+    }
+
+    @Override
+    public Product updatePrizeById(float prize, Long id) {
+        final Product product = this.productRepository.findById(id)
+            .orElseThrow(ProductNotFoundException::new);
+        product.setPrize(prize);
+
         this.productRepository.updatePrizeById(prize, id);
+        return product;
     }
 
     @Override
-    public void updateNameById(String name, Long id) {
+    public Product updateNameById(String name, Long id) {
+        final Product product = this.productRepository.findById(id)
+            .orElseThrow(ProductNotFoundException::new);
+        product.setName(name);
+
         this.productRepository.updateNameById(name, id);
+        return product;
     }
 
     @Override
     public void deleteById(Long id) {
         this.productRepository.deleteById(id);
-    }
-
-    @Override
-    public Product findById(Long id) {
-        return this.productRepository.findById(id)
-            .orElseThrow(() -> new ProductNotFoundException(id));
     }
 }

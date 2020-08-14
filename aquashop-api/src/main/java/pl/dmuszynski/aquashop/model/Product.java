@@ -45,4 +45,20 @@ public class Product {
     public List<Comment> getComments() {
         return comments;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrize(float prize) {
+        this.prize = prize;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
