@@ -36,7 +36,7 @@ public class TokenServiceImpl implements TokenService {
         final Token userToken = this.generateNewUserToken(user);
         String mailSubject = "Potwierdzenie rejestracji konta AquaShop";
         String mailContent = "Wymagane potwierdzenie rejestracji. Aby aktywować konto kliknij w poniższy link: \n"
-            + "http://localhost:8080/user-management/users/token?value=" + userToken.getValue();
+            + "http://localhost:8080/auth-management/token?value=" + userToken.getValue();
 
         try {
             this.mailService.sendMail(user.getEmail(), mailSubject, mailContent, true );

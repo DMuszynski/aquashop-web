@@ -11,7 +11,7 @@ import pl.dmuszynski.aquashop.service.AuthService;
 import pl.dmuszynski.aquashop.model.User;
 
 @RestController
-@RequestMapping("/auth-management")
+@RequestMapping("/auth-management/")
 public class AuthController {
 
     private final RegistrationService registrationService;
@@ -31,7 +31,7 @@ public class AuthController {
 
     @PostMapping(value = "/sign-up")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
-        final User registeredUser = this.registrationService.register(user.getEmail(), user.getPassword());
+        final User registeredUser = this.registrationService.register(user.getUsername(), user.getEmail(), user.getPassword());
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 

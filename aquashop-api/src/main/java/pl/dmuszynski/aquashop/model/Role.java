@@ -1,7 +1,7 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "role_type"))
@@ -12,7 +12,8 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
 
-    @NotNull @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @NotNull @Column(name = "role_type")
     private final RoleType roleType;
 
     public Role(RoleType roleType) {

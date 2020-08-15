@@ -37,9 +37,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public User register(String email, String password) {
+    public User register(String username, String email, String password) {
         validateUserEmailAlreadyExist(email);
-        final User registerUser = new User.UserBuilder(email, this.passwordEncoder.encode(password))
+        final User registerUser = new User.UserBuilder(username, email, this.passwordEncoder.encode(password))
             .roles(new HashSet<>(
                 Collections.singletonList(
                     this.roleService.findByRoleType(RoleType.ROLE_USER)

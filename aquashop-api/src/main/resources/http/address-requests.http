@@ -1,45 +1,31 @@
 ### Add user address
 POST http://localhost:8080/user-management/users/1/address-management/addresses
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
 
 {
   "country" : "Poland",
   "location" : "Kielce",
   "zipCode" : "30-000",
-  "street" : "warszawska 3"
+  "street" : "Warszawska 3"
 }
 
-### Update address country
-PATCH http://localhost:8080/user-management/users/1/address-management/addresses/1/country
+### Update address
+PUT http://localhost:8080/user-management/users/1/address-management/addresses/1
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
 
 {
-  "country" : "German"
-}
-
-### Update address location
-PATCH http://localhost:8080/user-management/users/1/address-management/addresses/1/location
-Content-Type: application/json
-
-{
-  "location" : "Berlin"
-}
-
-### Update address zip code
-PATCH http://localhost:8080/user-management/users/1/address-management/addresses/1/zip-code
-Content-Type: application/json
-
-{
-  "zipCode" : "20-000"
-}
-
-### Update address street
-PATCH http://localhost:8080/user-management/users/1/address-management/addresses/1/street
-Content-Type: application/json
-
-{
+  "country" : "German",
+  "location" : "Berlin",
+  "zipCode" : "20-000",
   "street" : "street"
 }
 
+### Find address
+GET http://localhost:8080/user-management/users/1/address-management/addresses/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+
 ### Delete address
 DELETE http://localhost:8080/user-management/users/1/address-management/addresses/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE

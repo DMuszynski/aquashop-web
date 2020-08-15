@@ -1,9 +1,9 @@
 package pl.dmuszynski.aquashop.model;
 
+import java.util.List;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))

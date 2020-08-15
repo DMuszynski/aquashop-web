@@ -1,21 +1,7 @@
-### Register user
-POST http://localhost:8080/user-management/users/register
-Content-Type: application/json
-
-{
-  "email" : "scsplayer1@gmail.com",
-  "password" : "password"
-}
-
-### JwtToken Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIn0.zaCJN0ekcrDajZ9QFSwP6-wL0B_2-G9Gy_iXCUdMkbU
-
-
-### Sign up
-GET http://localhost:8080/user-management/users/token?value=42a8b8d9-29f7-48a0-8072-3e7324dc2812
-
 ### Change user password
 PATCH http://localhost:8080/user-management/users/1/password
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
 
 {
   "password" : "newPassword"
@@ -24,6 +10,7 @@ Content-Type: application/json
 ### Change user email
 PATCH http://localhost:8080/user-management/users/1/email
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
 
 {
   "email" : "scsplayer2@gmail.com"
@@ -31,3 +18,4 @@ Content-Type: application/json
 
 ### Delete user
 DELETE http://localhost:8080/user-management/users/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE

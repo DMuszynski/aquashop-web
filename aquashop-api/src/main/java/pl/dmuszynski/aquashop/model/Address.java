@@ -1,7 +1,8 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Address {
@@ -11,6 +12,7 @@ public class Address {
     @Column(name = "address_id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

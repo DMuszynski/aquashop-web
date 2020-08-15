@@ -1,9 +1,9 @@
 package pl.dmuszynski.aquashop.model;
 
+import java.time.LocalDate;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "phone_number"))
@@ -24,7 +24,7 @@ public class Person {
     @NotBlank
     private String surname;
 
-    @NotBlank @Column(length = 9)
+    @NotBlank @Column(name = "phone_number", length = 9)
     private String phoneNumber;
 
     @NotNull

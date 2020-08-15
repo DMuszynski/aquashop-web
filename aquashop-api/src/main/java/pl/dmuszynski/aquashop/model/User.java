@@ -1,18 +1,20 @@
 package pl.dmuszynski.aquashop.model;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.annotation.CreatedDate;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
+import java.util.List;
+import java.time.LocalDateTime;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "email"), @UniqueConstraint(columnNames = "password")})
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email", "password"}))
 public class User {
 
     @Id
@@ -24,6 +26,9 @@ public class User {
     private String email;
 
     @NotBlank
+    private String username;
+
+    @NotBlank
     private String password;
 
     @ManyToMany
@@ -31,8 +36,17 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Address> addresses;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Token token;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Person person;
 
     @NotNull
     private boolean isEnabled;
@@ -45,6 +59,7 @@ public class User {
 
     private User(UserBuilder userBuilder) {
         this.id = userBuilder.id;
+        this.username = userBuilder.username;
         this.email = userBuilder.email;
         this.password = userBuilder.password;
         this.roles = userBuilder.roles;
@@ -55,6 +70,7 @@ public class User {
 
     public static final class UserBuilder {
         private Long id;
+        private final String username;
         private final String email;
         private final String password;
         private Set<Role> roles;
@@ -62,7 +78,8 @@ public class User {
         private boolean isEnabled;
         private LocalDateTime creationDate;
 
-        public UserBuilder(String email, String password) {
+        public UserBuilder(String username, String email, String password) {
+            this.username = username;
             this.email = email;
             this.password = password;
         }
@@ -123,5 +140,13 @@ public class User {
 
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public Token getToken() {
+        return token;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

@@ -1,24 +1,21 @@
 package pl.dmuszynski.aquashop.security.jwt;
 
-import java.util.Date;
+import pl.dmuszynski.aquashop.security.services.UserDetailsImpl;
 
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.JWT;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.auth0.jwt.JWT;
-//import io.jsonwebtoken.*;
-import pl.dmuszynski.aquashop.security.services.UserDetailsImpl;
+import java.util.Date;
 
 @Component
 public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${aquashop.jwtSecret}")
     private String jwtSecret;
