@@ -1,13 +1,13 @@
 package pl.dmuszynski.aquashop.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.dmuszynski.aquashop.model.Address;
-import pl.dmuszynski.aquashop.model.Comment;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
 import pl.dmuszynski.aquashop.service.CommentService;
+import pl.dmuszynski.aquashop.model.Comment;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")

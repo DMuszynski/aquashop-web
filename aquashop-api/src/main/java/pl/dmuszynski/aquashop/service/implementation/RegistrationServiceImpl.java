@@ -1,9 +1,5 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
 import pl.dmuszynski.aquashop.exception.UserIsAlreadyEnabledException;
 import pl.dmuszynski.aquashop.service.RegistrationService;
@@ -14,11 +10,15 @@ import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Token;
 import pl.dmuszynski.aquashop.model.User;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.HashSet;
 
-@Service
+@Service(value = "registrationService")
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final PasswordEncoder passwordEncoder;
@@ -54,16 +54,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Transactional
     @Override
-    public void signUp(String tokenValue) {
+    public void activateAccountByUserToken(String tokenValue) {
         final Token tokenByValue = this.tokenService.findByValue(tokenValue);
         final User user = tokenByValue.getUser();
 
-        this.activateAccount(user.isEnabled(), user.getId());
-    }
-
-    private void activateAccount(boolean isEnabled, Long id) {
-        if (!isEnabled)
-            this.userRepository.activateAccount(id);
+        if (!user.isEnabled())
+            this.userRepository.activateAccount(user.getId());
         else
             throw new UserIsAlreadyEnabledException();
     }

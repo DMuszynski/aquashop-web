@@ -1,14 +1,15 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import pl.dmuszynski.aquashop.exception.PersonNotFoundException;
+import pl.dmuszynski.aquashop.exception.UserNotFoundException;
 import pl.dmuszynski.aquashop.repository.PersonRepository;
+import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.PersonService;
-import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
 import pl.dmuszynski.aquashop.model.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -18,17 +19,18 @@ import java.time.LocalDate;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PersonServiceImpl(PersonRepository personRepository, UserService userService) {
+    public PersonServiceImpl(PersonRepository personRepository, UserRepository userRepository) {
         this.personRepository = personRepository;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Person addUserPerson(Person person, Long userId) {
-        final User user = this.userService.findById(userId);
+        final User user = this.userRepository.findById(userId)
+            .orElseThrow(UserNotFoundException::new);
 
         return this.personRepository.save(
             new Person(user,

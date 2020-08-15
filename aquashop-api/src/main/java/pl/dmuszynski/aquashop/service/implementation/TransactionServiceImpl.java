@@ -8,7 +8,7 @@ import pl.dmuszynski.aquashop.repository.TransactionRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.service.TransactionService;
 import pl.dmuszynski.aquashop.model.Transaction;
-import pl.dmuszynski.aquashop.service.UserService;
+import pl.dmuszynski.aquashop.service.UserProfileService;
 
 import java.time.LocalDateTime;
 
@@ -17,11 +17,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final ProductService productService;
-    private final UserService userService;
+    private final UserProfileService userService;
 
     @Autowired
     public TransactionServiceImpl(TransactionRepository transactionRepository, ProductService productService,
-                                  UserService userService)
+                                  UserProfileService userService)
     {
         this.transactionRepository = transactionRepository;
         this.productService = productService;

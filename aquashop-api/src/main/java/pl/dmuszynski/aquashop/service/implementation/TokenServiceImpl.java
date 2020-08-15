@@ -13,7 +13,7 @@ import pl.dmuszynski.aquashop.model.User;
 import javax.mail.MessagingException;
 import java.util.UUID;
 
-@Service
+@Service(value = "tokenService")
 public class TokenServiceImpl implements TokenService {
 
     private final TokenRepository tokenRepository;

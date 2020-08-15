@@ -4,5 +4,5 @@ import pl.dmuszynski.aquashop.model.User;
 
 public interface RegistrationService {
     User register(String email, String password);
-    void signUp(String value);
+    void activateAccountByUserToken(String value);
 }

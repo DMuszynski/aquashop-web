@@ -55,7 +55,7 @@ public class ProductController {
 
     @DeleteMapping(value = "/{id}")
     @PreAuthorize(value = "hasAnyRole('MODERATOR','ADMIN')")
-    public ResponseEntity<HttpStatus>  deleteById(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         this.productService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

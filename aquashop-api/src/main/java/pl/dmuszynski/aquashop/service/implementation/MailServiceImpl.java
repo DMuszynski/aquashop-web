@@ -1,15 +1,16 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
 import pl.dmuszynski.aquashop.service.MailService;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.mail.MessagingException;
 
-@Service
+@Service(value = "mailService")
 public class MailServiceImpl implements MailService {
 
     private final JavaMailSender javaMailSender;

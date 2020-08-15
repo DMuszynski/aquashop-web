@@ -9,13 +9,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
-import pl.dmuszynski.aquashop.service.implementation.UserServiceImpl;
+import pl.dmuszynski.aquashop.service.implementation.UserProfileServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceImplTest {
+public class UserProfileServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
@@ -24,7 +24,7 @@ public class UserServiceImplTest {
     private RoleRepository roleRepository;
 
     @Spy
-    private UserServiceImpl userServiceImpl;
+    private UserProfileServiceImpl userServiceImpl;
 
     @Before
     public void init() {
