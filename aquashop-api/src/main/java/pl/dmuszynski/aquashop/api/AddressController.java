@@ -11,7 +11,7 @@ import pl.dmuszynski.aquashop.model.Address;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
-@RequestMapping(value = "user-management/users/{id}/address-management/addresses")
+@RequestMapping(value = "user-management/users/{userId}/address-management/addresses")
 public class AddressController {
 
     private final AddressService addressService;
@@ -22,33 +22,21 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Address> addUserAddress(@RequestBody Address address, @PathVariable(value = "id") Long userId) {
+    public ResponseEntity<Address> addUserAddress(@RequestBody Address address, @PathVariable Long userId) {
         final Address createdAddress = this.addressService.addUserAddress(address, userId);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/{id}/country")
-    public ResponseEntity<Address> updateCountryById(@RequestBody String country, @PathVariable Long id) {
-        final Address updatedAddress = this.addressService.updateCountryById(country, id);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable Long id) {
+        final Address updatedAddress = this.addressService.updateAddress(address, id);
         return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}/location")
-    public ResponseEntity<Address> updateLocationById(@RequestBody String location, @PathVariable Long id) {
-        final Address updatedAddress = this.addressService.updateLocationById(location, id);
-        return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
-    }
-
-    @PatchMapping(value = "/{id}/zip-code")
-    public ResponseEntity<Address> updateZipCodeById(@RequestBody String zipCode, @PathVariable Long id) {
-        final Address updatedAddress = this.addressService.updateZipCodeById(zipCode, id);
-        return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
-    }
-
-    @PatchMapping(value = "/{id}/street")
-    public ResponseEntity<Address> updateStreetById(@RequestBody String street, @PathVariable Long id) {
-        final Address updatedAddress = this.addressService.updateStreetById(street, id);
-        return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Address> findById(@PathVariable Long id) {
+        final Address foundAddress = this.addressService.findById(id);
+        return new ResponseEntity<>(foundAddress, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

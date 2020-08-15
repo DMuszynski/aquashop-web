@@ -1,15 +1,16 @@
 package pl.dmuszynski.aquashop.exception;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
 @RestControllerAdvice
-public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserEmailAlreadyExistException.class)
     public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
@@ -21,23 +22,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(UserSamePasswordException.class)
-    public ResponseEntity<Object> handleUserSamePasswordException(UserSamePasswordException ex, WebRequest webRequest) {
+    @ExceptionHandler(UserDuplicatePasswordException.class)
+    public ResponseEntity<Object> handleUserDuplicatePasswordException(UserDuplicatePasswordException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(AddressNotFoundException.class)
-    public ResponseEntity<Object> handleAddressNotFoundException(AddressNotFoundException ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Object> handleProductNotFoundException(ProductNotFoundException ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
-    }
-
-    @ExceptionHandler(TokenNotFoundException.class)
-    public ResponseEntity<Object> handleTokenNotFoundException(TokenNotFoundException ex, WebRequest webRequest) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.NOT_FOUND, webRequest);
     }
 }

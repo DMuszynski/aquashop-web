@@ -22,6 +22,27 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @PostMapping
+    @PreAuthorize(value = "hasRole('MODERATOR')")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+        final Product createdProduct = this.productService.addProduct(product);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}")
+    @PreAuthorize(value = "hasRole('MODERATOR')")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable Long id) {
+        final Product updatedProduct = this.productService.updateProduct(product, id);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
+        final Product foundProduct = this.productService.findById(id);
+        return new ResponseEntity<>(foundProduct, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {
         final List<Product> productList = this.productService.findAll();
@@ -32,29 +53,8 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping
-    @PreAuthorize(value = "hasAnyRole('MODERATOR','ADMIN')")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        final Product createdProduct = this.productService.addProduct(product);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
-
-    @PatchMapping(value = "/{id}/prize")
-    @PreAuthorize(value = "hasAnyRole('MODERATOR','ADMIN')")
-    public ResponseEntity<Product> updatePrizeById(@RequestBody float prize, @PathVariable Long id) {
-        final Product updatedProduct = this.productService.updatePrizeById(prize, id);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
-    }
-
-    @PatchMapping(value = "/{id}/name")
-    @PreAuthorize(value = "hasAnyRole('MODERATOR','ADMIN')")
-    public ResponseEntity<Product> updateNameById(@RequestBody String name, @PathVariable Long id) {
-        final Product updatedProduct = this.productService.updateNameById(name, id);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
-    }
-
     @DeleteMapping(value = "/{id}")
-    @PreAuthorize(value = "hasAnyRole('MODERATOR','ADMIN')")
+    @PreAuthorize(value = "hasRole('MODERATOR')")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         this.productService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

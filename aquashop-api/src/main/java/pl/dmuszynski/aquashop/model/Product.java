@@ -28,6 +28,11 @@ public class Product {
         this.prize = prize;
     }
 
+    public Product(Long id, String name, float prize) {
+        this(name, prize);
+        this.id = id;
+    }
+
     protected Product() { }
 
     public Long getId() {

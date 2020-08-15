@@ -24,16 +24,6 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> users = this.adminService.findAll();
-
-        if (!users.isEmpty())
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
     @PatchMapping(value = "/{id}/user-role")
     public ResponseEntity<User> updateUserRole(@RequestBody User user, @PathVariable Long id) {
         final User updatedUser = this.adminService.updateUserRole(RoleType.ROLE_ADMIN, id);
@@ -44,5 +34,15 @@ public class AdminController {
     public ResponseEntity<User> updateUserIsEnabledById(@RequestBody User user, @PathVariable Long id) {
         final User updatedUser = this.adminService.updateUserIsEnabledById(user.isEnabled(), id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> findAll() {
+        List<User> users = this.adminService.findAll();
+
+        if (!users.isEmpty())
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -64,8 +64,8 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new UserIsAlreadyEnabledException();
     }
 
-    private void validateUserEmailAlreadyExist(String email) {
+    private void validateUserEmailAlreadyExist(String email) throws UserEmailAlreadyExistException{
         if (this.userRepository.findByEmail(email).isPresent())
-            throw new UserEmailAlreadyExistException(email);
+            throw new UserEmailAlreadyExistException("The user with given address e-mail " + email + " is already exist");
     }
 }

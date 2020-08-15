@@ -38,6 +38,11 @@ public class Person {
         this.user = user;
     }
 
+    public Person(User user, Long id, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
+        this(user, name, surname, phoneNumber, dateOfBirth);
+        this.setId(id);
+    }
+
     protected Person() { }
 
     public Long getId() {

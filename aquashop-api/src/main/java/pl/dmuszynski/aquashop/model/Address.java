@@ -35,7 +35,12 @@ public class Address {
         this.street = street;
     }
 
-    public Address() { }
+    public Address(User user, Long id, String country, String location, String zipCode, String street) {
+        this(user, country, location, zipCode, street);
+        this.id = id;
+    }
+
+    protected Address() { }
 
     public Long getId() {
         return id;

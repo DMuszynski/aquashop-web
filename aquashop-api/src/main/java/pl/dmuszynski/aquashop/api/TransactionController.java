@@ -1,13 +1,16 @@
 package pl.dmuszynski.aquashop.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.dmuszynski.aquashop.model.Transaction;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import pl.dmuszynski.aquashop.service.TransactionService;
+import pl.dmuszynski.aquashop.model.Transaction;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
@@ -22,7 +25,8 @@ public class TransactionController {
     }
 
     @PostMapping
-    public void realizeTransaction(@RequestBody Transaction transaction) {
-        this.transactionService.realizeTransaction(transaction);
+    public ResponseEntity<Transaction> realizeTransaction(@RequestBody Transaction transaction) {
+        final Transaction completedTransaction = this.transactionService.realizeTransaction(transaction);
+        return new ResponseEntity<>(completedTransaction, HttpStatus.OK);
     }
 }

@@ -29,6 +29,11 @@ public class Comment {
         this.mark = mark;
     }
 
+    public Comment(Product product, Long id, String description, int mark) {
+        this(product, description, mark);
+        this.id = id;
+    }
+
     protected Comment() {}
 
     public Long getId() {

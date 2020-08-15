@@ -10,9 +10,4 @@ import pl.dmuszynski.aquashop.model.Comment;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Modifying @Query(value = "UPDATE Comment c SET c.description = :description WHERE c.id = :id")
-    void updateDescriptionById(@Param("description") String description, @Param("id") Long id);
-
-    @Modifying @Query(value = "UPDATE Comment c SET c.mark = :mark WHERE c.id = :id")
-    void updateMarkById(@Param("mark") int mark, @Param("id") Long id);
 }

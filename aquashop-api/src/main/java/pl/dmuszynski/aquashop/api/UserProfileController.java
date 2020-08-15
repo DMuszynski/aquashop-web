@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import pl.dmuszynski.aquashop.service.UserProfileService;
+import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
 
 @RestController
@@ -14,10 +14,10 @@ import pl.dmuszynski.aquashop.model.User;
 @RequestMapping(value = "user-management/users/{id}")
 public class UserProfileController {
 
-    private final UserProfileService userService;
+    private final UserService userService;
 
     @Autowired
-    public UserProfileController(UserProfileService userService) {
+    public UserProfileController(UserService userService) {
         this.userService = userService;
     }
 

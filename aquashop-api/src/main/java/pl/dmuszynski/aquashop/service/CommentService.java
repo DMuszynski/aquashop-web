@@ -4,7 +4,7 @@ import pl.dmuszynski.aquashop.model.Comment;
 
 public interface CommentService {
     Comment addProductComment(Comment comment, Long productId);
-    Comment updateDescriptionById(String description, Long id);
-    Comment updateMarkById(int mark, Long id);
+    Comment updateComment(Comment comment, Long id);
+    Comment findById(Long id);
     void deleteById(Long id);
 }

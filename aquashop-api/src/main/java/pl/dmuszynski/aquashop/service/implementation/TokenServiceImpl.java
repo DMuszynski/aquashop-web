@@ -1,9 +1,9 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dmuszynski.aquashop.exception.TokenNotFoundException;
 import pl.dmuszynski.aquashop.repository.TokenRepository;
 import pl.dmuszynski.aquashop.service.TokenService;
 import pl.dmuszynski.aquashop.service.MailService;
@@ -28,18 +28,18 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Token findByValue(String value) {
         return tokenRepository.findByValue(value)
-            .orElseThrow(() -> new TokenNotFoundException(value));
+            .orElseThrow(() -> new ResourceNotFoundException("Token not found for this value: " + value));
     }
 
     @Override
     public void sendToken(User user) {
-        Token userToken = generateNewUserToken(user);
+        final Token userToken = this.generateNewUserToken(user);
         String mailSubject = "Potwierdzenie rejestracji konta AquaShop";
         String mailContent = "Wymagane potwierdzenie rejestracji. Aby aktywować konto kliknij w poniższy link: \n"
             + "http://localhost:8080/user-management/users/token?value=" + userToken.getValue();
 
         try {
-            mailService.sendMail(user.getEmail(), mailSubject, mailContent, true );
+            this.mailService.sendMail(user.getEmail(), mailSubject, mailContent, true );
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class TokenServiceImpl implements TokenService {
         do tokenValue = UUID.randomUUID().toString();
         while (tokenRepository.findByValue(tokenValue).isPresent());
 
-        Token token = new Token(user, tokenValue);
+        final Token token = new Token(user, tokenValue);
         return tokenRepository.save(token);
     }
 }

@@ -8,7 +8,7 @@ import pl.dmuszynski.aquashop.repository.TransactionRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.service.TransactionService;
 import pl.dmuszynski.aquashop.model.Transaction;
-import pl.dmuszynski.aquashop.service.UserProfileService;
+import pl.dmuszynski.aquashop.service.UserService;
 
 import java.time.LocalDateTime;
 
@@ -17,11 +17,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final ProductService productService;
-    private final UserProfileService userService;
+    private final UserService userService;
 
     @Autowired
     public TransactionServiceImpl(TransactionRepository transactionRepository, ProductService productService,
-                                  UserProfileService userService)
+                                  UserService userService)
     {
         this.transactionRepository = transactionRepository;
         this.productService = productService;
@@ -29,10 +29,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void realizeTransaction(Transaction transaction) {
-        Product product = this.productService.findById(transaction.getProduct().getId());
-        User user = this.userService.findById(transaction.getUser().getId());
+    public Transaction realizeTransaction(Transaction transaction) {
+        final Product product = this.productService.findById(transaction.getProduct().getId());
+        final User user = this.userService.findById(transaction.getUser().getId());
 
-        this.transactionRepository.save(new Transaction(product, user, LocalDateTime.now()));
+        return this.transactionRepository
+            .save(new Transaction(product, user, LocalDateTime.now()));
     }
 }

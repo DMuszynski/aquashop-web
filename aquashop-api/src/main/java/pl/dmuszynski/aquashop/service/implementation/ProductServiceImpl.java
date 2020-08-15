@@ -1,17 +1,15 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import pl.dmuszynski.aquashop.exception.ProductNotFoundException;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Product;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
 @Service(value = "productService")
 public class ProductServiceImpl implements ProductService {
 
@@ -22,10 +20,6 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-    @Override
-    public List<Product> findAll() {
-        return this.productRepository.findAll();
-    }
 
     @Override
     public Product addProduct(Product product) {
@@ -33,23 +27,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updatePrizeById(float prize, Long id) {
-        final Product product = this.productRepository.findById(id)
-            .orElseThrow(ProductNotFoundException::new);
-        product.setPrize(prize);
-
-        this.productRepository.updatePrizeById(prize, id);
-        return product;
+    public Product updateProduct(Product productDetails, Long id) {
+        final Product product = this.findById(id);
+        return productRepository
+            .save(new Product(product.getId(),
+                productDetails.getName(), productDetails.getPrize()));
     }
 
     @Override
-    public Product updateNameById(String name, Long id) {
-        final Product product = this.productRepository.findById(id)
-            .orElseThrow(ProductNotFoundException::new);
-        product.setName(name);
+    public Product findById(Long id) throws ResourceNotFoundException {
+        return this.productRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + id));
+    }
 
-        this.productRepository.updateNameById(name, id);
-        return product;
+    @Override
+    public List<Product> findAll() {
+        return this.productRepository.findAll();
     }
 
     @Override

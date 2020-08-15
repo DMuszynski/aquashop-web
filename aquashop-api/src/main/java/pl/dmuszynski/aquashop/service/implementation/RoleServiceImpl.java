@@ -21,6 +21,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findByRoleType(RoleType roleType) {
         return roleRepository.findByRoleType(roleType)
-            .orElseGet(() -> roleRepository.save(new Role(roleType)));
+            .orElseGet(() -> roleRepository
+                .save(new Role(roleType)));
     }
 }

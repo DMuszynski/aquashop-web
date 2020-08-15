@@ -1,9 +1,9 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.dmuszynski.aquashop.exception.UserNotFoundException;
 import pl.dmuszynski.aquashop.repository.AdminRepository;
 import pl.dmuszynski.aquashop.repository.RoleRepository;
 import pl.dmuszynski.aquashop.repository.UserRepository;
@@ -37,18 +37,18 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public User updateUserIsEnabledById(boolean isEnabled, Long id) {
+    public User updateUserIsEnabledById(boolean isEnabled, Long id) throws ResourceNotFoundException {
         final User user = this.userRepository.findById(id)
-            .orElseThrow(UserNotFoundException::new);
+            .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + id));
 
         this.adminRepository.updateUserIsEnabledById(isEnabled, id);
         return user;
     }
 
     @Override
-    public User updateUserRole(RoleType roleType, Long userId) {
-        final User user = this.userRepository.findById(userId)
-            .orElseThrow(UserNotFoundException::new);
+    public User updateUserRole(RoleType roleType, Long id) throws ResourceNotFoundException {
+        final User user = this.userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + id));
 
         this.adminRepository.updateUserRole(2,1);
         return user;

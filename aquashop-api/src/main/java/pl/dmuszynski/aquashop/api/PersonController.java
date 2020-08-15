@@ -9,11 +9,9 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.model.Person;
 
-import java.time.LocalDate;
-
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
-@RequestMapping(value = "user-management/users/{id}/person-management/persons")
+@RequestMapping(value = "user-management/users/{userId}/person-management/persons")
 public class PersonController {
 
     private final PersonService personService;
@@ -24,33 +22,21 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addUserPerson(@RequestBody Person person, @PathVariable(value = "id") Long userId) {
+    public ResponseEntity<Person> addUserPerson(@RequestBody Person person, @PathVariable Long userId) {
         final Person createdPerson = this.personService.addUserPerson(person, userId);
         return new ResponseEntity<>(createdPerson, HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/{id}/name")
-    public ResponseEntity<Person> updateNameById(@RequestBody String name, @PathVariable Long id) {
-        final Person updatedPerson = this.personService.updateNameById(name, id);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Long id) {
+        final Person updatedPerson = this.personService.updatePerson(person, id);
         return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}/surname")
-    public ResponseEntity<Person> updateSurnameById(@RequestBody String surname, @PathVariable Long id) {
-        final Person updatedPerson = this.personService.updateSurnameById(surname, id);
-        return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
-    }
-
-    @PatchMapping(value = "/{id}/phone-number")
-    public ResponseEntity<Person> updatePhoneNumberById(@RequestBody String phoneNumber, @PathVariable Long id) {
-        final Person updatedPerson = this.personService.updatePhoneNumberById(phoneNumber, id);
-        return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
-    }
-
-    @PatchMapping(value = "/{id}/date-of-birth")
-    public ResponseEntity<Person> updateDateOfBirthById(@RequestBody LocalDate dateOfBirth, @PathVariable Long id) {
-        final Person updatedPerson = this.personService.updateDateOfBirthById(dateOfBirth, id);
-        return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Person> findById(@PathVariable Long id) {
+        final Person foundPerson = this.personService.findById(id);
+        return new ResponseEntity<>(foundPerson, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -11,7 +11,7 @@ import pl.dmuszynski.aquashop.model.Comment;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
-@RequestMapping(value = "/product-management/products/{id}/comment-management/comments")
+@RequestMapping(value = "/product-management/products/{productId}/comment-management/comments")
 public class CommentController {
 
     private final CommentService commentService;
@@ -22,21 +22,21 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> addProductComment(@RequestBody Comment comment, @PathVariable(value = "id") Long productId) {
+    public ResponseEntity<Comment> addProductComment(@RequestBody Comment comment, @PathVariable Long productId) {
         final Comment createdComment = this.commentService.addProductComment(comment, productId);
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/{id}/description")
-    public ResponseEntity<Comment> updateDescriptionById(@RequestBody String description, @PathVariable Long id) {
-        final Comment updateComment = this.commentService.updateDescriptionById(description, id);
-        return new ResponseEntity<>(updateComment, HttpStatus.OK);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Comment> updateComment(@RequestBody Comment comment, @PathVariable Long id) {
+        final Comment updatedComment = this.commentService.updateComment(comment, id);
+        return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}/mark")
-    public ResponseEntity<Comment> updateMarkById(@RequestBody int mark, @PathVariable Long id) {
-        final Comment updateComment = this.commentService.updateMarkById(mark, id);
-        return new ResponseEntity<>(updateComment, HttpStatus.OK);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Comment> findById(@PathVariable Long id) {
+        final Comment foundComment = this.commentService.findById(id);
+        return new ResponseEntity<>(foundComment, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
