@@ -1,27 +1,27 @@
 ### Add product comment
 POST http://localhost:8080/product-management/products/1/comment-management/comments
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "description" : "very flexible black shorts",
   "mark" : "0"
 }
 
-### Update comment description
-PATCH http://localhost:8080/product-management/products/1/comment-management/comments/1/description
+### Update product comment
+PUT http://localhost:8080/product-management/products/1/comment-management/comments/1
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
-  "description" : "silk and very flexible black shorts"
-}
-
-### Update comment mark
-PATCH http://localhost:8080/product-management/products/1/comment-management/comments/1/mark
-Content-Type: application/json
-
-{
+  "description" : "silk and very flexible black shorts",
   "mark" : "1"
 }
 
+### Find comment
+GET http://localhost:8080/product-management/products/1/comment-management/comments/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+
 ### Delete comment
 DELETE http://localhost:8080/product-management/products/1/comment-management/comments/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw

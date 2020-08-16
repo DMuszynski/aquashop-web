@@ -1,7 +1,7 @@
 ### Add user address
 POST http://localhost:8080/user-management/users/1/address-management/addresses
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "country" : "Poland",
@@ -13,7 +13,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
 ### Update address
 PUT http://localhost:8080/user-management/users/1/address-management/addresses/1
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "country" : "German",
@@ -22,10 +22,10 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
   "street" : "street"
 }
 
-### Find address
-GET http://localhost:8080/user-management/users/1/address-management/addresses/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+### Find addresses
+GET http://localhost:8080/user-management/users/1/address-management/addresses
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 ### Delete address
 DELETE http://localhost:8080/user-management/users/1/address-management/addresses/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw

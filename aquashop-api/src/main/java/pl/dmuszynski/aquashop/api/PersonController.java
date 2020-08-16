@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import pl.dmuszynski.aquashop.payload.dto.PersonDTO;
 import pl.dmuszynski.aquashop.service.PersonService;
-import pl.dmuszynski.aquashop.model.Person;
+
+import javax.validation.Valid;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
@@ -22,20 +24,20 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addUserPerson(@RequestBody Person person, @PathVariable Long userId) {
-        final Person createdPerson = this.personService.addUserPerson(person, userId);
+    public ResponseEntity<PersonDTO> addUserPerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long userId) {
+        final PersonDTO createdPerson = this.personService.addUserPerson(personDetails, userId);
         return new ResponseEntity<>(createdPerson, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Long id) {
-        final Person updatedPerson = this.personService.updatePerson(person, id);
+    public ResponseEntity<PersonDTO> updatePerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long id) {
+        final PersonDTO updatedPerson = this.personService.updatePerson(personDetails, id);
         return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Person> findById(@PathVariable Long id) {
-        final Person foundPerson = this.personService.findById(id);
+    public ResponseEntity<PersonDTO> findById(@PathVariable Long id) {
+        final PersonDTO foundPerson = this.personService.findById(id);
         return new ResponseEntity<>(foundPerson, HttpStatus.OK);
     }
 

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.CommentService;
 import pl.dmuszynski.aquashop.model.Comment;
 
+import javax.validation.Valid;
+
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "/product-management/products/{productId}/comment-management/comments")
@@ -22,13 +24,13 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> addProductComment(@RequestBody Comment comment, @PathVariable Long productId) {
+    public ResponseEntity<Comment> addProductComment(@RequestBody @Valid Comment comment, @PathVariable Long productId) {
         final Comment createdComment = this.commentService.addProductComment(comment, productId);
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Comment> updateComment(@RequestBody Comment comment, @PathVariable Long id) {
+    public ResponseEntity<Comment> updateComment(@RequestBody @Valid Comment comment, @PathVariable Long id) {
         final Comment updatedComment = this.commentService.updateComment(comment, id);
         return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }

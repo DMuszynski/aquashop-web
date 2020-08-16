@@ -1,7 +1,7 @@
 ### Change user password
 PATCH http://localhost:8080/user-management/users/1/password
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "password" : "newPassword"
@@ -10,7 +10,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
 ### Change user email
 PATCH http://localhost:8080/user-management/users/1/email
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "email" : "scsplayer2@gmail.com"
@@ -18,4 +18,4 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
 
 ### Delete user
 DELETE http://localhost:8080/user-management/users/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw

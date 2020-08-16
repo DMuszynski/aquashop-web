@@ -1,12 +1,15 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.persistence.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Data;
 
+@Data
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Transaction {
@@ -32,24 +35,6 @@ public class Transaction {
         this.product = product;
         this.user = user;
         this.date = date;
-    }
-
-    protected Transaction() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public User getUser() {
-        return user;
     }
 }
 

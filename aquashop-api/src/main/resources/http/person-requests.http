@@ -1,7 +1,7 @@
 ### Add user person
 POST http://localhost:8080/user-management/users/1/person-management/persons
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
   "name" : "Jan",
@@ -11,12 +11,12 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
 }
 
 ### Update person
-PUT http://localhost:8080/user-management/users/1/person-management/persons/1
+PUT http://localhost:8080/user-management/users/1/person-management/persons/3
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 {
-  "name" : "John",
+  "name" : "Johns",
   "surname" : "Walker",
   "phoneNumber" : "123456789",
   "dateOfBirth" : "2000-01-01"
@@ -24,8 +24,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5Z
 
 ### Find person
 GET http://localhost:8080/user-management/users/1/person-management/persons/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
 
 ### Delete person
 DELETE http://localhost:8080/user-management/users/1/person-management/persons/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzY3NwbGF5ZXIxQGdtYWlsLmNvbSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjA3NTgwLCJpYXQiOjE1OTc1MjExODB9.kYsVkXVJYyVqUHqWxHUE8fu9n668ihgkgYfiqZ9rsGE
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw

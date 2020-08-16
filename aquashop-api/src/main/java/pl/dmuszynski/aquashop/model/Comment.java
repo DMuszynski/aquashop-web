@@ -1,13 +1,15 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "description"))
 public class Comment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
@@ -21,50 +23,16 @@ public class Comment {
     private String description;
 
     @NotNull
-    private int mark;
+    private int rating;
 
-    public Comment(Product product, String description, int mark) {
+    public Comment(Product product, String description, int rating) {
         this.description = description;
         this.product = product;
-        this.mark = mark;
+        this.rating = rating;
     }
 
-    public Comment(Product product, Long id, String description, int mark) {
-        this(product, description, mark);
+    public Comment(Product product, Long id, String description, int rating) {
+        this(product, description, rating);
         this.id = id;
-    }
-
-    protected Comment() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public int getMark() {
-        return mark;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setMark(int mark) {
-        this.mark = mark;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

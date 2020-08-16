@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import pl.dmuszynski.aquashop.payload.request.LoginRequest;
+import pl.dmuszynski.aquashop.payload.request.SignupRequest;
 import pl.dmuszynski.aquashop.payload.response.JwtResponse;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.AuthService;
 import pl.dmuszynski.aquashop.model.User;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth-management/")
@@ -24,14 +28,16 @@ public class AuthController {
     }
 
     @PostMapping(value = "/sign-in")
-    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody User user) {
-        final JwtResponse authenticatedUserResponse = this.authService.authenticateUser(user);
+    public ResponseEntity<JwtResponse> authenticateUser(@RequestBody @Valid LoginRequest loginRequest) {
+        final JwtResponse authenticatedUserResponse = this.authService
+            .authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
         return new ResponseEntity<>(authenticatedUserResponse, HttpStatus.OK);
     }
 
     @PostMapping(value = "/sign-up")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        final User registeredUser = this.registrationService.register(user.getUsername(), user.getEmail(), user.getPassword());
+    public ResponseEntity<User> registerUser(@RequestBody @Valid SignupRequest signupRequest) {
+        final User registeredUser = this.registrationService
+            .register(signupRequest.getUsername(), signupRequest.getEmail(), signupRequest.getPassword());
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 

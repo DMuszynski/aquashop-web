@@ -1,10 +1,10 @@
 package pl.dmuszynski.aquashop.service;
 
-import pl.dmuszynski.aquashop.model.Person;
+import pl.dmuszynski.aquashop.payload.dto.PersonDTO;
 
 public interface PersonService {
-    Person addUserPerson(Person person, Long userId);
-    Person updatePerson(Person person, Long id);
-    Person findById(Long id);
+    PersonDTO addUserPerson(PersonDTO person, Long userId);
+    PersonDTO updatePerson(PersonDTO person, Long id);
+    PersonDTO findById(Long id);
     void deleteById(Long id);
 }

@@ -30,9 +30,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JwtResponse authenticateUser(User user) {
+    public JwtResponse authenticateUser(String username, String password) {
         final Authentication authentication = this.authenticationManager
-            .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+            .authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);

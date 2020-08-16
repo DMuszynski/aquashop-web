@@ -7,7 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import pl.dmuszynski.aquashop.service.AddressService;
-import pl.dmuszynski.aquashop.model.Address;
+import pl.dmuszynski.aquashop.payload.dto.AddressDTO;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
@@ -22,21 +25,25 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Address> addUserAddress(@RequestBody Address address, @PathVariable Long userId) {
-        final Address createdAddress = this.addressService.addUserAddress(address, userId);
+    public ResponseEntity<AddressDTO> addUserAddress(@RequestBody @Valid AddressDTO addressDetails, @PathVariable Long userId) {
+        final AddressDTO createdAddress = this.addressService.addUserAddress(addressDetails, userId);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Address> updateAddress(@RequestBody Address address, @PathVariable Long id) {
-        final Address updatedAddress = this.addressService.updateAddress(address, id);
+    public ResponseEntity<AddressDTO> updateAddress(@RequestBody @Valid AddressDTO addressDetails, @PathVariable Long id) {
+        final AddressDTO updatedAddress = this.addressService.updateAddress(addressDetails, id);
         return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Address> findById(@PathVariable Long id) {
-        final Address foundAddress = this.addressService.findById(id);
-        return new ResponseEntity<>(foundAddress, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<AddressDTO>> findAllByUserId(@PathVariable Long userId) {
+        final List<AddressDTO> foundAddressesList = this.addressService.findAllByUserId(userId);
+
+        if (!foundAddressesList.isEmpty())
+            return new ResponseEntity<>(foundAddressesList, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/{id}")

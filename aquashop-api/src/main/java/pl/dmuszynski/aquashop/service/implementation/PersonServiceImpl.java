@@ -3,8 +3,10 @@ package pl.dmuszynski.aquashop.service.implementation;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.PersonRepository;
+import pl.dmuszynski.aquashop.payload.dto.PersonDTO;
 import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
@@ -15,33 +17,44 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final UserService userService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public PersonServiceImpl(PersonRepository personRepository, UserService userService) {
+    public PersonServiceImpl(PersonRepository personRepository, UserService userService, ModelMapper modelMapper) {
         this.personRepository = personRepository;
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Person addUserPerson(Person person, Long userId) {
-        final User user = this.userService.findById(userId);
-        return this.personRepository
-            .save(new Person(user, person.getName(),
-                person.getSurname(), person.getPhoneNumber(), person.getDateOfBirth()));
+    public PersonDTO addUserPerson(PersonDTO personDetails, Long userId) {
+        final User foundUser = this.userService.findById(userId);
+        final Person savedPerson = this.personRepository
+            .save(new Person(foundUser, personDetails.getName(), personDetails.getSurname(),
+                personDetails.getPhoneNumber(), personDetails.getDateOfBirth()));
+
+        return this.modelMapper.map(savedPerson, PersonDTO.class);
     }
 
     @Override
-    public Person updatePerson(Person personDetails, Long id) {
-        final Person person = this.findById(id);
-        return this.personRepository
-            .save(new Person(person.getUser(), person.getId(), personDetails.getName(),
+    public PersonDTO updatePerson(PersonDTO personDetails, Long id) {
+        final Person foundPerson = this.findPersonById(id);
+        final Person updatedPerson = this.personRepository
+            .save(new Person(foundPerson.getUser(), foundPerson.getId(), personDetails.getName(),
                 personDetails.getSurname(), personDetails.getPhoneNumber(), personDetails.getDateOfBirth()));
+
+        return this.modelMapper.map(updatedPerson, PersonDTO.class);
     }
 
-    @Override
-    public Person findById(Long id) throws ResourceNotFoundException {
+    private Person findPersonById(Long id) throws ResourceNotFoundException {
         return this.personRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + id));
+    }
+
+    @Override
+    public PersonDTO findById(Long id) {
+        final Person foundPerson = this.findPersonById(id);
+        return this.modelMapper.map(foundPerson, PersonDTO.class);
     }
 
     @Override

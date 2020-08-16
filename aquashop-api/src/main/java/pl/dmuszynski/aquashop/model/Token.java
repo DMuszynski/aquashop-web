@@ -1,12 +1,15 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+
+import lombok.NoArgsConstructor;
+import lombok.Data;
 
 @Entity
+@NoArgsConstructor @Data
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "value"))
 public class Token {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "token_id")
@@ -22,19 +25,5 @@ public class Token {
     public Token(User user, String value) {
         this.user = user;
         this.value = value;
-    }
-
-    protected Token() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

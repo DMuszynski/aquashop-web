@@ -26,7 +26,7 @@ public class CommentServiceImpl implements CommentService {
     public Comment addProductComment(Comment comment, Long productId) {
         final Product product = this.productService.findById(productId);
         return this.commentRepository
-            .save(new Comment(product, comment.getDescription(), comment.getMark()));
+            .save(new Comment(product, comment.getDescription(), comment.getRating()));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
         final Comment comment = this.findById(id);
         return this.commentRepository
             .save(new Comment(comment.getProduct(), comment.getId(),
-                commentDetails.getDescription(), commentDetails.getMark()));
+                commentDetails.getDescription(), commentDetails.getRating()));
     }
 
     @Override

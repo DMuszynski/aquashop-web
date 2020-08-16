@@ -13,7 +13,7 @@ POST http://localhost:8080/auth-management/sign-in
 Content-Type: application/json
 
 {
-  "email" : "scsplayer1@gmail.com",
+  "username" : "username",
   "password" : "password"
 }
 

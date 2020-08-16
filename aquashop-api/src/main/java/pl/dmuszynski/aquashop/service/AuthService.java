@@ -4,5 +4,5 @@ import pl.dmuszynski.aquashop.payload.response.JwtResponse;
 import pl.dmuszynski.aquashop.model.User;
 
 public interface AuthService {
-    JwtResponse authenticateUser(User user);
+    JwtResponse authenticateUser(String username, String password);
 }

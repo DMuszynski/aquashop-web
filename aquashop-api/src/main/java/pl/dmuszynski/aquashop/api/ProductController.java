@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Product;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,18 +25,17 @@ public class ProductController {
 
     @PostMapping
     @PreAuthorize(value = "hasRole('MODERATOR')")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestBody @Valid Product product) {
         final Product createdProduct = this.productService.addProduct(product);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     @PreAuthorize(value = "hasRole('MODERATOR')")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable Long id) {
+    public ResponseEntity<Product> updateProduct(@RequestBody @Valid Product product, @PathVariable Long id) {
         final Product updatedProduct = this.productService.updateProduct(product, id);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {

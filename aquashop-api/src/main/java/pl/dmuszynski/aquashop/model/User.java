@@ -1,16 +1,15 @@
 package pl.dmuszynski.aquashop.model;
 
-import java.util.Set;
-import java.util.List;
-import java.time.LocalDateTime;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
-
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.annotation.CreatedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)

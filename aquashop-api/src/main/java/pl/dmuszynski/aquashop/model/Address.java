@@ -1,18 +1,18 @@
 package pl.dmuszynski.aquashop.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+
+@Data
 @Entity
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
     private Long id;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -40,55 +40,5 @@ public class Address {
     public Address(User user, Long id, String country, String location, String zipCode, String street) {
         this(user, country, location, zipCode, street);
         this.id = id;
-    }
-
-    protected Address() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 }
