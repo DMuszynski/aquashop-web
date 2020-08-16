@@ -5,8 +5,8 @@ import pl.dmuszynski.aquashop.payload.dto.AddressDTO;
 import java.util.List;
 
 public interface AddressService {
-    AddressDTO addUserAddress(AddressDTO address, Long userId);
-    AddressDTO updateAddress(AddressDTO address, Long id);
+    AddressDTO addUserAddress(AddressDTO addressDetails, Long userId);
+    AddressDTO updateAddress(AddressDTO addressDetails, Long id);
     List<AddressDTO> findAllByUserId(Long userId);
     void deleteById(Long id);
 }

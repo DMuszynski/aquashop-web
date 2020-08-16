@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.List;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -34,39 +34,5 @@ public class Product {
     public Product(Long id, String name, float prize) {
         this(name, prize);
         this.id = id;
-    }
-
-    protected Product() { }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public float getPrize() {
-        return prize;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrize(float prize) {
-        this.prize = prize;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 }

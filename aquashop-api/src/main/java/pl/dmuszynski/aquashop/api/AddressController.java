@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
-@RequestMapping(value = "user-management/users/{userId}/address-management/addresses")
+@RequestMapping(value = "/user-management/users/{userId}/address-management/addresses")
 public class AddressController {
 
     private final AddressService addressService;

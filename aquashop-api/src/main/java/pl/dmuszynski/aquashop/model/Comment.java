@@ -4,10 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
-@Data
 @Entity
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "description"))
 public class Comment {
     @Id

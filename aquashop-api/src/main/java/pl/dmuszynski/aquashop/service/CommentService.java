@@ -1,10 +1,9 @@
 package pl.dmuszynski.aquashop.service;
 
-import pl.dmuszynski.aquashop.model.Comment;
+import pl.dmuszynski.aquashop.payload.dto.CommentDTO;
 
 public interface CommentService {
-    Comment addProductComment(Comment comment, Long productId);
-    Comment updateComment(Comment comment, Long id);
-    Comment findById(Long id);
+    CommentDTO addProductComment(CommentDTO commentDetails, Long productId);
+    CommentDTO updateComment(CommentDTO commentDetails, Long id);
     void deleteById(Long id);
 }

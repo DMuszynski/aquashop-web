@@ -4,9 +4,10 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "role_type"))
 public class Role {
     @Id
@@ -16,7 +17,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @NotNull @Column(name = "role_type")
-    private RoleType roleType = RoleType.ROLE_USER;
+    private RoleType roleType;
 
     public Role(RoleType roleType) {
         this.roleType = roleType;

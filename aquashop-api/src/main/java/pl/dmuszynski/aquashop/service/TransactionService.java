@@ -1,7 +1,10 @@
 package pl.dmuszynski.aquashop.service;
 
-import pl.dmuszynski.aquashop.model.Transaction;
+import pl.dmuszynski.aquashop.payload.dto.TransactionDTO;
+
+import java.util.List;
 
 public interface TransactionService {
-    Transaction realizeTransaction(Transaction transaction);
+    TransactionDTO realizeTransaction(TransactionDTO transactionDetails);
+    List<TransactionDTO> findAllByUserId(Long userId);
 }

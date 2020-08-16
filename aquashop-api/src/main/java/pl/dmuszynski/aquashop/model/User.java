@@ -2,7 +2,6 @@ package pl.dmuszynski.aquashop.model;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email", "password"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
 public class User {
 
     @Id
@@ -35,15 +34,12 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Token token;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Person person;
 

@@ -3,8 +3,10 @@ package pl.dmuszynski.aquashop.service.implementation;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.CommentRepository;
+import pl.dmuszynski.aquashop.payload.dto.CommentDTO;
 import pl.dmuszynski.aquashop.service.CommentService;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Comment;
@@ -15,32 +17,42 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final ProductService productService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, ProductService productService) {
+    public CommentServiceImpl(CommentRepository commentRepository, ProductService productService, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.productService = productService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Comment addProductComment(Comment comment, Long productId) {
-        final Product product = this.productService.findById(productId);
-        return this.commentRepository
-            .save(new Comment(product, comment.getDescription(), comment.getRating()));
+    public CommentDTO addProductComment(CommentDTO commentDetails, Long productId) {
+        final Product foundProduct = this.productService.findProductById(productId);
+        final Comment savedProduct = this.commentRepository
+            .save(new Comment(
+                foundProduct,
+                commentDetails.getDescription(),
+                commentDetails.getRating())
+            );
+
+        return this.modelMapper.map(savedProduct, CommentDTO.class);
     }
 
     @Override
-    public Comment updateComment(Comment commentDetails, Long id) {
-        final Comment comment = this.findById(id);
-        return this.commentRepository
-            .save(new Comment(comment.getProduct(), comment.getId(),
-                commentDetails.getDescription(), commentDetails.getRating()));
-    }
+    public CommentDTO updateComment(CommentDTO commentDetails, Long commentId) {
+        final Comment foundComment = this.commentRepository.findById(commentId)
+            .orElseThrow(() -> new ResourceNotFoundException("Comment not found for id: " + commentId));
 
-    @Override
-    public Comment findById(Long id) throws ResourceNotFoundException {
-        return this.commentRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Comment not found for id: " + id));
+        final Comment updatedComment = this.commentRepository
+            .save(new Comment(
+                foundComment.getProduct(),
+                foundComment.getId(),
+                commentDetails.getDescription(),
+                commentDetails.getRating())
+            );
+
+        return this.modelMapper.map(updatedComment, CommentDTO.class);
     }
 
     @Override

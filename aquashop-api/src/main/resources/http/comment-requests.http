@@ -5,7 +5,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZ
 
 {
   "description" : "very flexible black shorts",
-  "mark" : "0"
+  "rating" : "0"
 }
 
 ### Update product comment
@@ -15,7 +15,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZ
 
 {
   "description" : "silk and very flexible black shorts",
-  "mark" : "1"
+  "rating" : "1"
 }
 
 ### Find comment

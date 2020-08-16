@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import pl.dmuszynski.aquashop.payload.dto.CommentDTO;
 import pl.dmuszynski.aquashop.service.CommentService;
 import pl.dmuszynski.aquashop.model.Comment;
 
@@ -24,21 +25,15 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> addProductComment(@RequestBody @Valid Comment comment, @PathVariable Long productId) {
-        final Comment createdComment = this.commentService.addProductComment(comment, productId);
+    public ResponseEntity<CommentDTO> addProductComment(@RequestBody @Valid CommentDTO commentDetails, @PathVariable Long productId) {
+        final CommentDTO createdComment = this.commentService.addProductComment(commentDetails, productId);
         return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Comment> updateComment(@RequestBody @Valid Comment comment, @PathVariable Long id) {
-        final Comment updatedComment = this.commentService.updateComment(comment, id);
+    public ResponseEntity<CommentDTO> updateComment(@RequestBody @Valid CommentDTO commentDetails, @PathVariable Long id) {
+        final CommentDTO updatedComment = this.commentService.updateComment(commentDetails, id);
         return new ResponseEntity<>(updatedComment, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Comment> findById(@PathVariable Long id) {
-        final Comment foundComment = this.commentService.findById(id);
-        return new ResponseEntity<>(foundComment, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

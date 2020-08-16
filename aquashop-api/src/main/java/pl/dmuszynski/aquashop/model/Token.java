@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Data;
 
 @Entity
-@NoArgsConstructor @Data
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "value"))
 public class Token {
     @Id

@@ -1,12 +1,13 @@
 package pl.dmuszynski.aquashop.model;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 
-@Data
+import lombok.NoArgsConstructor;
+import lombok.Data;
+
 @Entity
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Category {
     @Id

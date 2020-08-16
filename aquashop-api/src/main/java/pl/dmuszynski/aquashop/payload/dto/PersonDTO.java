@@ -1,9 +1,9 @@
 package pl.dmuszynski.aquashop.payload.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import lombok.Data;
 
 @Data
 public class PersonDTO implements Serializable {

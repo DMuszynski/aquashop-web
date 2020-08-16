@@ -5,10 +5,11 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
-@Data
 @Entity
+@Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "phone_number"))
 public class Person {
     @Id
@@ -42,7 +43,7 @@ public class Person {
 
     public Person(User user, Long id, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
         this(user, name, surname, phoneNumber, dateOfBirth);
-        this.setId(id);
+        this.id = id;
     }
 }
 

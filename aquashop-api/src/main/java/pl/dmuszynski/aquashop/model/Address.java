@@ -1,12 +1,13 @@
 package pl.dmuszynski.aquashop.model;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 
-@Data
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data @NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

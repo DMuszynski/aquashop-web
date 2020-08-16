@@ -1,8 +1,8 @@
 package pl.dmuszynski.aquashop.payload.dto;
 
-import lombok.Data;
-
 import java.io.Serializable;
+
+import lombok.Data;
 
 @Data
 public class CommentDTO implements Serializable {
