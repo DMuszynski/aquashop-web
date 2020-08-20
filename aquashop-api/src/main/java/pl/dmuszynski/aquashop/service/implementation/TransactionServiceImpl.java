@@ -1,7 +1,7 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import pl.dmuszynski.aquashop.repository.TransactionRepository;
-import pl.dmuszynski.aquashop.payload.dto.TransactionDTO;
+import pl.dmuszynski.aquashop.payload.TransactionDTO;
 import pl.dmuszynski.aquashop.service.TransactionService;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -38,7 +38,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionDTO realizeTransaction(TransactionDTO transactionDetails) {
         final Product foundProduct = this.productService.findProductById(transactionDetails.getProduct().getId());
-        final User foundUser = this.userService.findById(transactionDetails.getUser().getId());
+        final User foundUser = this.userService.findUserById(transactionDetails.getUser().getId());
         final Transaction savedTransaction = this.transactionRepository
             .save(new Transaction(
                 foundUser,

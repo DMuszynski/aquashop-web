@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
-import pl.dmuszynski.aquashop.payload.dto.ProductDTO;
+import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
 
 import java.util.List;

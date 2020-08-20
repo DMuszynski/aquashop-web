@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor

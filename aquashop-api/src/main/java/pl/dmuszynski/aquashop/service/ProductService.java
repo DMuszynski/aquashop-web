@@ -1,6 +1,6 @@
 package pl.dmuszynski.aquashop.service;
 
-import pl.dmuszynski.aquashop.payload.dto.ProductDTO;
+import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
 
 import java.util.List;

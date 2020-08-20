@@ -3,8 +3,8 @@ package pl.dmuszynski.aquashop.model;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor

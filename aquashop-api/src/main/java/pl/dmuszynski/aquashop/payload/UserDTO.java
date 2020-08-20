@@ -1,4 +1,4 @@
-package pl.dmuszynski.aquashop.payload.dto;
+package pl.dmuszynski.aquashop.payload;
 
 import java.util.List;
 

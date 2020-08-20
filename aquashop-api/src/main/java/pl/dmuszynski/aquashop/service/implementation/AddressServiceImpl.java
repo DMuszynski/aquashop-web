@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
-import pl.dmuszynski.aquashop.payload.dto.AddressDTO;
+import pl.dmuszynski.aquashop.payload.AddressDTO;
 import pl.dmuszynski.aquashop.repository.AddressRepository;
 import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.service.UserService;
@@ -31,7 +31,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO addUserAddress(AddressDTO addressDetails, Long userId) {
-        final User foundUser = this.userService.findById(userId);
+        final User foundUser = this.userService.findUserById(userId);
         final Address savedAddress = this.addressRepository
             .save(new Address(
                 foundUser,
@@ -64,7 +64,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDTO> findAllByUserId(Long userId) {
-        final List<Address> addressList = this.userService.findById(userId).getAddresses();
+        final List<Address> addressList = this.userService.findUserById(userId).getAddresses();
         return addressList.stream()
             .map(address -> this.modelMapper.map(address, AddressDTO.class))
             .collect(Collectors.toList());

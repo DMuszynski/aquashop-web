@@ -1,7 +1,10 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
+import org.modelmapper.ModelMapper;
 import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
 import pl.dmuszynski.aquashop.exception.UserIsAlreadyEnabledException;
+import pl.dmuszynski.aquashop.payload.UserDTO;
+import pl.dmuszynski.aquashop.payload.request.SignupRequestDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.TokenService;
@@ -25,31 +28,33 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserRepository userRepository;
     private final TokenService tokenService;
     private final RoleService roleService;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                                   TokenService tokenService, RoleService roleService)
+                                   TokenService tokenService, RoleService roleService,
+                                   ModelMapper modelMapper)
     {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
         this.roleService = roleService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public User register(String username, String email, String password) {
-        validateUserEmailAlreadyExist(email);
-        final User registerUser = new User.UserBuilder(username, email, this.passwordEncoder.encode(password))
-            .roles(new HashSet<>(
-                Collections.singletonList(
-                    this.roleService.findByRoleType(RoleType.ROLE_USER)
-                )))
-            .build();
+    public UserDTO register(SignupRequestDTO signupDetails) {
+        validateUserEmailAlreadyExist(signupDetails.getEmail());
+        final User registerUser = this.userRepository
+            .save(new User(
+                signupDetails.getEmail(),
+                signupDetails.getUsername(),
+                this.passwordEncoder.encode(signupDetails.getPassword()),
+                new HashSet<>(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER))))
+            );
 
-        this.userRepository.save(registerUser);
         this.tokenService.sendToken(registerUser);
-
-        return registerUser;
+        return this.modelMapper.map(registerUser, UserDTO.class);
     }
 
     @Transactional

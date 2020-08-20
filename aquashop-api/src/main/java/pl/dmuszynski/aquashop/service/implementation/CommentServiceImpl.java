@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.CommentRepository;
-import pl.dmuszynski.aquashop.payload.dto.CommentDTO;
+import pl.dmuszynski.aquashop.payload.CommentDTO;
 import pl.dmuszynski.aquashop.service.CommentService;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.model.Comment;

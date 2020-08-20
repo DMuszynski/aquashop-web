@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
+import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.User;
+
+import javax.validation.Valid;
 
 @RestController
 @PreAuthorize(value = "hasRole('USER')")
@@ -22,14 +25,14 @@ public class UserProfileController {
     }
 
     @PatchMapping(value = "/email")
-    public ResponseEntity<User> changeEmail(@RequestBody User user, @PathVariable Long id) {
-        final User updatedUser = this.userService.changeEmail(user.getEmail(), id);
+    public ResponseEntity<UserDTO> changeEmail(@RequestBody @Valid UserDTO userDetails, @PathVariable Long id) {
+        final UserDTO updatedUser = this.userService.changeEmail(userDetails.getEmail(), id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @PatchMapping(value = "/password")
-    public ResponseEntity<User> changePassword(@RequestBody User user, @PathVariable Long id) {
-        final User updatedUser = this.userService.changePassword(user.getPassword(), id);
+    public ResponseEntity<User> changePassword(@RequestBody @Valid User userDetails, @PathVariable Long id) {
+        final User updatedUser = this.userService.changePassword(userDetails.getPassword(), id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

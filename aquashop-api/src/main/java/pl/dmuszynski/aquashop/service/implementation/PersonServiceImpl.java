@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.PersonRepository;
-import pl.dmuszynski.aquashop.payload.dto.PersonDTO;
+import pl.dmuszynski.aquashop.payload.PersonDTO;
 import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
@@ -28,7 +28,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDTO addUserPerson(PersonDTO personDetails, Long userId) {
-        final User foundUser = this.userService.findById(userId);
+        final User foundUser = this.userService.findUserById(userId);
         final Person savedPerson = this.personRepository
             .save(new Person(foundUser, personDetails.getName(), personDetails.getSurname(),
                 personDetails.getPhoneNumber(), personDetails.getDateOfBirth()));

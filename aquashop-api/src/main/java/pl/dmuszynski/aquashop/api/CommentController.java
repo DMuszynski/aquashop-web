@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import pl.dmuszynski.aquashop.payload.dto.CommentDTO;
+import pl.dmuszynski.aquashop.payload.CommentDTO;
 import pl.dmuszynski.aquashop.service.CommentService;
-import pl.dmuszynski.aquashop.model.Comment;
 
 import javax.validation.Valid;
 

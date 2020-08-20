@@ -8,11 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.dmuszynski.aquashop.payload.request.LoginRequestDTO;
 import pl.dmuszynski.aquashop.security.services.UserDetailsImpl;
 import pl.dmuszynski.aquashop.security.jwt.JwtUtils;
-import pl.dmuszynski.aquashop.payload.response.JwtResponse;
+import pl.dmuszynski.aquashop.payload.response.JwtResponseDTO;
 import pl.dmuszynski.aquashop.service.AuthService;
-import pl.dmuszynski.aquashop.model.User;
 
 import java.util.stream.Collectors;
 import java.util.List;
@@ -30,9 +30,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JwtResponse authenticateUser(String username, String password) {
+    public JwtResponseDTO authenticateUser(LoginRequestDTO loginDetails) {
         final Authentication authentication = this.authenticationManager
-            .authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            .authenticate(new UsernamePasswordAuthenticationToken(
+                loginDetails.getUsername(),
+                loginDetails.getPassword())
+            );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -42,7 +45,6 @@ public class AuthServiceImpl implements AuthService {
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.toList());
 
-        return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
-            userDetails.getEmail(), roles);
+        return new JwtResponseDTO(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
     }
 }

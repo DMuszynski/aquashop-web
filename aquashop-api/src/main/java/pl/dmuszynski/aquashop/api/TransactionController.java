@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 import pl.dmuszynski.aquashop.service.TransactionService;
-import pl.dmuszynski.aquashop.payload.dto.TransactionDTO;
+import pl.dmuszynski.aquashop.payload.TransactionDTO;
 
 import javax.validation.Valid;
 import java.util.List;
