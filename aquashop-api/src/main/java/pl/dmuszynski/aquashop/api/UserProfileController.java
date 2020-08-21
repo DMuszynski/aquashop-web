@@ -1,14 +1,14 @@
 package pl.dmuszynski.aquashop.api;
 
+import pl.dmuszynski.aquashop.payload.request.PasswordRequestDTO;
+import pl.dmuszynski.aquashop.payload.UserDTO;
+import pl.dmuszynski.aquashop.service.UserService;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
-import pl.dmuszynski.aquashop.payload.UserDTO;
-import pl.dmuszynski.aquashop.service.UserService;
-import pl.dmuszynski.aquashop.model.User;
 
 import javax.validation.Valid;
 
@@ -31,8 +31,8 @@ public class UserProfileController {
     }
 
     @PatchMapping(value = "/password")
-    public ResponseEntity<User> changePassword(@RequestBody @Valid User userDetails, @PathVariable Long id) {
-        final User updatedUser = this.userService.changePassword(userDetails.getPassword(), id);
+    public ResponseEntity<UserDTO> changePassword(@RequestBody @Valid PasswordRequestDTO passwordDetails, @PathVariable Long id) {
+        final UserDTO updatedUser = this.userService.changePassword(passwordDetails.getPassword(), id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

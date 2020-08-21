@@ -1,6 +1,5 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.modelmapper.ModelMapper;
 import pl.dmuszynski.aquashop.exception.UserDuplicatePasswordException;
 import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
@@ -12,6 +11,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import javax.transaction.Transactional;
 
@@ -31,18 +31,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User changePassword(String password, Long id) {
-        final User user = this.findUserById(id);
-        validateUserDuplicatePassword(password, user.getPassword());
+    public UserDTO changePassword(String password, Long id) {
+        final User foundUser = this.findUserById(id);
+        validateUserDuplicatePassword(password, foundUser.getPassword());
+        foundUser.setPassword(password);
 
         this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
-        return user;
+        return this.modelMapper.map(foundUser, UserDTO.class);
     }
 
     @Override
     public UserDTO changeEmail(String email, Long id) {
         final User foundUser = this.findUserById(id);
         validateUserEmailAlreadyExist(email);
+        foundUser.setEmail(email);
 
         this.userRepository.updateEmailById(email, id);
         return this.modelMapper.map(foundUser, UserDTO.class);
