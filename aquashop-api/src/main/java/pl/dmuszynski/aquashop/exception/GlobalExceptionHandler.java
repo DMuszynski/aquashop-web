@@ -17,6 +17,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
+    @ExceptionHandler(UsernameAlreadyExistException.class)
+    public ResponseEntity<Object> handleUsernameAlreadyExistException(UsernameAlreadyExistException ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
+    }
+
     @ExceptionHandler(UserIsAlreadyEnabledException.class)
     public ResponseEntity<Object> handleUserIsAlreadyEnabledException(UserIsAlreadyEnabledException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);

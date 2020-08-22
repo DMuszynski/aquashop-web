@@ -14,5 +14,5 @@ public interface AdminRepository extends JpaRepository<User, Long> {
     void updateUserIsEnabledById(@Param("isEnabled") boolean isEnabled, @Param("id") Long id);
 
     @Modifying @Query(value = "UPDATE user_role r SET r.role_id = :roleId WHERE r.user_id = :userId", nativeQuery = true)
-    void updateUserRole(@Param("roleId") int roleId, @Param("userId") int userId);
+    void updateUserRole(@Param("roleId") Long roleId, @Param("userId") Long userId);
 }

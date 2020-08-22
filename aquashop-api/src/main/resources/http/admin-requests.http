@@ -1,10 +1,11 @@
 ### Find all users
 GET http://localhost:8080/admin-management/users
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM
 
 ### Update user isEnabled
 PATCH http://localhost:8080/admin-management/users/1/is-enabled
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM
 
 {
   "isEnabled" : "false"

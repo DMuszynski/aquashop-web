@@ -9,6 +9,6 @@ public class UserDTO {
     private Long id;
     private String email;
     private String username;
-    private List<String> roles;
+    private List<RoleDTO> roles;
     private boolean isEnabled;
 }

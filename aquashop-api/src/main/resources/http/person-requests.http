@@ -1,7 +1,7 @@
 ### Add user person
 POST http://localhost:8080/user-management/users/1/person-management/persons
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM
 
 {
   "name" : "Jan",
@@ -11,9 +11,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZ
 }
 
 ### Update person
-PUT http://localhost:8080/user-management/users/1/person-management/persons/3
+PUT http://localhost:8080/user-management/users/1/person-management/persons/1
 Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM
 
 {
   "name" : "Johns",
@@ -24,8 +24,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZ
 
 ### Find person
 GET http://localhost:8080/user-management/users/1/person-management/persons/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM
 
 ### Delete person
 DELETE http://localhost:8080/user-management/users/1/person-management/persons/1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk3NjU1OTI5LCJpYXQiOjE1OTc1Njk1Mjl9.OUTGyTQcCAKFqUq9TdHYtxZrACZFHxDgU10-0yyqNZw
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlzcyI6ImF1dGgwIiwiZXhwIjoxNTk4MTY0NzUwLCJpYXQiOjE1OTgwNzgzNTB9.9_npv0lZjcwau2q0TMxCG3sYvLNHKPbOyB9LEeV6iyM

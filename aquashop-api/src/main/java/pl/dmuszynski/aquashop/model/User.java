@@ -55,7 +55,7 @@ public class User {
     @NotNull @Column(updatable = false)
     private LocalDateTime creationDate;
 
-    public User(String username, String password, String email, Set<Role> roles) {
+    public User(String email, String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.email = email;

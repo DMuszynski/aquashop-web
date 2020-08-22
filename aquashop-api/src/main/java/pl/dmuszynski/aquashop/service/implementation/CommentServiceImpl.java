@@ -29,14 +29,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDTO addProductComment(CommentDTO commentDetails, Long productId) {
         final Product foundProduct = this.productService.findProductById(productId);
-        final Comment savedProduct = this.commentRepository
+        final Comment savedComment = this.commentRepository
             .save(new Comment(
                 foundProduct,
                 commentDetails.getDescription(),
                 commentDetails.getRating())
             );
 
-        return this.modelMapper.map(savedProduct, CommentDTO.class);
+        return this.modelMapper.map(savedComment, CommentDTO.class);
     }
 
     @Override

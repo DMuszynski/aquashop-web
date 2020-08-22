@@ -23,7 +23,11 @@ public class Product {
     @NotNull @Column(scale = 2)
     private float prize;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+
+    @OneToMany(mappedBy = "product")
     private List<Comment> comments;
 
     public Product(String name, float prize) {

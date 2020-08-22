@@ -1,8 +1,8 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.modelmapper.ModelMapper;
 import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
 import pl.dmuszynski.aquashop.exception.UserIsAlreadyEnabledException;
+import pl.dmuszynski.aquashop.exception.UsernameAlreadyExistException;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.payload.request.SignupRequestDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
@@ -16,6 +16,7 @@ import pl.dmuszynski.aquashop.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -32,8 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Autowired
     public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                                   TokenService tokenService, RoleService roleService,
-                                   ModelMapper modelMapper)
+                                   TokenService tokenService, RoleService roleService, ModelMapper modelMapper)
     {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -44,7 +44,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public UserDTO register(SignupRequestDTO signupDetails) {
+        validateUsernameAlreadyExist(signupDetails.getUsername());
         validateUserEmailAlreadyExist(signupDetails.getEmail());
+
         final User registerUser = this.userRepository
             .save(new User(
                 signupDetails.getEmail(),
@@ -69,8 +71,13 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new UserIsAlreadyEnabledException();
     }
 
-    private void validateUserEmailAlreadyExist(String email) throws UserEmailAlreadyExistException{
+    private void validateUserEmailAlreadyExist(String email) throws UserEmailAlreadyExistException {
         if (this.userRepository.findByEmail(email).isPresent())
             throw new UserEmailAlreadyExistException("The user with given address e-mail " + email + " is already exist");
+    }
+
+    private void validateUsernameAlreadyExist(String username) throws UsernameAlreadyExistException {
+        if (this.userRepository.findByUsername(username).isPresent())
+            throw new UsernameAlreadyExistException("The user with given username " + username + " is already exist");
     }
 }
