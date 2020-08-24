@@ -10,5 +10,6 @@ public class ProductDTO implements Serializable {
     private Long id;
     private String name;
     private float prize;
+    private PromotionDTO promotion;
     private List<CommentDTO> comments;
 }

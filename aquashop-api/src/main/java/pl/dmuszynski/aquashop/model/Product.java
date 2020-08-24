@@ -23,20 +23,21 @@ public class Product {
     @NotNull @Column(scale = 2)
     private float prize;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
     @OneToMany(mappedBy = "product")
     private List<Comment> comments;
 
-    public Product(String name, float prize) {
-        this.name = name;
+    public Product(Promotion promotion, String name, float prize) {
+        this.promotion = promotion;
         this.prize = prize;
+        this.name = name;
     }
 
-    public Product(Long id, String name, float prize) {
-        this(name, prize);
+    public Product(Promotion promotion, Long id, String name, float prize) {
+        this(promotion, name, prize);
         this.id = id;
     }
 }

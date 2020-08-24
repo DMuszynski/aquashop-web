@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @PreAuthorize(value = "hasRole('MODERATOR')")
-@RequestMapping(value = "/product-management/products/{productId}/promotion-management/promotions")
+@RequestMapping(value = "/promotion-management/promotions")
 public class PromotionController {
 
     private final PromotionService promotionService;
@@ -36,8 +36,14 @@ public class PromotionController {
         return new ResponseEntity<>(updatedPromotion, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PromotionDTO> findById(@PathVariable Long id) {
+        final PromotionDTO foundPromotion = this.promotionService.findPromotionDtoById(id);
+        return new ResponseEntity<>(foundPromotion, HttpStatus.OK);
+    }
+
     @GetMapping
-    public ResponseEntity<List<PromotionDTO>> findAll() {
+    public ResponseEntity<List<PromotionDTO>> findAllPromotionDTO() {
         final List<PromotionDTO> foundPromotionsList = this.promotionService.findAll();
 
         if (!foundPromotionsList.isEmpty())

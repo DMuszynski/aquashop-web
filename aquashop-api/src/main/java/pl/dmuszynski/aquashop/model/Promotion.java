@@ -3,6 +3,7 @@ package pl.dmuszynski.aquashop.model;
 import org.springframework.data.annotation.CreatedDate;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Promotion {
 
     @Id
@@ -20,8 +22,11 @@ public class Promotion {
     @Column(name = "promotion_id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Product> products;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    private List<Product> products;
+
+    @NotBlank
+    private String name;
 
     @Range(min = 0, max = 100)
     private int percentValue;
@@ -34,15 +39,15 @@ public class Promotion {
     @NotNull @Column(updatable = false)
     private LocalDateTime endDate;
 
-    public Promotion(int percentValue, List<Product> products, LocalDateTime creationDate, LocalDateTime endTime) {
+    public Promotion(String name, int percentValue, LocalDateTime creationDate, LocalDateTime endTime) {
+        this.name = name;
         this.percentValue = percentValue;
-        this.products = products;
         this.creationDate = creationDate;
         this.endDate = endTime;
     }
 
-    public Promotion(Long id, int percentValue, List<Product> products, LocalDateTime creationDate, LocalDateTime endTime) {
-        this(percentValue, products, creationDate, endTime);
+    public Promotion(Long id, String name, int percentValue, LocalDateTime creationDate, LocalDateTime endTime) {
+        this(name, percentValue, creationDate, endTime);
         this.id = id;
     }
 }

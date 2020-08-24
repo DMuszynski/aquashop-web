@@ -6,29 +6,39 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.ProductRepository;
+import pl.dmuszynski.aquashop.service.PromotionService;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
+import pl.dmuszynski.aquashop.model.Promotion;
 
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.List;
 
 @Service(value = "productService")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final PromotionService promotionService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, PromotionService promotionService,
+                              ModelMapper modelMapper)
+    {
         this.productRepository = productRepository;
+        this.promotionService = promotionService;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public ProductDTO addProduct(ProductDTO productDetails) {
+        final Promotion foundPromotion = this.promotionService
+            .findPromotionById(productDetails.getPromotion().getId());
+
         final Product createdProduct = this.productRepository
             .save(new Product(
+                foundPromotion,
                 productDetails.getName(),
                 productDetails.getPrize())
             );
@@ -39,8 +49,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO updateProduct(ProductDTO productDetails, Long productId) {
         final Product foundProduct = this.findProductById(productId);
+        final Promotion foundPromotion = this.promotionService
+            .findPromotionById(productDetails.getPromotion().getId());
+
         final Product updatedProduct = this.productRepository
             .save(new Product(
+                foundPromotion,
                 foundProduct.getId(),
                 productDetails.getName(),
                 productDetails.getPrize())
@@ -50,15 +64,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findProductById(Long id) throws ResourceNotFoundException {
-        return this.productRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + id));
-    }
-
-    @Override
     public ProductDTO findProductDtoById(Long id) {
         final Product foundProduct = this.findProductById(id);
         return this.modelMapper.map(foundProduct, ProductDTO.class);
+    }
+
+    @Override
+    public Product findProductById(Long id) throws ResourceNotFoundException {
+        return this.productRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + id));
     }
 
     @Override

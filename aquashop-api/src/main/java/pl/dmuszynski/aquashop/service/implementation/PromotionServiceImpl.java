@@ -7,12 +7,9 @@ import org.modelmapper.ModelMapper;
 
 import pl.dmuszynski.aquashop.repository.PromotionRepository;
 import pl.dmuszynski.aquashop.service.PromotionService;
-import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.PromotionDTO;
 import pl.dmuszynski.aquashop.model.Promotion;
-import pl.dmuszynski.aquashop.model.Product;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -20,15 +17,12 @@ import java.util.List;
 public class PromotionServiceImpl implements PromotionService {
 
     private final PromotionRepository promotionRepository;
-    private final ProductService productService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PromotionServiceImpl(PromotionRepository promotionRepository, ProductService productService,
-                                ModelMapper modelMapper)
+    public PromotionServiceImpl(PromotionRepository promotionRepository, ModelMapper modelMapper)
     {
         this.promotionRepository = promotionRepository;
-        this.productService = productService;
         this.modelMapper = modelMapper;
     }
 
@@ -36,8 +30,8 @@ public class PromotionServiceImpl implements PromotionService {
     public PromotionDTO addPromotion(PromotionDTO promotionDetails) {
         final Promotion savedPromotion = this.promotionRepository
             .save(new Promotion(
+                promotionDetails.getName(),
                 promotionDetails.getPercentValue(),
-                promotionDetails.getProducts().stream().map(productDTO -> this.modelMapper.map(productDTO, Product.class)).collect(Collectors.toList()),
                 promotionDetails.getCreatedDate(),
                 promotionDetails.getEndDate())
             );
@@ -47,19 +41,29 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public PromotionDTO updatePromotion(PromotionDTO promotionDetails, Long id) throws ResourceNotFoundException {
-        final Promotion foundPromotion = this.promotionRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Address not found for this id" + id));
-
+        final Promotion foundPromotion = this.findPromotionById(id);
         final Promotion updatedPromotion = this.promotionRepository
             .save(new Promotion(
                 foundPromotion.getId(),
+                promotionDetails.getName(),
                 promotionDetails.getPercentValue(),
-                promotionDetails.getProducts().stream().map(productDTO -> this.modelMapper.map(productDTO, Product.class)).collect(Collectors.toList()),
                 promotionDetails.getCreatedDate(),
                 promotionDetails.getEndDate())
             );
 
         return this.modelMapper.map(updatedPromotion, PromotionDTO.class);
+    }
+
+    @Override
+    public PromotionDTO findPromotionDtoById(Long id) {
+        final Promotion foundPromotion = this.findPromotionById(id);
+        return this.modelMapper.map(foundPromotion, PromotionDTO.class);
+    }
+
+    @Override
+    public Promotion findPromotionById(Long id) throws ResourceNotFoundException {
+        return this.promotionRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Promotion not found for this id: " + id));
     }
 
     @Override
@@ -72,6 +76,6 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public void deleteById(Long id) {
-        this.productService.deleteById(id);
+        this.promotionRepository.deleteById(id);
     }
 }

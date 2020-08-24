@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> findAll() {
+    public ResponseEntity<List<ProductDTO>> findAllProductDto() {
         final List<ProductDTO> productList = this.productService.findAll();
 
         if (!productList.isEmpty())
