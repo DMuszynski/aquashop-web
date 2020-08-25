@@ -1,0 +1,29 @@
+### Find all users
+GET http://localhost:8080/admin-management/users
+Authorization: Bearer {{auth_token}}
+
+### Update user
+PUT http://localhost:8080/admin-management/users/1
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "id": 1,
+  "email": "scsplayer1@gmail.com",
+  "username": "username",
+  "roles": [
+    {
+      "id": 1,
+      "roleType": "ROLE_USER"
+    },
+    {
+      "id": 2,
+      "roleType": "ROLE_MODERATOR"
+    },
+    {
+      "id": 3,
+      "roleType": "ROLE_ADMIN"
+    }
+  ],
+  "enabled": true
+}

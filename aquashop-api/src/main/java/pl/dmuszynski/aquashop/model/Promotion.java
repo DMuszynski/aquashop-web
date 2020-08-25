@@ -11,19 +11,20 @@ import java.util.List;
 
 import lombok.NoArgsConstructor;
 import lombok.Data;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Data @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Promotion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "promotion_id")
     private Long id;
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    private List<Product> products;
+    @OneToMany(mappedBy = "promotion")
+    private List<Product> products;
 
     @NotBlank
     private String name;

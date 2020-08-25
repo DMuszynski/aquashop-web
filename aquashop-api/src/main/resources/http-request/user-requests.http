@@ -1,0 +1,21 @@
+### Change user password
+PATCH http://localhost:8080/user-management/users/1/password
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "password" : "newPassword"
+}
+
+### Change user email
+PATCH http://localhost:8080/user-management/users/1/email
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "email" : "scsplayer2@gmail.com"
+}
+
+### Delete user
+DELETE http://localhost:8080/user-management/users/1
+Authorization: Bearer {{auth_token}}

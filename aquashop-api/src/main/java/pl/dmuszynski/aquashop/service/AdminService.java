@@ -6,7 +6,6 @@ import pl.dmuszynski.aquashop.model.RoleType;
 import java.util.List;
 
 public interface AdminService {
-    UserDTO updateUserRole(RoleType roleType, Long id);
-    UserDTO updateUserIsEnabledById(boolean isEnabled, Long id);
+    UserDTO updateUser(UserDTO userDetails, Long id);
     List<UserDTO> findAll();
 }

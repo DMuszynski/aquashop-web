@@ -4,6 +4,7 @@ import pl.dmuszynski.aquashop.model.User;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 
 public interface UserService {
+    User save(User user);
     UserDTO changePassword(String password, Long id);
     UserDTO changeEmail(String email, Long id);
     UserDTO findUserDtoById(Long id);

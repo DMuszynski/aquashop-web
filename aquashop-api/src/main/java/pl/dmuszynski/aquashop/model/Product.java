@@ -23,7 +23,7 @@ public class Product {
     @NotNull @Column(scale = 2)
     private float prize;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
@@ -36,8 +36,9 @@ public class Product {
         this.name = name;
     }
 
-    public Product(Promotion promotion, Long id, String name, float prize) {
+    public Product(Promotion promotion, Long id, String name, float prize, List<Comment> comments) {
         this(promotion, name, prize);
+        this.comments = comments;
         this.id = id;
     }
 }

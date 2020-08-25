@@ -25,7 +25,7 @@ public class PromotionController {
     }
 
     @PostMapping
-    public ResponseEntity<PromotionDTO> addProductPromotion(@RequestBody @Valid PromotionDTO promotionDetails) {
+    public ResponseEntity<PromotionDTO> addPromotion(@RequestBody @Valid PromotionDTO promotionDetails) {
         final PromotionDTO createdPromotion = this.promotionService.addPromotion(promotionDetails);
         return new ResponseEntity<>(createdPromotion, HttpStatus.CREATED);
     }

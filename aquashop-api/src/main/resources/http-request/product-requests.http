@@ -1,0 +1,34 @@
+### Add product
+POST http://localhost:8080/product-management/products
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name" : "Black Shorts",
+  "prize" : "30.99"
+}
+
+### Update product
+PUT http://localhost:8080/product-management/products/1
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name" : "Blue Shorts",
+  "prize" : "20.00",
+  "promotion" : {
+   "id" : 1
+  }
+}
+
+### Find product
+GET http://localhost:8080/product-management/products/1
+Authorization: Bearer {{auth_token}}
+
+### Find all products
+GET http://localhost:8080/product-management/products
+Authorization: Bearer {{auth_token}}
+
+### Delete product
+DELETE http://localhost:8080/product-management/products/1
+Authorization: Bearer {{auth_token}}

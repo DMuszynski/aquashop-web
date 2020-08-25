@@ -10,6 +10,6 @@ public class PromotionDTO implements Serializable {
     private Long id;
     private String name;
     private int percentValue;
-    private LocalDateTime createdDate;
+    private LocalDateTime creationDate;
     private LocalDateTime endDate;
 }

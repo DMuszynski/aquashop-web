@@ -13,6 +13,7 @@ import pl.dmuszynski.aquashop.model.Product;
 import pl.dmuszynski.aquashop.model.Promotion;
 
 import java.util.stream.Collectors;
+import java.util.Optional;
 import java.util.List;
 
 @Service(value = "productService")
@@ -33,8 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO addProduct(ProductDTO productDetails) {
-        final Promotion foundPromotion = this.promotionService
-            .findPromotionById(productDetails.getPromotion().getId());
+        final Promotion foundPromotion = Optional.ofNullable(productDetails.getPromotion())
+            .map(promotion -> this.promotionService.findPromotionById(promotion.getId()))
+            .orElse(null);
 
         final Product createdProduct = this.productRepository
             .save(new Product(
@@ -49,15 +51,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO updateProduct(ProductDTO productDetails, Long productId) {
         final Product foundProduct = this.findProductById(productId);
-        final Promotion foundPromotion = this.promotionService
-            .findPromotionById(productDetails.getPromotion().getId());
+
+        final Promotion foundPromotion = Optional.ofNullable(productDetails.getPromotion())
+            .map(promotion -> this.promotionService.findPromotionById(promotion.getId()))
+            .orElse(null);
 
         final Product updatedProduct = this.productRepository
             .save(new Product(
                 foundPromotion,
                 foundProduct.getId(),
                 productDetails.getName(),
-                productDetails.getPrize())
+                productDetails.getPrize(),
+                foundProduct.getComments())
             );
 
         return this.modelMapper.map(updatedProduct, ProductDTO.class);

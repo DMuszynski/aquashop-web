@@ -6,11 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import pl.dmuszynski.aquashop.payload.RoleDTO;
 import pl.dmuszynski.aquashop.service.AdminService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
-import pl.dmuszynski.aquashop.model.RoleType;
-import pl.dmuszynski.aquashop.model.User;
 
 import java.util.List;
 
@@ -26,15 +23,10 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PatchMapping(value = "/{id}/user-role")
-    public ResponseEntity<UserDTO> updateUserRole(@RequestBody RoleDTO roleDetails, @PathVariable Long id) {
-        final UserDTO updatedUser = this.adminService.updateUserRole(roleDetails.getRoleType(), id);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-    }
 
-    @PatchMapping(value = "{id}/is-enabled")
-    public ResponseEntity<UserDTO> updateUserIsEnabledById(@RequestBody UserDTO userDetails, @PathVariable Long id) {
-        final UserDTO updatedUser = this.adminService.updateUserIsEnabledById(userDetails.isEnabled(), id);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDetails, @PathVariable Long id) {
+        final UserDTO updatedUser = this.adminService.updateUser(userDetails, id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 

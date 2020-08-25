@@ -20,8 +20,7 @@ public class PromotionServiceImpl implements PromotionService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PromotionServiceImpl(PromotionRepository promotionRepository, ModelMapper modelMapper)
-    {
+    public PromotionServiceImpl(PromotionRepository promotionRepository, ModelMapper modelMapper) {
         this.promotionRepository = promotionRepository;
         this.modelMapper = modelMapper;
     }
@@ -32,7 +31,7 @@ public class PromotionServiceImpl implements PromotionService {
             .save(new Promotion(
                 promotionDetails.getName(),
                 promotionDetails.getPercentValue(),
-                promotionDetails.getCreatedDate(),
+                promotionDetails.getCreationDate(),
                 promotionDetails.getEndDate())
             );
 
@@ -40,15 +39,15 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public PromotionDTO updatePromotion(PromotionDTO promotionDetails, Long id) throws ResourceNotFoundException {
+    public PromotionDTO updatePromotion(PromotionDTO promotionDetails, Long id) {
         final Promotion foundPromotion = this.findPromotionById(id);
         final Promotion updatedPromotion = this.promotionRepository
             .save(new Promotion(
                 foundPromotion.getId(),
                 promotionDetails.getName(),
                 promotionDetails.getPercentValue(),
-                promotionDetails.getCreatedDate(),
-                promotionDetails.getEndDate())
+                foundPromotion.getCreationDate(),
+                foundPromotion.getEndDate())
             );
 
         return this.modelMapper.map(updatedPromotion, PromotionDTO.class);

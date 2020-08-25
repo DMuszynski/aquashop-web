@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User save(User user) {
+        return this.userRepository.save(user);
+    }
+
+    @Override
     public UserDTO changePassword(String password, Long id) {
         final User foundUser = this.findUserById(id);
         validateUserDuplicatePassword(password, foundUser.getPassword());
