@@ -1,7 +1,7 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import pl.dmuszynski.aquashop.exception.UserDuplicatePasswordException;
-import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
+import pl.dmuszynski.aquashop.exception.DuplicatePasswordException;
+import pl.dmuszynski.aquashop.exception.UniqueEmailException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service(value = "userProfileService")
@@ -62,6 +64,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDTO> findAllUserDto() {
+        final List<User> foundUserList = this.userRepository.findAll();
+        return foundUserList.stream()
+            .map(user -> this.modelMapper.map(user, UserDTO.class))
+            .collect(Collectors.toList());
+    }
+
+    @Override
     public User findUserById(Long id) throws ResourceNotFoundException {
         return this.userRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + id));
@@ -72,13 +82,13 @@ public class UserServiceImpl implements UserService {
         this.userRepository.deleteById(id);
     }
 
-    private void validateUserEmailAlreadyExist(String email) throws UserEmailAlreadyExistException {
+    private void validateUserEmailAlreadyExist(String email) throws UniqueEmailException {
         if (this.userRepository.findByEmail(email).isPresent())
-            throw new UserEmailAlreadyExistException("The user with given address e-mail " + email + " is already exist");
+            throw new UniqueEmailException("The user with given address e-mail " + email + " is already exist");
     }
 
-    private void validateUserDuplicatePassword(String newPassword, String oldPassword) throws UserDuplicatePasswordException {
+    private void validateUserDuplicatePassword(String newPassword, String oldPassword) throws DuplicatePasswordException {
         if (this.passwordEncoder.matches(newPassword, oldPassword))
-            throw new UserDuplicatePasswordException();
+            throw new DuplicatePasswordException();
     }
 }

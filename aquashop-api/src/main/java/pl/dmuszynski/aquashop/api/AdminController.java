@@ -23,19 +23,18 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDetails, @PathVariable Long id) {
-        final UserDTO updatedUser = this.adminService.updateUser(userDetails, id);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        final UserDTO updatedUserDto = this.adminService.updateUser(userDetails, id);
+        return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<UserDTO> users = this.adminService.findAll();
+    public ResponseEntity<List<UserDTO>> findAllUserDto() {
+        List<UserDTO> foundUserDtoList = this.adminService.findAllUserDto();
 
-        if (!users.isEmpty())
-            return new ResponseEntity<>(users, HttpStatus.OK);
+        if (!foundUserDtoList.isEmpty())
+            return new ResponseEntity<>(foundUserDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

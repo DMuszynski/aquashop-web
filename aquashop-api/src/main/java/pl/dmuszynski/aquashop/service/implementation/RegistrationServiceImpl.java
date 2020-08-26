@@ -1,8 +1,8 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import pl.dmuszynski.aquashop.exception.UserEmailAlreadyExistException;
-import pl.dmuszynski.aquashop.exception.UserIsAlreadyEnabledException;
-import pl.dmuszynski.aquashop.exception.UsernameAlreadyExistException;
+import pl.dmuszynski.aquashop.exception.UniqueEmailException;
+import pl.dmuszynski.aquashop.exception.EnabledException;
+import pl.dmuszynski.aquashop.exception.UniqueUsernameException;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.payload.request.SignupRequestDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
@@ -33,7 +33,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Autowired
     public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                                   TokenService tokenService, RoleService roleService, ModelMapper modelMapper)
+                                   TokenService tokenService, RoleService roleService,
+                                   ModelMapper modelMapper)
     {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -43,7 +44,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public UserDTO register(SignupRequestDTO signupDetails) {
+    public UserDTO registerUser(SignupRequestDTO signupDetails) {
         validateUsernameAlreadyExist(signupDetails.getUsername());
         validateUserEmailAlreadyExist(signupDetails.getEmail());
 
@@ -62,22 +63,22 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Transactional
     @Override
     public void activateAccountByUserToken(String tokenValue) {
-        final Token tokenByValue = this.tokenService.findByValue(tokenValue);
-        final User user = tokenByValue.getUser();
+        final Token foundToken = this.tokenService.findByValue(tokenValue);
+        final User tokenUser = foundToken.getUser();
 
-        if (!user.isEnabled())
-            this.userRepository.activateAccount(user.getId());
+        if (!tokenUser.isEnabled())
+            this.userRepository.activateAccount(tokenUser.getId());
         else
-            throw new UserIsAlreadyEnabledException();
+            throw new EnabledException();
     }
 
-    private void validateUserEmailAlreadyExist(String email) throws UserEmailAlreadyExistException {
+    private void validateUserEmailAlreadyExist(String email) throws UniqueEmailException {
         if (this.userRepository.findByEmail(email).isPresent())
-            throw new UserEmailAlreadyExistException("The user with given address e-mail " + email + " is already exist");
+            throw new UniqueEmailException("The user with given address e-mail " + email + " is already exist");
     }
 
-    private void validateUsernameAlreadyExist(String username) throws UsernameAlreadyExistException {
+    private void validateUsernameAlreadyExist(String username) throws UniqueUsernameException {
         if (this.userRepository.findByUsername(username).isPresent())
-            throw new UsernameAlreadyExistException("The user with given username " + username + " is already exist");
+            throw new UniqueUsernameException("The user with given username " + username + " is already exist");
     }
 }

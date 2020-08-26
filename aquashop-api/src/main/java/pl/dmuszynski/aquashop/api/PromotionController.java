@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @PreAuthorize(value = "hasRole('MODERATOR')")
-@RequestMapping(value = "/promotion-management/promotions")
+@RequestMapping(value = "/product-management/products/{productId}/promotion-management/promotions")
 public class PromotionController {
 
     private final PromotionService promotionService;
@@ -25,29 +25,29 @@ public class PromotionController {
     }
 
     @PostMapping
-    public ResponseEntity<PromotionDTO> addPromotion(@RequestBody @Valid PromotionDTO promotionDetails) {
-        final PromotionDTO createdPromotion = this.promotionService.addPromotion(promotionDetails);
-        return new ResponseEntity<>(createdPromotion, HttpStatus.CREATED);
+    public ResponseEntity<PromotionDTO> addProductPromotion(@RequestBody @Valid PromotionDTO promotionDetails, @PathVariable Long productId) {
+        final PromotionDTO createdPromotionDto = this.promotionService.addPromotion(promotionDetails, productId);
+        return new ResponseEntity<>(createdPromotionDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<PromotionDTO> updatePromotion(@RequestBody @Valid PromotionDTO promotionDetails, @PathVariable Long id) {
-        final PromotionDTO updatedPromotion = this.promotionService.updatePromotion(promotionDetails, id);
-        return new ResponseEntity<>(updatedPromotion, HttpStatus.OK);
+        final PromotionDTO updatedPromotionDto = this.promotionService.updatePromotion(promotionDetails, id);
+        return new ResponseEntity<>(updatedPromotionDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PromotionDTO> findById(@PathVariable Long id) {
-        final PromotionDTO foundPromotion = this.promotionService.findPromotionDtoById(id);
-        return new ResponseEntity<>(foundPromotion, HttpStatus.OK);
+    public ResponseEntity<PromotionDTO> findPromotionDtoById(@PathVariable Long id) {
+        final PromotionDTO foundPromotionDto = this.promotionService.findPromotionDtoById(id);
+        return new ResponseEntity<>(foundPromotionDto, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<PromotionDTO>> findAllPromotionDTO() {
-        final List<PromotionDTO> foundPromotionsList = this.promotionService.findAll();
+        final List<PromotionDTO> foundPromotionDtoList = this.promotionService.findAll();
 
-        if (!foundPromotionsList.isEmpty())
-            return new ResponseEntity<>(foundPromotionsList, HttpStatus.OK);
+        if (!foundPromotionDtoList.isEmpty())
+            return new ResponseEntity<>(foundPromotionDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

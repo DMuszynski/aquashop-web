@@ -25,24 +25,24 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<PersonDTO> addUserPerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long userId) {
-        final PersonDTO createdPerson = this.personService.addUserPerson(personDetails, userId);
-        return new ResponseEntity<>(createdPerson, HttpStatus.CREATED);
+        final PersonDTO createdPersonDto = this.personService.addUserPerson(personDetails, userId);
+        return new ResponseEntity<>(createdPersonDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<PersonDTO> updatePerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long id) {
-        final PersonDTO updatedPerson = this.personService.updatePerson(personDetails, id);
-        return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+        final PersonDTO updatedPersonDto = this.personService.updatePerson(personDetails, id);
+        return new ResponseEntity<>(updatedPersonDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PersonDTO> findById(@PathVariable Long id) {
-        final PersonDTO foundPerson = this.personService.findById(id);
-        return new ResponseEntity<>(foundPerson, HttpStatus.OK);
+    public ResponseEntity<PersonDTO> findPersonDtoById(@PathVariable Long id) {
+        final PersonDTO foundPersonDto = this.personService.findPersonDtoById(id);
+        return new ResponseEntity<>(foundPersonDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<HttpStatus> deleteByUserId(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         this.personService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

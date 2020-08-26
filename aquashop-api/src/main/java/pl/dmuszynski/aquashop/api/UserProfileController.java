@@ -26,14 +26,20 @@ public class UserProfileController {
 
     @PatchMapping(value = "/email")
     public ResponseEntity<UserDTO> changeEmail(@RequestBody @Valid UserDTO userDetails, @PathVariable Long id) {
-        final UserDTO updatedUser = this.userService.changeEmail(userDetails.getEmail(), id);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        final UserDTO updatedUserDto = this.userService.changeEmail(userDetails.getEmail(), id);
+        return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
     }
 
     @PatchMapping(value = "/password")
     public ResponseEntity<UserDTO> changePassword(@RequestBody @Valid PasswordRequestDTO passwordDetails, @PathVariable Long id) {
-        final UserDTO updatedUser = this.userService.changePassword(passwordDetails.getPassword(), id);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        final UserDTO updatedUserDto = this.userService.changePassword(passwordDetails.getPassword(), id);
+        return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<UserDTO> findUserDtoById(@PathVariable Long id) {
+        final UserDTO foundUserDto = this.userService.findUserDtoById(id);
+        return new ResponseEntity<>(foundUserDto, HttpStatus.OK);
     }
 
     @DeleteMapping

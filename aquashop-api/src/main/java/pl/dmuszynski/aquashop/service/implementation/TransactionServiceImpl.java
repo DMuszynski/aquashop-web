@@ -50,9 +50,9 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDTO> findAllByUserId(Long userId) {
-        List<Transaction> foundTransactionsList = this.transactionRepository.findAllByUserId(userId);
-        return foundTransactionsList.stream()
+    public List<TransactionDTO> findAllTransactionDtoByUserId(Long userId) {
+        final List<Transaction> foundTransactionList = this.transactionRepository.findAllByUserId(userId);
+        return foundTransactionList.stream()
             .map(transaction -> this.modelMapper.map(transaction, TransactionDTO.class))
             .collect(Collectors.toList());
     }

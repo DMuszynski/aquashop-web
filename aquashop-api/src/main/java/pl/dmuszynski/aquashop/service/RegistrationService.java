@@ -4,6 +4,6 @@ import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.payload.request.SignupRequestDTO;
 
 public interface RegistrationService {
-    UserDTO register(SignupRequestDTO signupDetails);
+    UserDTO registerUser(SignupRequestDTO signupDetails);
     void activateAccountByUserToken(String value);
 }

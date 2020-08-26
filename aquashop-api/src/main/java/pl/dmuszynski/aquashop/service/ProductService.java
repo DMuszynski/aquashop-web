@@ -9,7 +9,7 @@ public interface ProductService {
     ProductDTO addProduct(ProductDTO productDetails);
     ProductDTO updateProduct(ProductDTO productDetails, Long id);
     ProductDTO findProductDtoById(Long id);
+    List<ProductDTO> findAllProductDto();
     Product findProductById(Long id);
-    List<ProductDTO> findAll();
     void deleteById(Long id);
 }

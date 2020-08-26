@@ -25,14 +25,14 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<CommentDTO> addProductComment(@RequestBody @Valid CommentDTO commentDetails, @PathVariable Long productId) {
-        final CommentDTO createdComment = this.commentService.addProductComment(commentDetails, productId);
-        return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
+        final CommentDTO createdCommentDto = this.commentService.addProductComment(commentDetails, productId);
+        return new ResponseEntity<>(createdCommentDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<CommentDTO> updateComment(@RequestBody @Valid CommentDTO commentDetails, @PathVariable Long id) {
-        final CommentDTO updatedComment = this.commentService.updateComment(commentDetails, id);
-        return new ResponseEntity<>(updatedComment, HttpStatus.OK);
+        final CommentDTO updatedCommentDto = this.commentService.updateComment(commentDetails, id);
+        return new ResponseEntity<>(updatedCommentDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

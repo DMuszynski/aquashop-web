@@ -23,21 +23,19 @@ public class Product {
     @NotNull @Column(scale = 2)
     private float prize;
 
-    @ManyToOne
-    @JoinColumn(name = "promotion_id")
+    @OneToOne(mappedBy = "promotion", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Promotion promotion;
 
     @OneToMany(mappedBy = "product")
     private List<Comment> comments;
 
-    public Product(Promotion promotion, String name, float prize) {
-        this.promotion = promotion;
+    public Product(String name, float prize) {
         this.prize = prize;
         this.name = name;
     }
 
-    public Product(Promotion promotion, Long id, String name, float prize, List<Comment> comments) {
-        this(promotion, name, prize);
+    public Product(Long id, String name, float prize, List<Comment> comments) {
+        this(name, prize);
         this.comments = comments;
         this.id = id;
     }

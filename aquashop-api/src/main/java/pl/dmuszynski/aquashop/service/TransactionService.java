@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TransactionService {
     TransactionDTO realizeTransaction(TransactionDTO transactionDetails);
-    List<TransactionDTO> findAllByUserId(Long userId);
+    List<TransactionDTO> findAllTransactionDtoByUserId(Long userId);
 }

@@ -1,17 +1,16 @@
 ### Add promotion
-POST http://localhost:8080/promotion-management/promotions
+POST http://localhost:8080/product-management/products/1/promotion-management/promotions
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "name" : "Black Friday promotiono",
   "percentValue" : "50",
-  "createdDate" : "2000-01-01T21:34:55",
+  "startDate" : "2000-01-01T21:34:55",
   "endDate" : "2000-01-08T21:34:55"
 }
 
 ### Update promotion
-PUT http://localhost:8080/promotion-management/promotions/1
+PUT http://localhost:8080/product-management/products/1/promotion-management/promotions/1
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
@@ -20,3 +19,15 @@ Authorization: Bearer {{auth_token}}
   "name" : "Monday promotion",
   "percentValue" : "30"
 }
+
+### Find promotion
+GET http://localhost:8080/product-management/products/1/promotion-management/promotions/1
+Authorization: Bearer {{auth_token}}
+
+### Find all promotions
+GET http://localhost:8080/product-management/products/1/promotion-management/promotions
+Authorization: Bearer {{auth_token}}
+
+### Delete promotion
+DELETE http://localhost:8080/product-management/products/1/promotion-management/promotions/1
+Authorization: Bearer {{auth_token}}

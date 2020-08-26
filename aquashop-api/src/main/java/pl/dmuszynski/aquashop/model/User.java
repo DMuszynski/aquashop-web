@@ -1,19 +1,17 @@
 package pl.dmuszynski.aquashop.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor
@@ -50,6 +48,9 @@ public class User {
 
     @NotNull
     private boolean isEnabled;
+
+    @NotNull
+    private boolean isLocked;
 
     @CreatedDate
     @NotNull @Column(updatable = false)

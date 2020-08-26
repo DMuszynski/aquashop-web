@@ -26,22 +26,22 @@ public class AddressController {
 
     @PostMapping
     public ResponseEntity<AddressDTO> addUserAddress(@RequestBody @Valid AddressDTO addressDetails, @PathVariable Long userId) {
-        final AddressDTO createdAddress = this.addressService.addUserAddress(addressDetails, userId);
-        return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
+        final AddressDTO createdAddressDto = this.addressService.addUserAddress(addressDetails, userId);
+        return new ResponseEntity<>(createdAddressDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<AddressDTO> updateAddress(@RequestBody @Valid AddressDTO addressDetails, @PathVariable Long id) {
-        final AddressDTO updatedAddress = this.addressService.updateAddress(addressDetails, id);
-        return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
+        final AddressDTO updatedAddressDto = this.addressService.updateAddress(addressDetails, id);
+        return new ResponseEntity<>(updatedAddressDto, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<AddressDTO>> findAllByUserId(@PathVariable Long userId) {
-        final List<AddressDTO> foundAddressesList = this.addressService.findAllByUserId(userId);
+    public ResponseEntity<List<AddressDTO>> findAllAddressDtoByUserId(@PathVariable Long userId) {
+        final List<AddressDTO> foundAddressDtoList = this.addressService.findAllAddressDtoByUserId(userId);
 
-        if (!foundAddressesList.isEmpty())
-            return new ResponseEntity<>(foundAddressesList, HttpStatus.OK);
+        if (!foundAddressDtoList.isEmpty())
+            return new ResponseEntity<>(foundAddressDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -26,29 +26,29 @@ public class ProductController {
     @PostMapping
     @PreAuthorize(value = "hasRole('MODERATOR')")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody @Valid ProductDTO productDetails) {
-        final ProductDTO createdProduct = this.productService.addProduct(productDetails);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+        final ProductDTO createdProductDto = this.productService.addProduct(productDetails);
+        return new ResponseEntity<>(createdProductDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     @PreAuthorize(value = "hasRole('MODERATOR')")
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody @Valid ProductDTO productDetails, @PathVariable Long id) {
-        final ProductDTO updatedProduct = this.productService.updateProduct(productDetails, id);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        final ProductDTO updatedProductDto = this.productService.updateProduct(productDetails, id);
+        return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findProductDtoById(@PathVariable Long id) {
-        final ProductDTO foundProduct = this.productService.findProductDtoById(id);
-        return new ResponseEntity<>(foundProduct, HttpStatus.OK);
+        final ProductDTO foundProductDto = this.productService.findProductDtoById(id);
+        return new ResponseEntity<>(foundProductDto, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> findAllProductDto() {
-        final List<ProductDTO> productList = this.productService.findAll();
+        final List<ProductDTO> foundProductDtoList = this.productService.findAllProductDto();
 
-        if (!productList.isEmpty())
-            return new ResponseEntity<>(productList, HttpStatus.OK);
+        if (!foundProductDtoList.isEmpty())
+            return new ResponseEntity<>(foundProductDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

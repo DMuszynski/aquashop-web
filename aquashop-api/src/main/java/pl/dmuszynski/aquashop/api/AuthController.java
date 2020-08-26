@@ -33,11 +33,10 @@ public class AuthController {
         return new ResponseEntity<>(authenticatedUserResponse, HttpStatus.OK);
     }
 
-
     @PostMapping(value = "/sign-up")
     public ResponseEntity<UserDTO> registerUser(@RequestBody @Valid SignupRequestDTO signupDetails) {
-        final UserDTO registeredUser = this.registrationService.register(signupDetails);
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+        final UserDTO registeredUserDto = this.registrationService.registerUser(signupDetails);
+        return new ResponseEntity<>(registeredUserDto, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/token")

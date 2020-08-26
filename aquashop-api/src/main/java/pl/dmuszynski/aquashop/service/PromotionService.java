@@ -6,10 +6,10 @@ import pl.dmuszynski.aquashop.payload.PromotionDTO;
 import java.util.List;
 
 public interface PromotionService {
-    PromotionDTO addPromotion(PromotionDTO promotionDetails);
+    PromotionDTO addPromotion(PromotionDTO promotionDetails, Long productId);
     PromotionDTO updatePromotion(PromotionDTO promotionDetails, Long id);
     PromotionDTO findPromotionDtoById(Long id);
+    List<PromotionDTO> findAllPromotionDTO();
     Promotion findPromotionById(Long id);
-    List<PromotionDTO> findAll();
     void deleteById(Long id);
 }

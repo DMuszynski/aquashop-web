@@ -12,23 +12,23 @@ import org.springframework.http.HttpStatus;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UserEmailAlreadyExistException.class)
-    public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex, WebRequest webRequest) {
+    @ExceptionHandler(UniqueEmailException.class)
+    public ResponseEntity<Object> handleUniqueEmailException(UniqueEmailException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(UsernameAlreadyExistException.class)
-    public ResponseEntity<Object> handleUsernameAlreadyExistException(UsernameAlreadyExistException ex, WebRequest webRequest) {
+    @ExceptionHandler(UniqueUsernameException.class)
+    public ResponseEntity<Object> handleUniqueUsernameException(UniqueUsernameException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(UserIsAlreadyEnabledException.class)
-    public ResponseEntity<Object> handleUserIsAlreadyEnabledException(UserIsAlreadyEnabledException ex, WebRequest webRequest) {
+    @ExceptionHandler(EnabledException.class)
+    public ResponseEntity<Object> handleEnabledException(EnabledException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(UserDuplicatePasswordException.class)
-    public ResponseEntity<Object> handleUserDuplicatePasswordException(UserDuplicatePasswordException ex, WebRequest webRequest) {
+    @ExceptionHandler(DuplicatePasswordException.class)
+    public ResponseEntity<Object> handleDuplicatePasswordException(DuplicatePasswordException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 

@@ -52,7 +52,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDTO findById(Long id) {
+    public PersonDTO findPersonDtoById(Long id) {
         final Person foundPerson = this.findPersonById(id);
         return this.modelMapper.map(foundPerson, PersonDTO.class);
     }

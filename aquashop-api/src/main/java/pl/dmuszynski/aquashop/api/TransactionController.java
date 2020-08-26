@@ -26,16 +26,16 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<TransactionDTO> realizeTransaction(@RequestBody @Valid TransactionDTO transactionDetails) {
-        final TransactionDTO completedTransaction = this.transactionService.realizeTransaction(transactionDetails);
-        return new ResponseEntity<>(completedTransaction, HttpStatus.OK);
+        final TransactionDTO completedTransactionDto = this.transactionService.realizeTransaction(transactionDetails);
+        return new ResponseEntity<>(completedTransactionDto, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<TransactionDTO>> findAllByUserId(@PathVariable Long userId) {
-        final List<TransactionDTO> foundTransactionsList = this.transactionService.findAllByUserId(userId);
+    public ResponseEntity<List<TransactionDTO>> findAllTransactionDtoByUserId(@PathVariable Long userId) {
+        final List<TransactionDTO> foundTransactionList = this.transactionService.findAllByUserId(userId);
 
-        if (!foundTransactionsList.isEmpty())
-            return new ResponseEntity<>(foundTransactionsList, HttpStatus.OK);
+        if (!foundTransactionList.isEmpty())
+            return new ResponseEntity<>(foundTransactionList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

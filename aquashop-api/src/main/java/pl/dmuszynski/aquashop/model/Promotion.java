@@ -1,54 +1,50 @@
 package pl.dmuszynski.aquashop.model;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.NoArgsConstructor;
 import lombok.Data;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Data @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "promotion_id")
     private Long id;
 
-    @OneToMany(mappedBy = "promotion")
-    private List<Product> products;
-
-    @NotBlank
-    private String name;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Range(min = 0, max = 100)
     private int percentValue;
 
     @CreatedDate
     @NotNull @Column(updatable = false)
-    private LocalDateTime creationDate;
+    private LocalDate startDate;
 
     @CreatedDate
     @NotNull @Column(updatable = false)
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
-    public Promotion(String name, int percentValue, LocalDateTime creationDate, LocalDateTime endTime) {
-        this.name = name;
+    public Promotion(Product product, int percentValue, LocalDate startDate, LocalDate endDate) {
         this.percentValue = percentValue;
-        this.creationDate = creationDate;
-        this.endDate = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Promotion(Long id, String name, int percentValue, LocalDateTime creationDate, LocalDateTime endTime) {
-        this(name, percentValue, creationDate, endTime);
+    public Promotion(Long id, Product product, int percentValue, LocalDate startDate, LocalDate endDate) {
+        this(product, percentValue, startDate, endDate);
         this.id = id;
     }
 }

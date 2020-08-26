@@ -11,4 +11,5 @@ public class UserDTO {
     private String username;
     private List<RoleDTO> roles;
     private boolean isEnabled;
+    private boolean isLocked;
 }
