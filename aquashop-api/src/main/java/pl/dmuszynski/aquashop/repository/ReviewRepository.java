@@ -2,9 +2,9 @@ package pl.dmuszynski.aquashop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.dmuszynski.aquashop.model.Person;
+import pl.dmuszynski.aquashop.model.Review;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 }

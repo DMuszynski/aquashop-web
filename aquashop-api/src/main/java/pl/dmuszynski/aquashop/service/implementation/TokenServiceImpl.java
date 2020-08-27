@@ -10,12 +10,13 @@ import pl.dmuszynski.aquashop.service.MailService;
 import pl.dmuszynski.aquashop.model.Token;
 import pl.dmuszynski.aquashop.model.User;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.mail.MessagingException;
 import java.util.UUID;
 
 @Service(value = "tokenService")
 public class TokenServiceImpl implements TokenService {
-
     private final TokenRepository tokenRepository;
     private final MailService mailService;
 

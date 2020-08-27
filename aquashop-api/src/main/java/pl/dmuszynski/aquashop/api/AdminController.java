@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.AdminService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 @RestController

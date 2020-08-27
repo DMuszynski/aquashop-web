@@ -21,8 +21,7 @@ public class Promotion {
     @Column(name = "promotion_id")
     private Long id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -41,6 +40,7 @@ public class Promotion {
         this.percentValue = percentValue;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.product = product;
     }
 
     public Promotion(Long id, Product product, int percentValue, LocalDate startDate, LocalDate endDate) {

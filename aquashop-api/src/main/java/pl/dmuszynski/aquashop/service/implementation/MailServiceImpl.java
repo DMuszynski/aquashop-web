@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import pl.dmuszynski.aquashop.service.MailService;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.mail.internet.MimeMessage;
 import javax.mail.MessagingException;
 

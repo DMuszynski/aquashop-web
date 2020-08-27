@@ -17,11 +17,6 @@ public class Person {
     @Column(name = "person_id")
     private Long id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @NotBlank
     private String name;
 
@@ -34,6 +29,10 @@ public class Person {
     @NotNull
     private LocalDate dateOfBirth;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Person(User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
@@ -42,7 +41,7 @@ public class Person {
         this.user = user;
     }
 
-    public Person(User user, Long id, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
+    public Person(Long id, User user, String name, String surname, String phoneNumber, LocalDate dateOfBirth) {
         this(user, name, surname, phoneNumber, dateOfBirth);
         this.id = id;
     }

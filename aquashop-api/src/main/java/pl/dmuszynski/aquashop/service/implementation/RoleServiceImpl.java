@@ -8,6 +8,8 @@ import pl.dmuszynski.aquashop.service.RoleService;
 import pl.dmuszynski.aquashop.model.RoleType;
 import pl.dmuszynski.aquashop.model.Role;
 
+import lombok.RequiredArgsConstructor;
+
 @Service(value = "roleService")
 public class RoleServiceImpl implements RoleService {
 

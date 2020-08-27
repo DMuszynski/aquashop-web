@@ -5,8 +5,8 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class CommentDTO implements Serializable {
+public class ReviewDTO implements Serializable {
     private Long id;
-    private String description;
-    private int rating;
+    private Short grade;
+    private String reviewComment;
 }

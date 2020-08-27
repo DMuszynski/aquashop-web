@@ -1,8 +1,8 @@
 package pl.dmuszynski.aquashop.payload.response;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 @Data
 public class JwtResponseDTO {

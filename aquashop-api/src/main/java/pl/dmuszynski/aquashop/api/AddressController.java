@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.payload.AddressDTO;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,7 +41,6 @@ public class AddressController {
     @GetMapping
     public ResponseEntity<List<AddressDTO>> findAllAddressDtoByUserId(@PathVariable Long userId) {
         final List<AddressDTO> foundAddressDtoList = this.addressService.findAllAddressDtoByUserId(userId);
-
         if (!foundAddressDtoList.isEmpty())
             return new ResponseEntity<>(foundAddressDtoList, HttpStatus.OK);
         else

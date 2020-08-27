@@ -32,6 +32,16 @@ public class User {
     @NotBlank
     private String password;
 
+    @NotNull
+    private boolean isEnabled;
+
+    @NotNull
+    private boolean isLocked;
+
+    @CreatedDate
+    @NotNull @Column(updatable = false)
+    private LocalDateTime creationDate;
+
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -43,18 +53,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Token token;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Person person;
-
-    @NotNull
-    private boolean isEnabled;
-
-    @NotNull
-    private boolean isLocked;
-
-    @CreatedDate
-    @NotNull @Column(updatable = false)
-    private LocalDateTime creationDate;
 
     public User(String email, String username, String password, Set<Role> roles) {
         this.username = username;

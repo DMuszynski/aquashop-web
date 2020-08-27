@@ -13,6 +13,8 @@ import pl.dmuszynski.aquashop.service.PromotionService;
 import pl.dmuszynski.aquashop.payload.PromotionDTO;
 import pl.dmuszynski.aquashop.model.Promotion;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.stream.Collectors;
 import java.util.List;
 import java.time.LocalDate;
@@ -25,9 +27,7 @@ public class PromotionServiceImpl implements PromotionService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PromotionServiceImpl(PromotionRepository promotionRepository, ProductService productService,
-                                ModelMapper modelMapper)
-    {
+    public PromotionServiceImpl(PromotionRepository promotionRepository, ProductService productService, ModelMapper modelMapper) {
         this.promotionRepository = promotionRepository;
         this.productService = productService;
         this.modelMapper = modelMapper;

@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import pl.dmuszynski.aquashop.payload.PersonDTO;
 import pl.dmuszynski.aquashop.service.PersonService;
+import pl.dmuszynski.aquashop.payload.PersonDTO;
+
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.Valid;
 

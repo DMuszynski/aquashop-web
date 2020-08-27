@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
 
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
@@ -20,6 +21,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException
     {
         logger.error("Unauthorized error: {}", authException.getMessage());
+        logger.error("ej error: {}", Arrays.toString(authException.getStackTrace()));
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
     }
 }

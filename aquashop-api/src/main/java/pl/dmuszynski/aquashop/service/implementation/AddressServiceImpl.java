@@ -12,22 +12,18 @@ import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Address;
 import pl.dmuszynski.aquashop.model.User;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.stream.Collectors;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service(value = "addressService")
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public AddressServiceImpl(AddressRepository addressRepository, UserService userService, ModelMapper modelMapper) {
-        this.addressRepository = addressRepository;
-        this.userService = userService;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public AddressDTO addUserAddress(AddressDTO addressDetails, Long userId) {
@@ -51,8 +47,8 @@ public class AddressServiceImpl implements AddressService {
 
         final Address updatedAddress = this.addressRepository
             .save(new Address(
-                foundAddress.getUser(),
                 foundAddress.getId(),
+                foundAddress.getUser(),
                 addressDetails.getCountry(),
                 addressDetails.getLocation(),
                 addressDetails.getZipCode(),

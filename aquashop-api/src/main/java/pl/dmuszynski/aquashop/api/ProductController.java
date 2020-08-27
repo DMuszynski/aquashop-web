@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.ProductDTO;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.Valid;
 import java.util.List;
 

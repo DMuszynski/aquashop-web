@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.stream.Collectors;
 import java.util.List;
 import java.time.LocalDateTime;

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.service.TransactionService;
 import pl.dmuszynski.aquashop.payload.TransactionDTO;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -32,10 +34,9 @@ public class TransactionController {
 
     @GetMapping
     public ResponseEntity<List<TransactionDTO>> findAllTransactionDtoByUserId(@PathVariable Long userId) {
-        final List<TransactionDTO> foundTransactionList = this.transactionService.findAllByUserId(userId);
-
-        if (!foundTransactionList.isEmpty())
-            return new ResponseEntity<>(foundTransactionList, HttpStatus.OK);
+        final List<TransactionDTO> foundTransactionDtoList = this.transactionService.findAllTransactionDtoByUserId(userId);
+        if (!foundTransactionDtoList.isEmpty())
+            return new ResponseEntity<>(foundTransactionDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

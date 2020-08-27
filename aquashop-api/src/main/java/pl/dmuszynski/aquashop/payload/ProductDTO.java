@@ -9,6 +9,6 @@ import lombok.Data;
 public class ProductDTO implements Serializable {
     private Long id;
     private String name;
-    private float prize;
-    private List<CommentDTO> comments;
+    private float price;
+    private List<ReviewDTO> reviews;
 }

@@ -12,6 +12,7 @@ import lombok.Data;
 @Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -21,22 +22,22 @@ public class Product {
     private String name;
 
     @NotNull @Column(scale = 2)
-    private float prize;
+    private Float price;
 
-    @OneToOne(mappedBy = "promotion", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
     private Promotion promotion;
 
     @OneToMany(mappedBy = "product")
-    private List<Comment> comments;
+    private List<Review> reviews;
 
-    public Product(String name, float prize) {
-        this.prize = prize;
+    public Product(String name, Float price) {
+        this.price = price;
         this.name = name;
     }
 
-    public Product(Long id, String name, float prize, List<Comment> comments) {
-        this(name, prize);
-        this.comments = comments;
+    public Product(Long id, String name, Float price, List<Review> reviews) {
+        this(name, price);
+        this.reviews = reviews;
         this.id = id;
     }
 }

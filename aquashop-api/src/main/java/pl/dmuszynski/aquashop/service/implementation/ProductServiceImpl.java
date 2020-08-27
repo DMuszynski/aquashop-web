@@ -10,6 +10,8 @@ import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO addProduct(ProductDTO productDetails) {
         final Product createdProduct = this.productRepository
-            .save(new Product(productDetails.getName(), productDetails.getPrize()));
+            .save(new Product(productDetails.getName(), productDetails.getPrice()));
 
         return this.modelMapper.map(createdProduct, ProductDTO.class);
     }
@@ -40,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
             .save(new Product(
                 foundProduct.getId(),
                 productDetails.getName(),
-                productDetails.getPrize(),
-                foundProduct.getComments())
+                productDetails.getPrice(),
+                foundProduct.getReviews())
             );
 
         return this.modelMapper.map(updatedProduct, ProductDTO.class);

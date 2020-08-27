@@ -12,6 +12,8 @@ import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
 import pl.dmuszynski.aquashop.model.User;
 
+import lombok.RequiredArgsConstructor;
+
 @Service(value = "personService")
 public class PersonServiceImpl implements PersonService {
 
@@ -40,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
     public PersonDTO updatePerson(PersonDTO personDetails, Long id) {
         final Person foundPerson = this.findPersonById(id);
         final Person updatedPerson = this.personRepository
-            .save(new Person(foundPerson.getUser(), foundPerson.getId(), personDetails.getName(),
+            .save(new Person(foundPerson.getId(), foundPerson.getUser(), personDetails.getName(),
                 personDetails.getSurname(), personDetails.getPhoneNumber(), personDetails.getDateOfBirth()));
 
         return this.modelMapper.map(updatedPerson, PersonDTO.class);

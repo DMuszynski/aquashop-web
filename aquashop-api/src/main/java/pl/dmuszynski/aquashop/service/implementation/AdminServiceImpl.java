@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+
 @Service(value = "adminService")
 public class AdminServiceImpl implements AdminService {
 

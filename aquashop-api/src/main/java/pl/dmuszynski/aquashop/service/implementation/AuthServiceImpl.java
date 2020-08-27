@@ -14,6 +14,8 @@ import pl.dmuszynski.aquashop.security.jwt.JwtUtils;
 import pl.dmuszynski.aquashop.payload.response.JwtResponseDTO;
 import pl.dmuszynski.aquashop.service.AuthService;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.stream.Collectors;
 import java.util.List;
 

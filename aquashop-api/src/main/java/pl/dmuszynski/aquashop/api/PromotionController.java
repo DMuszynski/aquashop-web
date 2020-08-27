@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import pl.dmuszynski.aquashop.payload.PromotionDTO;
 import pl.dmuszynski.aquashop.service.PromotionService;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class PromotionController {
 
     @GetMapping
     public ResponseEntity<List<PromotionDTO>> findAllPromotionDTO() {
-        final List<PromotionDTO> foundPromotionDtoList = this.promotionService.findAll();
+        final List<PromotionDTO> foundPromotionDtoList = this.promotionService.findAllPromotionDTO();
 
         if (!foundPromotionDtoList.isEmpty())
             return new ResponseEntity<>(foundPromotionDtoList, HttpStatus.OK);

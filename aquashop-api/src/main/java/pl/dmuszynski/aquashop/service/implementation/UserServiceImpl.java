@@ -1,21 +1,23 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import pl.dmuszynski.aquashop.exception.DuplicatePasswordException;
-import pl.dmuszynski.aquashop.exception.UniqueEmailException;
-import pl.dmuszynski.aquashop.repository.UserRepository;
-import pl.dmuszynski.aquashop.service.UserService;
-import pl.dmuszynski.aquashop.payload.UserDTO;
-import pl.dmuszynski.aquashop.model.User;
-
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import pl.dmuszynski.aquashop.validator.DuplicatePasswordValidator;
+import pl.dmuszynski.aquashop.validator.UniqueEmailValidator;
+import pl.dmuszynski.aquashop.repository.UserRepository;
+import pl.dmuszynski.aquashop.service.UserService;
+import pl.dmuszynski.aquashop.payload.UserDTO;
+import pl.dmuszynski.aquashop.model.User;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.RequiredArgsConstructor;
 
 @Transactional
 @Service(value = "userProfileService")
@@ -40,8 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO changePassword(String password, Long id) {
         final User foundUser = this.findUserById(id);
-        validateUserDuplicatePassword(password, foundUser.getPassword());
-        foundUser.setPassword(password);
+        new DuplicatePasswordValidator(passwordEncoder).validate(password, foundUser.getPassword());
 
         this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
         return this.modelMapper.map(foundUser, UserDTO.class);
@@ -49,8 +50,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO changeEmail(String email, Long id) {
+        new UniqueEmailValidator(userRepository).validate(email);
         final User foundUser = this.findUserById(id);
-        validateUserEmailAlreadyExist(email);
         foundUser.setEmail(email);
 
         this.userRepository.updateEmailById(email, id);
@@ -80,15 +81,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         this.userRepository.deleteById(id);
-    }
-
-    private void validateUserEmailAlreadyExist(String email) throws UniqueEmailException {
-        if (this.userRepository.findByEmail(email).isPresent())
-            throw new UniqueEmailException("The user with given address e-mail " + email + " is already exist");
-    }
-
-    private void validateUserDuplicatePassword(String newPassword, String oldPassword) throws DuplicatePasswordException {
-        if (this.passwordEncoder.matches(newPassword, oldPassword))
-            throw new DuplicatePasswordException();
     }
 }
