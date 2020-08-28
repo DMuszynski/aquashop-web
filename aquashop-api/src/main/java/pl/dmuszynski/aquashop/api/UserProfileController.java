@@ -5,7 +5,6 @@ import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.UserService;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -15,16 +14,12 @@ import lombok.RequiredArgsConstructor;
 import javax.validation.Valid;
 
 @RestController
+@RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "user-management/users/{id}")
 public class UserProfileController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserProfileController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PatchMapping(value = "/email")
     public ResponseEntity<UserDTO> changeEmail(@RequestBody @Valid UserDTO userDetails, @PathVariable Long id) {

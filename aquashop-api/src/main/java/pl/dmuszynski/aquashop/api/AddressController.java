@@ -1,7 +1,6 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -15,16 +14,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "/user-management/users/{userId}/address-management/addresses")
 public class AddressController {
 
     private final AddressService addressService;
-
-    @Autowired
-    public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
 
     @PostMapping
     public ResponseEntity<AddressDTO> addUserAddress(@RequestBody @Valid AddressDTO addressDetails, @PathVariable Long userId) {

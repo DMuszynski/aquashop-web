@@ -7,7 +7,6 @@ import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.AuthService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -17,17 +16,12 @@ import lombok.RequiredArgsConstructor;
 import javax.validation.Valid;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/auth-management/")
 public class AuthController {
 
     private final RegistrationService registrationService;
     private final AuthService authService;
-
-    @Autowired
-    public AuthController(RegistrationService registrationService, AuthService authService) {
-        this.registrationService = registrationService;
-        this.authService = authService;
-    }
 
     @PostMapping(value = "/sign-in")
     public ResponseEntity<JwtResponseDTO> authenticateUser(@RequestBody @Valid LoginRequestDTO loginDetails) {

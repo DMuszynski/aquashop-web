@@ -1,7 +1,6 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -14,16 +13,12 @@ import lombok.RequiredArgsConstructor;
 import javax.validation.Valid;
 
 @RestController
+@RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "/product-management/products/{productId}/comment-management/comments")
 public class ReviewController {
 
     private final ReviewService reviewService;
-
-    @Autowired
-    public ReviewController(ReviewService reviewService) {
-        this.reviewService = reviewService;
-    }
 
     @PostMapping
     public ResponseEntity<ReviewDTO> addProductComment(@RequestBody @Valid ReviewDTO reviewDetails, @PathVariable Long productId) {

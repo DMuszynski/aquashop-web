@@ -1,7 +1,6 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -15,16 +14,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('MODERATOR')")
 @RequestMapping(value = "/product-management/products/{productId}/promotion-management/promotions")
 public class PromotionController {
 
     private final PromotionService promotionService;
-
-    @Autowired
-    public PromotionController(PromotionService promotionService) {
-        this.promotionService = promotionService;
-    }
 
     @PostMapping
     public ResponseEntity<PromotionDTO> addProductPromotion(@RequestBody @Valid PromotionDTO promotionDetails, @PathVariable Long productId) {

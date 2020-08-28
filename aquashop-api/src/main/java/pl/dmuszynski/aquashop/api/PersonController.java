@@ -1,7 +1,6 @@
 package pl.dmuszynski.aquashop.api;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -14,16 +13,12 @@ import lombok.RequiredArgsConstructor;
 import javax.validation.Valid;
 
 @RestController
+@RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('USER')")
 @RequestMapping(value = "user-management/users/{userId}/person-management/persons")
 public class PersonController {
 
     private final PersonService personService;
-
-    @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     @PostMapping
     public ResponseEntity<PersonDTO> addUserPerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long userId) {
