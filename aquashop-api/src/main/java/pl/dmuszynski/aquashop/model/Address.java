@@ -9,8 +9,12 @@ import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Address extends AbstractEntity {
+public class Address {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
+    private Long id;
 
     @NotBlank
     private String country;

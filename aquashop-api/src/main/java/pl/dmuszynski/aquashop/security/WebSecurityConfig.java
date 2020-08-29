@@ -13,29 +13,22 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 
 import pl.dmuszynski.aquashop.security.jwt.JwtFilter;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationEntryPoint unauthorizedHandler;
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
-
-    @Autowired
-    public WebSecurityConfig(AuthenticationEntryPoint unauthorizedHandler, UserDetailsService userDetailsService,
-                             JwtFilter jwtFilter)
-    {
-        this.unauthorizedHandler = unauthorizedHandler;
-        this.userDetailsService = userDetailsService;
-        this.jwtFilter = jwtFilter;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
