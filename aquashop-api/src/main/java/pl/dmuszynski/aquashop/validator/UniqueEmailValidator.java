@@ -3,9 +3,7 @@ package pl.dmuszynski.aquashop.validator;
 import pl.dmuszynski.aquashop.exception.UniqueUsernameException;
 import pl.dmuszynski.aquashop.exception.UniqueEmailException;
 import pl.dmuszynski.aquashop.repository.UserRepository;
-
 import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 
 @Component

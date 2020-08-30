@@ -24,11 +24,11 @@ public class Product {
     @NotNull @Column(scale = 2)
     private Float price;
 
-    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
-    private Promotion promotion;
-
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
+
+    @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
+    private Promotion promotion;
 
     public Product(String name, Float price) {
         this.price = price;

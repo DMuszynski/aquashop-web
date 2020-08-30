@@ -2,9 +2,7 @@ package pl.dmuszynski.aquashop.validator;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import pl.dmuszynski.aquashop.exception.DuplicatePasswordException;
-
 import lombok.RequiredArgsConstructor;
 
 @Component

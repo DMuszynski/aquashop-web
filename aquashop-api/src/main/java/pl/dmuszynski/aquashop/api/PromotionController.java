@@ -4,10 +4,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
 import pl.dmuszynski.aquashop.payload.PromotionDTO;
 import pl.dmuszynski.aquashop.service.PromotionService;
-
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.Valid;

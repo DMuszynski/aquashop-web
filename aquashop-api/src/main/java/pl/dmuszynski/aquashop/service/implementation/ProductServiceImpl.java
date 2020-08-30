@@ -1,31 +1,23 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
-
 import lombok.RequiredArgsConstructor;
 
 import java.util.stream.Collectors;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service(value = "productService")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
-        this.productRepository = productRepository;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public ProductDTO addProduct(ProductDTO productDetails) {

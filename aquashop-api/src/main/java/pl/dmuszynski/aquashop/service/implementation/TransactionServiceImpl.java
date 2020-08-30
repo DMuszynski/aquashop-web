@@ -8,17 +8,15 @@ import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Transaction;
 import pl.dmuszynski.aquashop.model.Product;
 import pl.dmuszynski.aquashop.model.User;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import lombok.RequiredArgsConstructor;
 
 import java.util.stream.Collectors;
 import java.util.List;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Service(value = "transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
@@ -26,16 +24,6 @@ public class TransactionServiceImpl implements TransactionService {
     private final ProductService productService;
     private final UserService userService;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository, ProductService productService,
-                                  UserService userService, ModelMapper modelMapper)
-    {
-        this.transactionRepository = transactionRepository;
-        this.productService = productService;
-        this.userService = userService;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public TransactionDTO realizeTransaction(TransactionDTO transactionDetails) {

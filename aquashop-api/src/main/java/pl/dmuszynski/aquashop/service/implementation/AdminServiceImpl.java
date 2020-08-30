@@ -1,34 +1,25 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.service.AdminService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.service.RoleService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.model.User;
+import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-
+@RequiredArgsConstructor
 @Service(value = "adminService")
 public class AdminServiceImpl implements AdminService {
 
     private final UserService userService;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public AdminServiceImpl(UserService userService, RoleService roleService, ModelMapper modelMapper) {
-        this.userService = userService;
-        this.roleService = roleService;
-        this.modelMapper = modelMapper;
-    }
 
     @Transactional
     @Override

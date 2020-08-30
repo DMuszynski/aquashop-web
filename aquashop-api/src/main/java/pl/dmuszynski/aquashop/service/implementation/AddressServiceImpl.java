@@ -1,17 +1,14 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.payload.AddressDTO;
 import pl.dmuszynski.aquashop.repository.AddressRepository;
 import pl.dmuszynski.aquashop.service.AddressService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Address;
 import pl.dmuszynski.aquashop.model.User;
-
 import lombok.RequiredArgsConstructor;
 
 import java.util.stream.Collectors;

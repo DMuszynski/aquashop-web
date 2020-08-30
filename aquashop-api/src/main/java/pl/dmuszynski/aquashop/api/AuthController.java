@@ -6,11 +6,9 @@ import pl.dmuszynski.aquashop.payload.response.JwtResponseDTO;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.AuthService;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.Valid;

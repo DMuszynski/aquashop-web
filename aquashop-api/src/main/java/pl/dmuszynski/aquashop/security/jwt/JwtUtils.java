@@ -1,11 +1,9 @@
 package pl.dmuszynski.aquashop.security.jwt;
 
-import pl.dmuszynski.aquashop.security.services.UserDetailsImpl;
-
+import pl.dmuszynski.aquashop.security.userdetails.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -35,7 +33,7 @@ public class JwtUtils {
             .sign(algorithm);
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getUsernameFromJwtToken(String token) {
         return JWT.decode(token).getSubject();
     }
 

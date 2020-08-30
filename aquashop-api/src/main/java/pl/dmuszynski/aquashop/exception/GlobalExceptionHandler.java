@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UniqueEmailException.class)
-    public ResponseEntity<Object> handleUniqueEmailException(UniqueEmailException ex, WebRequest webRequest) {
+    @ExceptionHandler(DuplicatePasswordException.class)
+    public ResponseEntity<Object> handleDuplicatePasswordException(DuplicatePasswordException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
@@ -22,13 +22,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(EnabledException.class)
-    public ResponseEntity<Object> handleEnabledException(EnabledException ex, WebRequest webRequest) {
+    @ExceptionHandler(UniqueEmailException.class)
+    public ResponseEntity<Object> handleUniqueEmailException(UniqueEmailException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 
-    @ExceptionHandler(DuplicatePasswordException.class)
-    public ResponseEntity<Object> handleDuplicatePasswordException(DuplicatePasswordException ex, WebRequest webRequest) {
+    @ExceptionHandler(AlreadyEnabledException.class)
+    public ResponseEntity<Object> handleEnabledException(AlreadyEnabledException ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getMessage(), HttpHeaders.EMPTY, HttpStatus.CONFLICT, webRequest);
     }
 

@@ -3,14 +3,12 @@ package pl.dmuszynski.aquashop.model;
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Data @NoArgsConstructor
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
@@ -42,5 +40,6 @@ public class Address {
 
     public Address(Long id, User user, String country, String location, String zipCode, String street) {
         this(user, country, location, zipCode, street);
+        this.id = id;
     }
 }

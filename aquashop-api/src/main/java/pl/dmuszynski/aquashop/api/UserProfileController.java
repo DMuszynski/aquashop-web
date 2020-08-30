@@ -3,12 +3,10 @@ package pl.dmuszynski.aquashop.api;
 import pl.dmuszynski.aquashop.payload.request.PasswordRequestDTO;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.UserService;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
 import lombok.RequiredArgsConstructor;
 
 import javax.validation.Valid;

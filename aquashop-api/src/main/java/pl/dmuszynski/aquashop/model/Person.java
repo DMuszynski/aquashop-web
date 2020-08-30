@@ -29,7 +29,7 @@ public class Person {
     @NotNull
     private LocalDate dateOfBirth;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

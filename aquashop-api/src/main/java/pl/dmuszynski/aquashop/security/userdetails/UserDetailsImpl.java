@@ -1,4 +1,4 @@
-package pl.dmuszynski.aquashop.security.services;
+package pl.dmuszynski.aquashop.security.userdetails;
 
 import java.util.Collection;
 import java.util.List;

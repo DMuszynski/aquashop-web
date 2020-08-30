@@ -1,32 +1,23 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.repository.PersonRepository;
 import pl.dmuszynski.aquashop.payload.PersonDTO;
 import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.model.Person;
 import pl.dmuszynski.aquashop.model.User;
-
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service(value = "personService")
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final UserService userService;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public PersonServiceImpl(PersonRepository personRepository, UserService userService, ModelMapper modelMapper) {
-        this.personRepository = personRepository;
-        this.userService = userService;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public PersonDTO addUserPerson(PersonDTO personDetails, Long userId) {

@@ -2,37 +2,28 @@ package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.validator.DuplicatePasswordValidator;
 import pl.dmuszynski.aquashop.validator.UniqueEmailValidator;
 import pl.dmuszynski.aquashop.repository.UserRepository;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.model.User;
+import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.RequiredArgsConstructor;
-
 @Transactional
+@RequiredArgsConstructor
 @Service(value = "userProfileService")
 public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public UserServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository, ModelMapper modelMapper) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public User save(User user) {

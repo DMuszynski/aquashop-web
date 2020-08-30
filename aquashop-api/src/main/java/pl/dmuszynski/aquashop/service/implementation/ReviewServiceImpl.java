@@ -1,32 +1,23 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-
 import pl.dmuszynski.aquashop.repository.ReviewRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.service.ReviewService;
 import pl.dmuszynski.aquashop.payload.ReviewDTO;
 import pl.dmuszynski.aquashop.model.Product;
 import pl.dmuszynski.aquashop.model.Review;
-
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service(value = "reviewService")
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ProductService productService;
     private final ModelMapper modelMapper;
-
-    @Autowired
-    public ReviewServiceImpl(ReviewRepository reviewRepository, ProductService productService, ModelMapper modelMapper) {
-        this.reviewRepository = reviewRepository;
-        this.productService = productService;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public ReviewDTO addProductReview(ReviewDTO reviewDetails, Long productId) {
