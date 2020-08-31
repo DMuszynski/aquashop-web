@@ -30,7 +30,7 @@ public class Promotion {
     @NotNull @Column(updatable = false)
     private LocalDate endDate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 

@@ -11,6 +11,8 @@ import pl.dmuszynski.aquashop.model.Address;
 import pl.dmuszynski.aquashop.model.User;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -19,11 +21,24 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final EntityManager entityManager;
     private final UserService userService;
     private final ModelMapper modelMapper;
 
     @Override
+//    @Transactional
     public AddressDTO addUserAddress(AddressDTO addressDetails, Long userId) {
+//        this.entityManager.persist(
+//            new Address(
+//                entityManager.getReference(User.class, userId),
+//                addressDetails.getCountry(),
+//                addressDetails.getLocation(),
+//                addressDetails.getZipCode(),
+//                addressDetails.getStreet()
+//            )
+//        );
+
+
         final User foundUser = this.userService.findUserById(userId);
         final Address savedAddress = this.addressRepository
             .save(new Address(

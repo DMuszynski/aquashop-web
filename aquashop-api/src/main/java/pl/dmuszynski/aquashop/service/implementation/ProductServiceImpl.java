@@ -3,12 +3,14 @@ package pl.dmuszynski.aquashop.service.implementation;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+import pl.dmuszynski.aquashop.model.Review;
 import pl.dmuszynski.aquashop.repository.ProductRepository;
 import pl.dmuszynski.aquashop.service.ProductService;
 import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
                 foundProduct.getId(),
                 productDetails.getName(),
                 productDetails.getPrice(),
-                foundProduct.getReviews())
+                new ArrayList<Review>())
             );
 
         return this.modelMapper.map(updatedProduct, ProductDTO.class);

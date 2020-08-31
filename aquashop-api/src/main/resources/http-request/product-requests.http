@@ -5,7 +5,7 @@ Authorization: Bearer {{auth_token}}
 
 {
   "name" : "Black Shorts",
-  "prize" : "30.99"
+  "price" : "30.99"
 }
 
 ### Update product
@@ -15,7 +15,7 @@ Authorization: Bearer {{auth_token}}
 
 {
   "name" : "Blue Shorts",
-  "prize" : "20.00"
+  "price" : "20.00"
 }
 
 ### Find product
