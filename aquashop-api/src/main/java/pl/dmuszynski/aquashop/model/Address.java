@@ -11,7 +11,6 @@ import lombok.Data;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
     private Long id;
 
     @NotBlank
@@ -27,7 +26,6 @@ public class Address {
     private String street;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private User user;
 
     public Address(User user, String country, String location, String zipCode, String street) {

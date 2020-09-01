@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import pl.dmuszynski.aquashop.payload.request.LoginRequestDTO;
 import pl.dmuszynski.aquashop.security.userdetails.UserDetailsImpl;
 import pl.dmuszynski.aquashop.security.jwt.JwtUtils;
 import pl.dmuszynski.aquashop.payload.response.JwtResponseDTO;
@@ -24,12 +23,9 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtils jwtUtils;
 
     @Override
-    public JwtResponseDTO authenticateUser(LoginRequestDTO loginDetails) {
+    public JwtResponseDTO authenticateUser(String username, String password) {
         final Authentication authentication = this.authenticationManager
-            .authenticate(new UsernamePasswordAuthenticationToken(
-                loginDetails.getUsername(),
-                loginDetails.getPassword())
-            );
+            .authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String jwtToken = jwtUtils.generateJwtToken(authentication);

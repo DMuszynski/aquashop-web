@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 import pl.dmuszynski.aquashop.validator.UniqueUsernameValidator;
 import pl.dmuszynski.aquashop.validator.UniqueEmailValidator;
-import pl.dmuszynski.aquashop.payload.request.SignupRequestDTO;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import pl.dmuszynski.aquashop.service.RegistrationService;
 import pl.dmuszynski.aquashop.service.TokenService;
@@ -18,9 +17,11 @@ import pl.dmuszynski.aquashop.model.User;
 import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+@Transactional
 @RequiredArgsConstructor
 @Service(value = "registrationService")
 public class RegistrationServiceImpl implements RegistrationService {
@@ -32,23 +33,20 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final ModelMapper modelMapper;
 
     @Override
-    public UserDTO registerUser(SignupRequestDTO signupDetails) {
-        new UniqueUsernameValidator(userRepository).validate(signupDetails.getUsername());
-        new UniqueEmailValidator(userRepository).validate(signupDetails.getEmail());
+    public UserDTO registerUser(String email, String username, String password) {
+        new UniqueUsernameValidator(userRepository).validate(username);
+        new UniqueEmailValidator(userRepository).validate(email);
 
         final User registerUser = this.userRepository
-            .save(new User(
-                signupDetails.getEmail(),
-                signupDetails.getUsername(),
-                this.passwordEncoder.encode(signupDetails.getPassword()),
-                new HashSet<>(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER))))
+            .save(new User(email, username,
+                this.passwordEncoder.encode(password),
+                new ArrayList<>(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER))))
             );
 
         this.tokenService.sendToken(registerUser);
         return this.modelMapper.map(registerUser, UserDTO.class);
     }
 
-    @Transactional
     @Override
     public void activateAccountByUserToken(String tokenValue) {
         final Token foundToken = this.tokenService.findByValue(tokenValue);

@@ -6,11 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.dmuszynski.aquashop.model.User;
+import pl.dmuszynski.aquashop.payload.UserDTO;
 
 import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+//    @Query("SELECT new pl.dmuszynski.aquashop.payload.UserDTO(r) FROM User u join u.roles r WHERE u.id = :id and r.id = :id")
+//    UserDTO findUserDTOById(@Param("id") Long id);
 
     boolean existsByEmail(String username);
     boolean existsByUsername(String username);

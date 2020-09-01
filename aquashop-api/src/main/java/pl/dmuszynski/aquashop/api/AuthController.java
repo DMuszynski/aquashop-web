@@ -23,13 +23,24 @@ public class AuthController {
 
     @PostMapping(value = "/sign-in")
     public ResponseEntity<JwtResponseDTO> authenticateUser(@RequestBody @Valid LoginRequestDTO loginDetails) {
-        final JwtResponseDTO authenticatedUserResponse = this.authService.authenticateUser(loginDetails);
+        final JwtResponseDTO authenticatedUserResponse = this.authService
+            .authenticateUser(
+                loginDetails.getUsername(),
+                loginDetails.getPassword()
+            );
+
         return new ResponseEntity<>(authenticatedUserResponse, HttpStatus.OK);
     }
 
     @PostMapping(value = "/sign-up")
     public ResponseEntity<UserDTO> registerUser(@RequestBody @Valid SignupRequestDTO signupDetails) {
-        final UserDTO registeredUserDto = this.registrationService.registerUser(signupDetails);
+        final UserDTO registeredUserDto = this.registrationService
+            .registerUser(
+                signupDetails.getEmail(),
+                signupDetails.getUsername(),
+                signupDetails.getPassword()
+            );
+
         return new ResponseEntity<>(registeredUserDto, HttpStatus.CREATED);
     }
 

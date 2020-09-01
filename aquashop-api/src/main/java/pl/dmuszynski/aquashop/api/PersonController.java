@@ -8,6 +8,7 @@ import pl.dmuszynski.aquashop.service.PersonService;
 import pl.dmuszynski.aquashop.payload.PersonDTO;
 import lombok.RequiredArgsConstructor;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -18,6 +19,7 @@ public class PersonController {
 
     private final PersonService personService;
 
+    @Transactional
     @PostMapping
     public ResponseEntity<PersonDTO> addUserPerson(@RequestBody @Valid PersonDTO personDetails, @PathVariable Long userId) {
         final PersonDTO createdPersonDto = this.personService.addUserPerson(personDetails, userId);

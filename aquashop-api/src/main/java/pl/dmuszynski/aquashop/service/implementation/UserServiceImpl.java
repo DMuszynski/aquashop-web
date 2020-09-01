@@ -51,6 +51,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUserDtoById(Long id) {
+//        UserDTO u = this.userRepository.findUserDTOById(id);
+//        System.out.println(u.getEmail() + u.getId());
+//        return u;
         final User foundUser = this.findUserById(id);
         return this.modelMapper.map(foundUser, UserDTO.class);
     }

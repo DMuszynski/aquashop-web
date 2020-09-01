@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
         foundUser.setLocked(userDetails.isLocked());
         foundUser.setRoles(userDetails.getRoles().stream()
             .map(roleDTO -> this.roleService.findByRoleType(roleDTO.getRoleType()))
-            .collect(Collectors.toSet())
+            .collect(Collectors.toList())
         );
 
         final User savedUser = this.userService.save(foundUser);
