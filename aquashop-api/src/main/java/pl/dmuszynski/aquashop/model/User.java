@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data @NoArgsConstructor
@@ -48,10 +47,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Address> addresses;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Token token;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Person person;
 
     public User(String email, String username, String password, List<Role> roles) {

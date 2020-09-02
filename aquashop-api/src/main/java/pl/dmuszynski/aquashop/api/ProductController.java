@@ -19,14 +19,14 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    @PreAuthorize(value = "hasRole('MODERATOR')")
+    @PreAuthorize(value = "hasRole('USER')")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody @Valid ProductDTO productDetails) {
         final ProductDTO createdProductDto = this.productService.addProduct(productDetails);
         return new ResponseEntity<>(createdProductDto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
-    @PreAuthorize(value = "hasRole('MODERATOR')")
+    @PreAuthorize(value = "hasRole('USER')")
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody @Valid ProductDTO productDetails, @PathVariable Long id) {
         final ProductDTO updatedProductDto = this.productService.updateProduct(productDetails, id);
         return new ResponseEntity<>(updatedProductDto, HttpStatus.OK);
@@ -41,7 +41,6 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductDTO>> findAllProductDto() {
         final List<ProductDTO> foundProductDtoList = this.productService.findAllProductDto();
-
         if (!foundProductDtoList.isEmpty())
             return new ResponseEntity<>(foundProductDtoList, HttpStatus.OK);
         else

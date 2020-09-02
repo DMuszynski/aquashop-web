@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 
 @Transactional
 @RequiredArgsConstructor
@@ -43,7 +42,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 new ArrayList<>(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER))))
             );
 
-        this.tokenService.sendToken(registerUser);
+//        this.tokenService.sendToken(registerUser);
         return this.modelMapper.map(registerUser, UserDTO.class);
     }
 

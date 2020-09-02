@@ -23,10 +23,11 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDTO addProductReview(ReviewDTO reviewDetails, Long productId) {
         final Product foundProduct = this.productService.findProductById(productId);
         final Review savedReview = this.reviewRepository
-            .save(new Review(
-                foundProduct,
-                reviewDetails.getGrade(),
-                reviewDetails.getReviewComment())
+            .save(Review.builder()
+                .product(foundProduct)
+                .grade(reviewDetails.getGrade())
+                .reviewComment(reviewDetails.getReviewComment())
+                .build()
             );
 
         return this.modelMapper.map(savedReview, ReviewDTO.class);
@@ -38,11 +39,12 @@ public class ReviewServiceImpl implements ReviewService {
             .orElseThrow(() -> new ResourceNotFoundException("Review not found for id: " + reviewId));
 
         final Review updatedReview = this.reviewRepository
-            .save(new Review(
-                foundReview.getId(),
-                foundReview.getProduct(),
-                foundReview.getGrade(),
-                foundReview.getReviewComment())
+            .save(Review.builder()
+                .id(foundReview.getId())
+                .product(foundReview.getProduct())
+                .grade(reviewDetails.getGrade())
+                .reviewComment(reviewDetails.getReviewComment())
+                .build()
             );
 
         return this.modelMapper.map(updatedReview, ReviewDTO.class);

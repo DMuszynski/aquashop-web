@@ -3,7 +3,7 @@ GET http://localhost:8080/admin-management/users
 Authorization: Bearer {{auth_token}}
 
 ### Update user
-PUT http://localhost:8080/admin-management/users/1
+PUT http://localhost:8080/admin-management/users/2
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 

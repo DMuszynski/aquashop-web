@@ -14,12 +14,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 //    @Query("SELECT new pl.dmuszynski.aquashop.payload.UserDTO(r) FROM User u join u.roles r WHERE u.id = :id and r.id = :id")
-//    UserDTO findUserDTOById(@Param("id") Long id);
 
     boolean existsByEmail(String username);
-    boolean existsByUsername(String username);
 
-    Optional<User> findByUsername(String username);
+    boolean existsByUsername(String username);
 
     @Modifying @Query(value = "UPDATE User u SET u.email = :email WHERE u.id = :id")
     void updateEmailById(@Param("email") String email, @Param("id") Long id);
@@ -29,4 +27,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying @Query(value = "UPDATE User u SET u.isEnabled = true WHERE u.id = :id")
     void activateAccount(@Param("id") Long id);
+
+    @Query(value = "SELECT new pl.dmuszynski.aquashop.payload.UserDTO(u.id, u.email, u.username, u.isEnabled, u.isLocked) FROM User u WHERE u.id =:id")
+    Optional<UserDTO> findUserDtoById(@Param("id") Long id);
+
+    Optional<User> findByUsername(String username);
 }

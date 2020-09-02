@@ -1,11 +1,11 @@
 package pl.dmuszynski.aquashop.payload;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

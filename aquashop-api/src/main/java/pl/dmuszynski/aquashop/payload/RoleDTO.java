@@ -1,13 +1,14 @@
 package pl.dmuszynski.aquashop.payload;
 
 import pl.dmuszynski.aquashop.model.RoleType;
-
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 @RequiredArgsConstructor
-public class RoleDTO {
+public class RoleDTO implements Serializable {
     private Long id;
     private RoleType roleType;
 

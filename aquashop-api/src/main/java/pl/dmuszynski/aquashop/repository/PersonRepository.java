@@ -13,7 +13,4 @@ import java.util.Optional;
 public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query(value = "SELECT new pl.dmuszynski.aquashop.payload.PersonDTO(p.id, p.name, p.surname, p.phoneNumber, p.dateOfBirth) FROM Person p WHERE p.id = :id")
     Optional<PersonDTO> findPersonDtoById(@Param("id") Long id);
-
-//    @Query(value = "DELETE FROM Person p WHERE p.id = :id")
-//    void deleteById(@Param("id")  Long id);
 }

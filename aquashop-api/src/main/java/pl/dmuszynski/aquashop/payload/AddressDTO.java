@@ -1,10 +1,14 @@
 package pl.dmuszynski.aquashop.payload;
 
-import java.io.Serializable;
-
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddressDTO implements Serializable {
     private Long id;
     private String country;

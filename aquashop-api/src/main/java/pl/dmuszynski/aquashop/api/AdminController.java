@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import pl.dmuszynski.aquashop.payload.AuthorizedUserDTO;
 import pl.dmuszynski.aquashop.service.AdminService;
 import pl.dmuszynski.aquashop.payload.UserDTO;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,10 @@ public class AdminController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAllUserDto() {
-        List<UserDTO> foundUserDtoList = this.adminService.findAllUserDto();
-
-        if (!foundUserDtoList.isEmpty())
-            return new ResponseEntity<>(foundUserDtoList, HttpStatus.OK);
+    public ResponseEntity<List<AuthorizedUserDTO>> findAllAuthorizedUserDto() {
+        final List<AuthorizedUserDTO> foundAuthorizedUserDtoList = this.adminService.findAllAuthorizedUserDto();
+        if (!foundAuthorizedUserDtoList.isEmpty())
+            return new ResponseEntity<>(foundAuthorizedUserDtoList, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

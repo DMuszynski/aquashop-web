@@ -3,11 +3,12 @@ package pl.dmuszynski.aquashop.model;
 import javax.validation.constraints.NotBlank;
 import javax.persistence.*;
 
-import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
-@Data @NoArgsConstructor
+@Builder @Data
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +29,6 @@ public class Address {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    public Address(User user, String country, String location, String zipCode, String street) {
-        this.user = user;
-        this.country = country;
-        this.location = location;
-        this.zipCode = zipCode;
-        this.street = street;
-    }
-
-    public Address(Long id, User user, String country, String location, String zipCode, String street) {
-        this(user, country, location, zipCode, street);
-        this.id = id;
-    }
+    @Tolerate
+    public Address() {}
 }

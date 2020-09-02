@@ -1,0 +1,23 @@
+### Add product review
+POST http://localhost:8080/product-management/products/1/review-management/reviews
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "reviewComment" : "very flexible black shorts",
+  "grade" : "0"
+}
+
+### Update product review
+PUT http://localhost:8080/product-management/products/1/review-management/reviews/1
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "reviewComment" : "silk and very flexible black shorts",
+  "grade" : "1"
+}
+
+### Delete review
+DELETE http://localhost:8080/product-management/products/1/review-management/reviews/1
+Authorization: Bearer {{auth_token}}

@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @PreAuthorize(value = "hasRole('USER')")
-@RequestMapping(value = "/product-management/products/{productId}/comment-management/comments")
+@RequestMapping(value = "/product-management/products/{productId}/review-management/reviews")
 public class ReviewController {
 
     private final ReviewService reviewService;

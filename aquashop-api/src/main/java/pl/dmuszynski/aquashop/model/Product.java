@@ -12,7 +12,6 @@ import lombok.Data;
 @Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")

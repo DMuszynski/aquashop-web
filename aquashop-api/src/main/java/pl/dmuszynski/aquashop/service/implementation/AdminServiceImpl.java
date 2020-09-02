@@ -1,5 +1,7 @@
 package pl.dmuszynski.aquashop.service.implementation;
 
+import pl.dmuszynski.aquashop.payload.AuthorizedUserDTO;
+import pl.dmuszynski.aquashop.repository.AdminRepository;
 import pl.dmuszynski.aquashop.service.AdminService;
 import pl.dmuszynski.aquashop.service.UserService;
 import pl.dmuszynski.aquashop.service.RoleService;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service(value = "adminService")
 public class AdminServiceImpl implements AdminService {
 
+    private final AdminRepository adminRepository;
     private final UserService userService;
     private final RoleService roleService;
     private final ModelMapper modelMapper;
@@ -26,17 +29,17 @@ public class AdminServiceImpl implements AdminService {
     public UserDTO updateUser(UserDTO userDetails, Long id) {
         final User foundUser = this.userService.findUserById(id);
         foundUser.setLocked(userDetails.isLocked());
-        foundUser.setRoles(userDetails.getRoles().stream()
-            .map(roleDTO -> this.roleService.findByRoleType(roleDTO.getRoleType()))
-            .collect(Collectors.toList())
-        );
+//        foundUser.setRoles(userDetails.getRoles().stream()
+//            .map(roleDTO -> this.roleService.findByRoleType(roleDTO.getRoleType()))
+//            .collect(Collectors.toList())
+//        );
 
-        final User savedUser = this.userService.save(foundUser);
+        final User savedUser = this.adminRepository.save(foundUser);
         return this.modelMapper.map(savedUser, UserDTO.class);
     }
 
     @Override
-    public List<UserDTO> findAllUserDto() {
-        return this.userService.findAllUserDto();
+    public List<AuthorizedUserDTO> findAllAuthorizedUserDto() {
+        return this.adminRepository.findAllAuthorizedUserDto();
     }
 }

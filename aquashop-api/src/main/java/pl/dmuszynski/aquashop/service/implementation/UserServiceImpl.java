@@ -13,10 +13,7 @@ import pl.dmuszynski.aquashop.model.User;
 import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 
-@Transactional
 @RequiredArgsConstructor
 @Service(value = "userProfileService")
 public class UserServiceImpl implements UserService {
@@ -26,44 +23,31 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public User save(User user) {
-        return this.userRepository.save(user);
-    }
-
-    @Override
+    @Transactional
     public UserDTO changePassword(String password, Long id) {
         final User foundUser = this.findUserById(id);
         new DuplicatePasswordValidator(passwordEncoder).validate(password, foundUser.getPassword());
+        foundUser.setPassword(this.passwordEncoder.encode(password));
 
-        this.userRepository.updatePasswordById(passwordEncoder.encode(password), id);
+        this.userRepository.updatePasswordById(foundUser.getPassword(), foundUser.getId());
         return this.modelMapper.map(foundUser, UserDTO.class);
     }
 
     @Override
+    @Transactional
     public UserDTO changeEmail(String email, Long id) {
         new UniqueEmailValidator(userRepository).validate(email);
         final User foundUser = this.findUserById(id);
         foundUser.setEmail(email);
 
-        this.userRepository.updateEmailById(email, id);
+        this.userRepository.updateEmailById(foundUser.getEmail(), foundUser.getId());
         return this.modelMapper.map(foundUser, UserDTO.class);
     }
 
     @Override
-    public UserDTO findUserDtoById(Long id) {
-//        UserDTO u = this.userRepository.findUserDTOById(id);
-//        System.out.println(u.getEmail() + u.getId());
-//        return u;
-        final User foundUser = this.findUserById(id);
-        return this.modelMapper.map(foundUser, UserDTO.class);
-    }
-
-    @Override
-    public List<UserDTO> findAllUserDto() {
-        final List<User> foundUserList = this.userRepository.findAll();
-        return foundUserList.stream()
-            .map(user -> this.modelMapper.map(user, UserDTO.class))
-            .collect(Collectors.toList());
+    public UserDTO findUserDtoById(Long id) throws ResourceNotFoundException {
+        return this.userRepository.findUserDtoById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + id));
     }
 
     @Override
