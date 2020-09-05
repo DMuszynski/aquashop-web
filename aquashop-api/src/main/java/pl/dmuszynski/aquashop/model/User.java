@@ -2,7 +2,8 @@ package pl.dmuszynski.aquashop.model;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.annotation.CreatedDate;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor
+@Builder @Data
 @EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
 public class User {
@@ -39,7 +40,7 @@ public class User {
     @NotNull @Column(updatable = false)
     private LocalDateTime creationDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
@@ -53,10 +54,6 @@ public class User {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Person person;
 
-    public User(String email, String username, String password, List<Role> roles) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.roles = roles;
-    }
+    @Tolerate
+    public User() {}
 }

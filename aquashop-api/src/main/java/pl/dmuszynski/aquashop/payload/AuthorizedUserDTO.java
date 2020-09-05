@@ -1,9 +1,10 @@
 package pl.dmuszynski.aquashop.payload;
 
+import pl.dmuszynski.aquashop.model.Address;
+import pl.dmuszynski.aquashop.model.Role;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Data;
-import pl.dmuszynski.aquashop.model.Role;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class AuthorizedUserDTO extends UserDTO {
 
-    private List<RoleDTO> roles;
+    private List<Address> addresses;
 
     public AuthorizedUserDTO(Long id, String email, String username, boolean isEnabled, boolean isLocked) {
         super(id, email, username, isEnabled, isLocked);

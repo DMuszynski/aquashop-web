@@ -10,7 +10,6 @@ import pl.dmuszynski.aquashop.payload.ProductDTO;
 import pl.dmuszynski.aquashop.model.Product;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -24,7 +23,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO addProduct(ProductDTO productDetails) {
         final Product createdProduct = this.productRepository
-            .save(new Product(productDetails.getName(), productDetails.getPrice()));
+            .save(Product.builder()
+                .name(productDetails.getName())
+                .price(productDetails.getPrice())
+                .build()
+            );
 
         return this.modelMapper.map(createdProduct, ProductDTO.class);
     }
@@ -33,11 +36,11 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO updateProduct(ProductDTO productDetails, Long productId) {
         final Product foundProduct = this.findProductById(productId);
         final Product updatedProduct = this.productRepository
-            .save(new Product(
-                foundProduct.getId(),
-                productDetails.getName(),
-                productDetails.getPrice(),
-                new ArrayList<Review>())
+            .save(Product.builder()
+                .id(foundProduct.getId())
+                .name(productDetails.getName())
+                .price(productDetails.getPrice())
+                .build()
             );
 
         return this.modelMapper.map(updatedProduct, ProductDTO.class);
@@ -45,22 +48,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO findProductDtoById(Long id) {
-        final Product foundProduct = this.findProductById(id);
-        return this.modelMapper.map(foundProduct, ProductDTO.class);
-    }
-
-    @Override
-    public List<ProductDTO> findAllProductDto() {
-        final List<Product> foundProductList = this.productRepository.findAll();
-        return foundProductList.stream()
-            .map(product -> this.modelMapper.map(product, ProductDTO.class))
-            .collect(Collectors.toList());
+        return this.productRepository.findProductDtoById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + id));
     }
 
     @Override
     public Product findProductById(Long id) throws ResourceNotFoundException {
         return this.productRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Product not found for this id: " + id));
+    }
+
+    @Override
+    public List<ProductDTO> findAllProductDto() {
+        return this.productRepository.findAllProductDto();
     }
 
     @Override

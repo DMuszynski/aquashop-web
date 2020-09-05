@@ -6,6 +6,8 @@ import javax.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "role_type"))
@@ -17,6 +19,9 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @NotNull @Column(name = "role_type")
     private RoleType roleType;
+
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Role(RoleType roleType) {
         this.roleType = roleType;

@@ -5,11 +5,12 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.List;
 
-import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
-@Data @NoArgsConstructor
+@Builder @Data
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
     @Id
@@ -29,14 +30,6 @@ public class Product {
     @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
     private Promotion promotion;
 
-    public Product(String name, Float price) {
-        this.price = price;
-        this.name = name;
-    }
-
-    public Product(Long id, String name, Float price, List<Review> reviews) {
-        this(name, price);
-        this.reviews = reviews;
-        this.id = id;
-    }
+    @Tolerate
+    public Product() {}
 }

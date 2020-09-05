@@ -17,7 +17,6 @@ import pl.dmuszynski.aquashop.model.User;
 import lombok.RequiredArgsConstructor;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collections;
 
 @Transactional
@@ -37,9 +36,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         new UniqueEmailValidator(userRepository).validate(email);
 
         final User registerUser = this.userRepository
-            .save(new User(email, username,
-                this.passwordEncoder.encode(password),
-                new ArrayList<>(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER))))
+            .save(User.builder()
+                .email(email)
+                .username(username)
+                .password(this.passwordEncoder.encode(password))
+                .roles(Collections.singletonList(this.roleService.findByRoleType(RoleType.ROLE_USER)))
+                .build()
             );
 
 //        this.tokenService.sendToken(registerUser);
@@ -50,7 +52,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void activateAccountByUserToken(String tokenValue) {
         final Token foundToken = this.tokenService.findByValue(tokenValue);
         final User tokenUser = foundToken.getUser();
-        
+
         if (!tokenUser.isEnabled())
             this.userRepository.activateAccount(tokenUser.getId());
         else

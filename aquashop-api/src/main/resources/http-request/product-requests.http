@@ -4,7 +4,7 @@ Content-Type: application/json
 Authorization: Bearer {{auth_token}}
 
 {
-  "name" : "Black Shorts",
+  "name" : "Black Shortss",
   "price" : "30.99"
 }
 
