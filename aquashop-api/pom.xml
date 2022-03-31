@@ -16,7 +16,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
 		<project.lombok.version>1.18.12</project.lombok.version>
 		<maven.compiler.source>1.14</maven.compiler.source>
 		<maven.compiler.target>1.14</maven.compiler.target>
